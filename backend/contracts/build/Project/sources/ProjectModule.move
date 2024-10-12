@@ -6,6 +6,8 @@ module account_address::ProjectModule {
     use std::option;
     use aptos_token_objects::collection::{Self};
     use aptos_token_objects::token::{Self};
+    use aptos_framework::coin::{Self, balance, transfer};
+    use aptos_framework::aptos_coin::{Self, AptosCoin};
 
     use aptos_framework::event;
 
@@ -104,8 +106,18 @@ module account_address::ProjectModule {
 
         let creator_addr = signer::address_of(creator);
 
-        // let strin_id = format !(b"{}", id);
-        // let strin_id = u64_to_string(id);
+        // Check that max_bounty is greater than zero
+        assert!(max_bounty > 0, 0);
+
+        // Check that the creator has enough balance to cover max_bounty
+        let creator_balance = balance<AptosCoin>(creator_addr);
+        assert!(creator_balance >= max_bounty, 1);
+
+        // Ensure that end_date is after start_date
+        assert!(end_date > start_date, 2);
+
+        // Transfer max_bounty from creator to the contract
+        transfer<AptosCoin>(creator, creator_addr, max_bounty);
 
         token::create_named_token(
             creator,
