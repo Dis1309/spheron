@@ -91,7 +91,6 @@ module account_address::ProjectModule {
             no_project: 0,
             users: simple_map::new(),
         };
-
         
         simple_map::upsert(
             &mut project_mapping.users,
