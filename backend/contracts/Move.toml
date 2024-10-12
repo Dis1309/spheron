@@ -7,6 +7,7 @@ authors = []
 account_address="6d977e33f5b64e6d1913ff5ced32abe326045d95c95eaaf264df1d3d04eaf95b"
 creater="0x12"
 
+
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-framework" }
 AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-token-objects" }
