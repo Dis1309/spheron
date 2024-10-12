@@ -4,8 +4,26 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-account_address="0x1234"
+account_address="6d977e33f5b64e6d1913ff5ced32abe326045d95c95eaaf264df1d3d04eaf95b"
+creater="0x12"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-framework" }
 AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-token-objects" }
+
+/*
+Transaction submitted: https://explorer.aptoslabs.com/txn/0x9d56ff05b48bd3f9c1824149dd2bca50074d18edc4f4a0419cc659af895b9afc?network=devnet
+{
+  "Result": {
+    "transaction_hash": "0x9d56ff05b48bd3f9c1824149dd2bca50074d18edc4f4a0419cc659af895b9afc",
+    "gas_used": 2785,
+    "gas_unit_price": 100,
+    "sender": "6d977e33f5b64e6d1913ff5ced32abe326045d95c95eaaf264df1d3d04eaf95b",
+    "sequence_number": 0,
+    "success": true,
+    "timestamp_us": 1728758069181550,
+    "version": 26820258,
+    "vm_status": "Executed successfully"
+  }
+}
+*/
