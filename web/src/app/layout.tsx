@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { WalletProvider } from "@/components/provider";
+import WalletProvider from "@/components/WalletProvider";
 
 const secondaryFont = localFont({
   src: "./fonts/Secondary.otf",
