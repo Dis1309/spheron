@@ -1,0 +1,30 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1735_52)">
+<mask id="mask0_1735_52" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
+<path d="M0 0H400V400H0V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_1735_52)">
+<mask id="mask1_1735_52" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="20" y="0" width="360" height="400">
+<path d="M260 0C326.274 0 380 53.726 380 120V140C380 206.258 326.302 259.974 260.05 260H380V400H20V260C20 193.75 73.688 140.04 139.93 140H20C20 62.68 82.68 0 160 0H260Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_1735_52)">
+<path d="M400 0H0V400H400V0Z" fill="white"/>
+<path d="M400 0H0V400H400V0Z" fill="white"/>
+<path d="M400 0H0V400H400V0Z" fill="white"/>
+</g>
+</g>
+<mask id="mask2_1735_52" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="20" y="0" width="360" height="400">
+<path d="M260 0C326.274 0 380 53.726 380 120V140C380 206.258 326.302 259.974 260.05 260H380V400H20V260C20 193.75 73.688 140.04 139.93 140H20C20 62.68 82.68 0 160 0H260Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_1735_52)">
+<g style="mix-blend-mode:overlay">
+<path d="M400 0H0V400H400V0Z" fill="white"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1735_52">
+<rect width="400" height="400" fill="white"/>
+</clipPath>
+</defs>
+</svg>

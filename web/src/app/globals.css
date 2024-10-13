@@ -1,0 +1,155 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  background: black;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Satoshi", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .transparent-text {
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .hero-heading {
+    @apply tracking-tight font-bold max-w-screen-lg leading-[1.1] font-secondary overflow-hidden;
+  }
+
+  .hero-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 via-zinc-200/80 to-zinc-300/70 text-center text-[5.2rem];
+  }
+
+  .shiny-button {
+    font-size: 1rem;
+    padding: 1em 2em;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 1);
+    box-shadow: 0 0.025em 0.4em -0.02em hsl(0 0% 100% / 0.25),
+      0 0.05em 0 0 hsl(260 0% 50%) inset, 0 -0.05em 0 0 hsl(260 0% 0%) inset;
+    border: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity 300ms;
+    opacity: 1;
+    container-type: inline-size;
+  }
+  .front-layer {
+    transition-duration: 300ms;
+    border-radius: 9999px;
+    inset: 0.125rem;
+    position: absolute;
+    background: radial-gradient(
+        40% 50% at center 100%,
+        rgba(255, 239, 206, 0.15),
+        transparent
+      ),
+      radial-gradient(
+        80% 100% at center 120%,
+        rgba(255, 239, 204, 0.2),
+        transparent
+      ),
+      rgba(5, 5, 5, 1);
+  }
+
+  .text {
+    position: relative;
+    color: white;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100cqw;
+    height: 100cqw;
+    transition: opacity 300ms;
+    background-image: linear-gradient(
+      transparent,
+      transparent 30%,
+      #fffa,
+      transparent 70%,
+      transparent
+    );
+    animation: spinner 2s linear infinite;
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+}
