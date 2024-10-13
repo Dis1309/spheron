@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { PetraWallet } from "petra-plugin-wallet-adapter";
-import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 import WalletProvider from "./components/prove"; // Assuming the correct path to prove component
-
-const wallets = [new PetraWallet()];
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,14 +21,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: { children: React.ReactNode }) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {/* Wrap the children with WalletProvider here, inside body */}
-        <WalletProvider>
-          {children}
-        </WalletProvider>
+        <WalletProvider>{children}</WalletProvider>
       </body>
     </html>
   );
