@@ -12,6 +12,7 @@
     "@ai-sdk/google": "^0.0.51",
     "@aptos-labs/ts-sdk": "^1.29.1",
     "@aptos-labs/wallet-adapter-react": "^3.7.1",
+    "@google/generative-ai": "^0.21.0",
     "@gsap/react": "^2.1.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-collapsible": "^1.1.1",
