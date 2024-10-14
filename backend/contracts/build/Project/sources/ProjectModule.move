@@ -11,6 +11,9 @@ module account_address::ProjectModule {
     use aptos_framework::aptos_coin::{Self, AptosCoin};
     use aptos_framework::event;
     use aptos_std::type_info;
+
+    //Error
+    const E_NOT_INITIALIZED: u64 = 1;
     /// Structure for Contribution details
     struct Contributor has copy, drop, store {
         issuer: address,
@@ -129,14 +132,14 @@ module account_address::ProjectModule {
         // let contractaddress = @account_address;
         // transfer<AptosCoin>(creator, contractaddress, max_bounty);
 
-        token::create_named_token(
-            creator,
-            string::utf8(b"User NFT collection"),
-            string::utf8(b"Description"),
-            description,
-            option::none(),
-            string::utf8(b"https://mycollection.com/my-named-token.jpeg")
-        );
+        // token::create_named_token(
+        //     creator,
+        //     string::utf8(b"User NFT collection"),
+        //     string::utf8(b"Description"),
+        //     description,
+        //     option::none(),
+        //     string::utf8(b"https://mycollection.com/my-named-token.jpeg")
+        // );
 
         let project_mapping = borrow_global_mut<ProjectMapping>(@account_address);
         simple_map::upsert(
@@ -167,10 +170,7 @@ module account_address::ProjectModule {
         );
     }
     
-   public fun project_mapping_exists(account: &signer): bool {
-    let check = exists<ProjectMapping>(signer::address_of(account));
-    return check
-   }
+    
 
     public entry fun transaction_winners(
         deployer: &signer,
@@ -212,4 +212,14 @@ module account_address::ProjectModule {
          };
        };
     }
+
+   public fun project_mapping_exists(account: &signer): bool {
+   exists<ProjectMapping>(signer::address_of(account))
+    
+   }
+   #[view]
+   public fun project_mapping_exist(account: address): bool {
+   exists<ProjectMapping>(account)
+    
+   }
 }

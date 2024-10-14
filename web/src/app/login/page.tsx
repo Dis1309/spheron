@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x12c8c259151b344581b624c49c147dd40a2bacdd53784174d2b22ded31c20e7f";
+  "0xf815f18a37fc3da9ab822e1b1f1a0bd1afd7c1d20e53102e54e52f2209ed0f10";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
