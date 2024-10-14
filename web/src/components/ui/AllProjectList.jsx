@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { useEffect } from "react";
 import Projecturl1 from "../../public/Project1.png";
 import Projecturl2 from "../../public/Project2.jpg";
 import Projecturl3 from "../../public/Project3.png";
@@ -13,17 +13,17 @@ const projects = [
   {
     projectId: 1,
     imageurl: Projecturl1,
-    Title: "Card smx",
-    description: "This is a description for project 1.",
+    Title: "InvigoPulse",
+    description: "InvigoPulse",
     tags: ["ml", "blockchain", "web"],
-    startDate: "2024-09-28",
-    endDate: "2024-09-06",
-    MaxBountyAmount: 8631,
+    startDate: "2024-10-15",
+    endDate: "2024-10-25",
+    MaxBountyAmount: 1000,
     githubLink: "https://github.com/user/project_1",
     levels: {
-      Critical: 9200,
-      High: 3870,
-      Low: 1327,
+      Critical: 500,
+      High: 300,
+      Low: 200,
     },
   },
 

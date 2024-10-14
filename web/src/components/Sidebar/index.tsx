@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   LayoutDashboard,
   User,
@@ -38,6 +39,10 @@ const links = [
   },
 ];
 
+const eraseSession = () => {
+  // Replace 'yourKey' with the key of the item you want to remove
+  sessionStorage.removeItem("accountAddress");
+};
 const DashboardSidebar = ({}) => {
   const [open, setOpen] = useState(false);
 
@@ -64,13 +69,25 @@ const DashboardSidebar = ({}) => {
           </div>
           <div className="w-full flex justify-center px-4 mb-4">
             {open ? (
-              <Button variant="destructive" className="w-full">
-                Logout <LogOut className="h-4 w-4 ml-2" />
-              </Button>
+              <Link href="/">
+                <Button
+                  variant="destructive"
+                  className="w-full"
+                  onClick={() => eraseSession()}
+                >
+                  Logout <LogOut className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
             ) : (
-              <Button variant="destructive" size="icon">
-                <LogOut className="h-4 w-4" />
-              </Button>
+              <Link href="/">
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  onClick={() => eraseSession()}
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </Link>
             )}
           </div>
         </SidebarBody>

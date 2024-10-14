@@ -107,7 +107,7 @@ const Login = () => {
     }
   }
   // GET PROJECT INFORMATION
-  async function getprojectinfo() {
+  async function getallprojectinfo() {
     if (!account) return [];
     try {
       const projectMappingResource = await aptos.getAccountResource({
@@ -217,11 +217,11 @@ const Login = () => {
     if (connected == true) {
       const address = account?.address || "";
       console.log(address);
-      // initializeProjectMapping();
+      initializeProjectMapping();
       // createUser();
-      createProject();
+      // createProject();
       // onApproval();
-      // getprojectinfo();
+      // getallprojectinfo();
       sessionStorage.setItem("accountAddress", address);
       router.push("/dashboard");
     }

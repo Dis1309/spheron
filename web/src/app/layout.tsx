@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import WalletProvider from "@/components/WalletProvider";
-
+import { Toaster } from "react-hot-toast";
 const secondaryFont = localFont({
   src: "./fonts/Secondary.otf",
   variable: "--font-secondary",
@@ -23,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${secondaryFont.variable} antialiased`}>
+        <Toaster position="top-right" reverseOrder={false} />
         <WalletProvider>{children}</WalletProvider>
       </body>
     </html>

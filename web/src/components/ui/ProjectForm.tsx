@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -109,6 +109,7 @@ function ProjectForm() {
 
     // Log the final values with selected tags
     console.log(finalValues);
+    toast.success("Form submitted successfully!");
   }
 
   return (
