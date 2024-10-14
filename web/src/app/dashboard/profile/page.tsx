@@ -67,6 +67,110 @@ const page = () => {
                     </div>
                   </div>
                 </div>
+                {/* {prev transactions} */}
+                <div className="flex flex-col gap-4">
+                  <h1 className="text- font-bold text-3xl text-gray-200">
+                    Prev Transactions
+                  </h1>
+                  <div className="flex flex-col gap-2">
+                    {" "}
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                          Project Name : FlowBG
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">$500</div>
+                        <p className="text-xs text-muted-foreground">
+                          Critcal contribution
+                        </p>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                          Project Name : InvigoPulse
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">$100</div>
+                        <p className="text-xs text-muted-foreground">
+                          High contribution
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col gap-4">
+                <h1 className="text- font-bold text-3xl text-gray-200">
+                  Prev Contribution
+                </h1>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col bg-black border border-gray-600 rounded-sm shadow-md overflow-hidden hover:rounded-xl hover:scale-105 transition-all duration-200 ">
+                    <div className="p-4 flex flex-col gap-2">
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                          InvogoPulse
+                        </h1>
+                        <button className="text-gray-600 dark:text-gray-400 text-sm">
+                          High
+                        </button>
+                      </div>
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <p className="text-sm font-light text-white">
+                          Prediction added
+                        </p>
+                        <button className="bg-green-700 py-2.5 px-5 text-sm font-semibold">
+                          Approved
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col bg-black border border-gray-600 rounded-sm shadow-md overflow-hidden hover:rounded-xl hover:scale-105 transition-all duration-200 ">
+                    <div className="p-4 flex flex-col gap-2">
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                          FlowBG
+                        </h1>
+                        <button className="text-gray-600 dark:text-gray-400 text-sm">
+                          Critical
+                        </button>
+                      </div>
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <p className="text-sm font-light text-white">
+                          worked on the ML model and integration
+                        </p>
+                        <button className="bg-green-700 py-2.5 px-5 text-sm font-semibold">
+                          Approved
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col bg-black border border-gray-600 rounded-sm shadow-md overflow-hidden hover:rounded-xl hover:scale-105 transition-all duration-200 ">
+                    <div className="p-4 flex flex-col gap-2">
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                          Ghayal
+                        </h1>
+                        <button className="text-gray-600 dark:text-gray-400 text-sm">
+                          Critical
+                        </button>
+                      </div>
+                      <div className="flex flex-row w-full justify-between items-center">
+                        <p className="text-sm font-light text-white">
+                          Integrated blokchain
+                        </p>
+                        <button className="bg-gray-800 py-2.5 px-5 text-sm font-semibold">
+                          Pending
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Card>
           </div>

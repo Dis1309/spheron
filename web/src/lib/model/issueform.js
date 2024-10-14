@@ -29,6 +29,12 @@ const issueFormModel = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  contributerId: {
+    type: String,
+  },
+  ownerId: {
+    type: String,
+  },
 });
 
 export const IssueForm =

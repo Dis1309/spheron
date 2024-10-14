@@ -21,53 +21,61 @@ export function Chatbot() {
     // Adjusted regex to match both "Project_id:" and "Project id :"
     const regex = /Project[_\s]?id\s*:\s*(\d+)/gi;
     const ids = [...messageContent.matchAll(regex)].map((match) => match[1]);
-    console.log("ids -",ids);
+    console.log("ids -", ids);
     return ids;
   };
-  
-  
-// Helper function to render project cards
-const renderProjectCards = (projectIds:any) => {
-  const recommendedProjects = projectData.filter((project) =>
-    projectIds.includes(project.project_id.toString())
-  );
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-      {recommendedProjects.map((project) => (
-        <div
-          key={project.project_id}
-          className="border p-4 rounded-lg shadow-md bg-white"
-        >
-          {/* Display project image */}
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            className="w-full h-40 object-cover rounded-lg mb-4"
-          />
-          <h3 className="text-lg font-bold">{project.title}</h3>
-          <p className="text-sm">{project.description}</p>
-          <a
-            href={project.url.startsWith('http') ? project.url : `https://${project.url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 mt-2 inline-block"
+  // Helper function to render project cards
+  const renderProjectCards = (projectIds: any) => {
+    const recommendedProjects = projectData.filter((project) =>
+      projectIds.includes(project.project_id.toString())
+    );
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        {recommendedProjects.map((project) => (
+          <div
+            key={project.project_id}
+            className="border p-4 rounded-lg shadow-md bg-white"
           >
-            View Project
-          </a>
-        </div>
-      ))}
-    </div>
-  );
-};
-
+            {/* Display project image */}
+            <img
+              src={project.imageUrl}
+              alt={project.title}
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-lg font-bold">{project.title}</h3>
+            <p className="text-sm">{project.description}</p>
+            <a
+              href={
+                project.url.startsWith("http")
+                  ? project.url
+                  : `https://${project.url}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 mt-2 inline-block"
+            >
+              View Project
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col h-[80vh] w-full max-w-[672px] mx-auto bg-background rounded-lg shadow-lg">
       <div className="flex-1 overflow-auto p-6">
         {messages.length === 0 && (
           <div className="flex flex-col justify-center items-center h-full">
-            <Image src={AI} alt="AI" width={80} height={80} />
+            <Image
+              src={AI}
+              alt="AI"
+              width={80}
+              height={80}
+              style={{ filter: "invert(1)" }}
+            />
             <p className="text-lg text-muted-foreground mt-4">
               Welcome to the Chatbot! Ask me anything.
             </p>
@@ -82,11 +90,22 @@ const renderProjectCards = (projectIds:any) => {
               : [];
 
             return (
-              <div key={message.id} className={`flex ${isAssistant ? "items-start gap-3" : "justify-end"}`}>
+              <div
+                key={message.id}
+                className={`flex ${
+                  isAssistant ? "items-start gap-3" : "justify-end"
+                }`}
+              >
                 {isAssistant ? (
                   <>
                     <div className="p-2 border border-gray-700 rounded-full">
-                      <Image src={AI} alt="AI" width={20} height={20} />
+                      <Image
+                        src={AI}
+                        alt="AI"
+                        width={20}
+                        height={20}
+                        style={{ filter: "invert(1)" }}
+                      />
                     </div>
                     <div className="bg-muted rounded-lg p-3 max-w-[70%]">
                       <Markdown className="text-sm text-muted-foreground">
@@ -115,7 +134,7 @@ const renderProjectCards = (projectIds:any) => {
         <div className="relative flex-1">
           <Textarea
             placeholder="Type your message..."
-            className="rounded-lg pr-12 min-h-[64px]"
+            className="rounded-lg pr-12 min-h-[64px] text-white"
             rows={1}
             value={input}
             onChange={handleInputChange}
