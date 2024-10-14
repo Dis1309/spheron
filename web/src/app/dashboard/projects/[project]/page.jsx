@@ -42,32 +42,59 @@ const page = ({ params }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [projectLink, setProjectLink] = useState(project.githubLink);
+  const [canContribute, setCanContribute] = useState(true);
+  const approve = async (id) => {
+    try {
+      const response = await fetch(`/api/issues`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }), // Pass the issueId
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to update issue approval status");
+      }
+      setIssues((prevIssues) =>
+        prevIssues.map((issue) =>
+          issue._id === id ? { ...issue, isApproved: true } : issue
+        )
+      );
+      const data = await response.json();
+      console.log("Issue approved:", data);
+      // Update the UI or state as needed after the approval
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    // async function fetchIssues() {
-    //   try {
-    //     const response = await fetch(`/api/issues?projectId=${projectId}`);
-    //     if (!response.ok) {
-    //       throw new Error("Error fetching issues");
-    //     }
+    async function fetchIssues() {
+      try {
+        const response = await fetch(`/api/issues?projectId=${projectId}`);
+        if (!response.ok) {
+          throw new Error("Error fetching issues");
+        }
 
-    //     const data = await response.json();
-    //     console.log(data);
-    //     const storedValue = sessionStorage.getItem("accountAddress");
-
-    //     const filteredIssues = data.issues.filter(
-    //       (issue) => issue.ownerId === storedValue
-    //     );
-    //     setIssues(filteredIssues);
-    //   } catch (err) {
-    //     console.log(error);
-    //     setError(err.message);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // }
-    // fetchIssues();
-  });
+        const data = await response.json();
+        console.log(data);
+        const storedValue = sessionStorage.getItem("accountAddress");
+        const filteredIssues = data.issues.filter(
+          (issue) => issue.ownerId === storedValue
+        );
+        setIssues(filteredIssues);
+      } catch (err) {
+        console.log(error);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchIssues();
+    if (issues.length == 0) {
+      setCanContribute(false);
+    }
+  }, [projectId]);
 
   const LevelsDisplay = () => {
     return (
@@ -93,6 +120,13 @@ const page = ({ params }) => {
       </div>
     );
   };
+  if (loading) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <h1 className="text-white text-3xl font-secondary">Loading....</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen w-full overflow-x-hidden gap-2 bg-black">
@@ -142,20 +176,59 @@ const page = ({ params }) => {
               </h1>
               <LevelsDisplay />
             </div>
-            <IssueDialog />
+            {canContribute == true ? <IssueDialog /> : <></>}
           </div>
           <div>
             <h2>Issues for Project ID: {projectId}</h2>
             {issues.length === 0 ? (
               <p>No issues found.</p>
             ) : (
-              <ul>
+              <div className="flex flex-col gap-5">
                 {issues.map((issue) => (
-                  <li key={issue.issueId} className="text-white">
-                    <strong>{issue.description}</strong>
-                  </li>
+                  <div
+                    key={issue._id}
+                    className="w-full gap-4 py-3 px-10 flex flex-row justify-evenly items-center border rounded-lg  hover:rounded-xl transition-all duration-200"
+                  >
+                    <h1 className="text-lg font-bold text-gray-400">
+                      {issue.title}
+                    </h1>
+                    <div className="flex flex-col gap-1">
+                      <p className="font-light text-white font-sm">By</p>
+                      <h3 className="text-lg font-md text-gray-200">
+                        {issue.username}
+                      </h3>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <p className="font-light text-white font-sm">Level </p>
+                      <h3 className="text-lg font-md text-gray-200">
+                        {issue.priority}
+                      </h3>
+                    </div>
+                    <h1 className="text-sm font-light text-gray-200">
+                      {issue.description}
+                    </h1>
+                    {issue.isApproved != true ? (
+                      <div className="flex flex-col gap-2">
+                        <button
+                          className="bg-green-700 py-2.5 px-5 text-sm text-white font-semibold hover:scale-105 transition-all duration-200"
+                          onClick={() => {
+                            approve(issue._id);
+                          }}
+                        >
+                          Approve
+                        </button>
+                        <button className="bg-red-700 py-2.5 px-5 text-sm text-white font-semibold hover:scale-105 transition-all duration-200">
+                          Disapprove
+                        </button>
+                      </div>
+                    ) : (
+                      <button className="bg-green-700 py-2.5 px-5 text-white text-sm font-semibold">
+                        Approved
+                      </button>
+                    )}
+                  </div>
                 ))}
-              </ul>
+              </div>
             )}
           </div>
         </div>
