@@ -10,6 +10,41 @@ async function connectToDB() {
   }
 }
 
+export async function GET(req) {
+  try {
+    await connectToDB();
+
+    // Extracting the `projectId` from the request URL
+    const { searchParams } = new URL(req.url);
+    const projectId = searchParams.get("projectId");
+
+    if (!projectId) {
+      return NextResponse.json(
+        { message: "Project ID is required" },
+        { status: 400 }
+      );
+    }
+
+    // Find all issue forms with the provided `projectId`
+    const issues = await IssueForm.find({ projectId });
+
+    if (issues.length === 0) {
+      return NextResponse.json(
+        { message: "No issues found for the given projectId" },
+        { status: 404 }
+      );
+    }
+    console.log(issues);
+    return NextResponse.json({ issues }, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching issues:", error);
+    return NextResponse.json(
+      { message: "Error fetching issues" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req) {
   try {
     await connectToDB();
@@ -50,10 +85,4 @@ export async function POST(req) {
       { status: 500 }
     );
   }
-}
-export async function GET() {
-  await mongoose.connect(connectionSrt);
-  const data = await IssueForm.find();
-  console.log(data);
-  return NextResponse.json({ result: data });
 }

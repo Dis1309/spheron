@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.51",
     "@aptos-labs/ts-sdk": "^1.29.1",
     "@aptos-labs/wallet-adapter-react": "^3.7.1",
     "@gsap/react": "^2.1.1",
@@ -21,6 +22,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@tabler/icons-react": "^3.19.0",
+    "ai": "^3.4.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.7",
@@ -33,6 +35,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
+    "react-markdown": "^9.0.1",
     "recharts": "^2.13.0",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",

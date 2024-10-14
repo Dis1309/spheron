@@ -60,6 +60,8 @@ export default function IssueForm() {
       issueId: 123, // static issueId
       projectId: 4, // static projectId
       isApproved: false, // static isApproved (default: false)
+      contributerId: sessionStorage.getItem("accountAddress"),
+      ownerId: "1234",
     };
 
     try {

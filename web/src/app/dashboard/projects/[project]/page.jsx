@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import TagsDisplay from "../../../../components/ui/tagsDisplay";
 import { Button } from "@/components/ui/button";
 import IssueDialog from "@/components/ui/issueDialog";
+
 let project = {
-  projectId: 5,
+  projectId: 4,
   imageurl: Projecturl5,
   Title: "Card smx",
   description: "This is a description for project 5.",
@@ -23,34 +24,50 @@ let project = {
 };
 
 const page = ({ params }) => {
-  const [projectId, setProjectId] = useState();
-  const [desc, setDesc] = useState();
-  const [imgUrl, setImgUrl] = useState();
-  const [title, setTitle] = useState();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [projectId, setProjectId] = useState(project.projectId);
+  const [desc, setDesc] = useState(project.description);
+  const [imgUrl, setImgUrl] = useState(project.imageurl);
+  const [title, setTitle] = useState(project.Title);
+  const [startDate, setStartDate] = useState(project.startDate);
+  const [endDate, setEndDate] = useState(project.endDate);
   const [tags, setTags] = useState(["ui/ux", "ai", "data"]);
-  const [totalBounty, setTotalBounty] = useState();
+  const [totalBounty, setTotalBounty] = useState(project.MaxBountyAmount);
   const [open, setOpen] = useState(false);
   const [levels, setLevels] = useState({
     Critical: 0,
     High: 0,
     Low: 0,
   });
-  const [projectLink, setProjectLink] = useState();
+  const [issues, setIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [projectLink, setProjectLink] = useState(project.githubLink);
 
   useEffect(() => {
-    setProjectId(project.id);
-    setDesc(project.description);
-    setImgUrl(project.imageurl);
-    setTitle(project.Title);
-    setStartDate(project.startDate);
-    setEndDate(project.endDate);
-    setTags(project.tags);
-    setTotalBounty(project.MaxBountyAmount);
-    setLevels(project.levels);
-    setProjectLink(project.githubLink);
-  }, []);
+    async function fetchIssues() {
+      try {
+        const response = await fetch(`/api/issues?projectId=${projectId}`);
+        if (!response.ok) {
+          throw new Error("Error fetching issues");
+        }
+
+        const data = await response.json();
+        console.log(data);
+        const storedValue = sessionStorage.getItem("accountAddress");
+
+        const filteredIssues = data.issues.filter(
+          (issue) => issue.ownerId === storedValue
+        );
+        setIssues(filteredIssues);
+      } catch (err) {
+        console.log(error);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchIssues();
+  }, [projectId]);
 
   const LevelsDisplay = () => {
     return (
@@ -126,6 +143,20 @@ const page = ({ params }) => {
               <LevelsDisplay />
             </div>
             <IssueDialog />
+          </div>
+          <div>
+            <h2>Issues for Project ID: {projectId}</h2>
+            {issues.length === 0 ? (
+              <p>No issues found.</p>
+            ) : (
+              <ul>
+                {issues.map((issue) => (
+                  <li key={issue.issueId} className="text-white">
+                    <strong>{issue.description}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

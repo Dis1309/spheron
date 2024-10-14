@@ -28,7 +28,7 @@ const projects = [
 
   {
     projectId: 5,
-    imageurl: Projecturl5,
+    imageurl: Projecturl3,
     Title: "Card smx",
     description: "This is a description for project 5.",
     tags: ["ui/ux", "ai", "data"],
@@ -44,7 +44,7 @@ const projects = [
   },
   {
     projectId: 6,
-    imageurl: Projecturl1,
+    imageurl: Projecturl2,
     Title: "Card smx",
     description: "This is a description for project 6.",
     tags: ["security", "data", "ml"],
@@ -59,7 +59,7 @@ const projects = [
     },
   },
   {
-    projectId: 10,
+    projectId: 4,
     imageurl: Projecturl4,
     Title: "Card smx",
     description: "This is a description for project 10.",
