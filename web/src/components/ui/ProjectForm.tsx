@@ -57,7 +57,7 @@ const formSchema = z
 
 function ProjectForm() {
   const { account, connected, signAndSubmitTransaction } = useWallet();
-  const moduleAddress = "0xf815f18a37fc3da9ab822e1b1f1a0bd1afd7c1d20e53102e54e52f2209ed0f10";
+  const moduleAddress = "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

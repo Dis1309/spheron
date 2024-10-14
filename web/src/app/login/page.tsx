@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0xf815f18a37fc3da9ab822e1b1f1a0bd1afd7c1d20e53102e54e52f2209ed0f10";
+  "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -29,29 +29,24 @@ const Login = () => {
   async function createUser() {
     if (!account) return [];
     try {
-      // const result = await aptos.view<[boolean]>({
-      //   payload: {
-      //     function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
-      //     typeArguments: [], 
-      //     functionArguments: [account.address]
-      //   }
-      // });
-  
-      // // Check the result
-      // if (result) {
-      //   console.log("Project mapping exists for the user.");
-      //   // Add any other actions here based on this check
-      // } else {
-      //   console.log("No project mapping exists for the user.");
-      //   // Add any other actions here based on this check
-      // }
+      const result = await aptos.view({
+        payload: {
+          function:`${moduleAddress}::ProjectModule::project_mapping_exist`,
+          functionArguments: [account?.address],
+         }
+      })
+      console.log(result);
+      
+      var flag = result != null ? result[0] : true;
+      console.log(flag);
+      if(!flag){
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
           functionArguments: [],
         },
       };
-      // Replace `client` with your Aptos client instance and `account` with the signer object
+      // Replace ⁠ client ⁠ with your Aptos client instance and ⁠ account ⁠ with the signer object
       const response1 = await signAndSubmitTransaction(transaction1);
 
       // Optionally, wait for the transaction to be confirmed
@@ -72,53 +67,54 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response2.hash });
       console.log("Created new user and their collection");
       console.log(response2);
+    }
     } catch (error: any) {
       console.log(error);
     }
   }
 
   // CREATE PROJECT
-  async function createProject() {
-    if (!account) return [];
-    try {
-      const startDate = BigInt(new Date("2024-10-10").getTime());
-      const endDate = BigInt(new Date("2024-10-20").getTime());
-      let newproject = {
-        id: 1,
-        description: "hello",
-        max_bounty: 100,
-        start_date: startDate,
-        end_date: endDate,
-        critical_bounty: 50,
-        high_bounty: 30,
-        low_bounty: 20,
-      };
+  // async function createProject() {
+  //   if (!account) return [];
+  //   try {
+  //     const startDate = BigInt(new Date("2024-10-10").getTime());
+  //     const endDate = BigInt(new Date("2024-10-20").getTime());
+  //     let newproject = {
+  //       id: 1,
+  //       description: "hello",
+  //       max_bounty: 100,
+  //       start_ate: startDate,
+  //       end_date: endDate,
+  //       critical_bounty: 50,
+  //       high_bounty: 30,
+  //       low_bounty: 20,
+  //     };
 
-      const transaction: InputTransactionData = {
-        data: {
-          function: `${moduleAddress}::ProjectModule::create_project`,
-          functionArguments: [
-            newproject.id,
-            newproject.description,
-            newproject.max_bounty,
-            newproject.start_date,
-            newproject.end_date,
-            newproject.critical_bounty,
-            newproject.high_bounty,
-            newproject.low_bounty,
-          ],
-        },
-      };
-      console.log("adding new project...");
-      console.log(transaction);
-      const response = await signAndSubmitTransaction(transaction);
-      await aptos.waitForTransaction({ transactionHash: response.hash });
-      console.log("added new project");
-      console.log(response);
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
+  //     const transaction: InputTransactionData = {
+  //       data: {
+  //         function: `${moduleAddress}::ProjectModule::create_project`,
+  //         functionArguments: [
+  //           newproject.id,
+  //           newproject.description,
+  //           newproject.max_bounty,
+  //           newproject.start_date,
+  //           newproject.end_date,
+  //           newproject.critical_bounty,
+  //           newproject.high_bounty,
+  //           newproject.low_bounty,
+  //         ],
+  //       },
+  //     };
+  //     console.log("adding new project...");
+  //     console.log(transaction);
+  //     const response = await signAndSubmitTransaction(transaction);
+  //     await aptos.waitForTransaction({ transactionHash: response.hash });
+  //     console.log("added new project");
+  //     console.log(response);
+  //   } catch (error: any) {
+  //     console.log(error);
+  //   }
+  // }
   // GET PROJECT INFORMATION
   async function getallprojectinfo() {
     if (!account) return [];
