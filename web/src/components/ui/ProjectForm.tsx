@@ -17,8 +17,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { InputTransactionData, useWallet } from "@aptos-labs/wallet-adapter-react";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
-const aptosConfig = new AptosConfig({ network: Network.TESTNET });
-export const aptos = new Aptos(aptosConfig);
+import {aptos} from "@/app/login/page";
+import { moduleAddress } from "@/app/login/page";
 import { projectData } from "@/app/api/chatbot/data";
 
 // Zod schema with validation
@@ -57,7 +57,6 @@ const formSchema = z
 
 function ProjectForm() {
   const { account, connected, signAndSubmitTransaction } = useWallet();
-  const moduleAddress = "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -114,6 +113,32 @@ function ProjectForm() {
       setCustomTag("");
     }
   };
+//   async function registerCoin() {
+//     if (!account) {
+//         toast.error("Wallet not connected!");
+//         return;
+//     }
+    
+//     try {
+//         const transaction: InputTransactionData = {
+//             data: {
+//                 function: `${moduleAddress}::CoinStore::register`, // Change this to the correct function
+//                 functionArguments: [
+//                     "CoinType", // Replace with your actual CoinType
+//                 ],
+//                 typeArguments: [],
+//             },
+//         };
+        
+//         console.log("Registering coin...");
+//         const response = await signAndSubmitTransaction(transaction);
+//         await aptos.waitForTransaction({ transactionHash: response.hash });
+//         toast.success("Coin registered successfully!");
+//     } catch (error: any) {
+//         console.error(error);
+//         toast.error("Failed to register coin.");
+//     }
+// }
      // CREATE PROJECT
     async function createProject(extractedValues:any) {
       console.log("inside");
@@ -185,8 +210,11 @@ function ProjectForm() {
     console.log(finalValues);
     toast.success("Form submitted successfully!");
     
+    // console.log("registers");
+    // await registerCoin();
     console.log("Hello");
     await createProject(extractedValues);
+    
     
   }
     

@@ -83,13 +83,13 @@ module account_address::ProjectModule {
         
         move_to(creator, user);
         
-        event::emit(
-            CreateCollectionEvent {
-                creator_addr: creator_addr,
-                name: string::utf8(b"User NFT Collection"),
-                description: string::utf8(b"Stores collection of NFTs under the user")
-            }
-        );
+        // event::emit(
+        //     CreateCollectionEvent {
+        //         creator_addr: creator_addr,
+        //         name: string::utf8(b"User NFT Collection"),
+        //         description: string::utf8(b"Stores collection of NFTs under the user")
+        //     }
+        // );
     }
 
     public entry fun create_project(
@@ -102,8 +102,15 @@ module account_address::ProjectModule {
         critical_bounty: u64,
         high_bounty: u64,
         low_bounty: u64,
-    ) acquires ProjectMapping{
+    ) acquires User{
+
         let creator_addr = signer::address_of(creator);
+
+        // Retrieve and update the User resource
+        assert!(exists<User>(creator_addr),10);
+        let user = borrow_global_mut<User>(creator_addr);
+        vector::push_back(&mut user.projects, id);
+
         // Create a vector to hold Contributor structs
         let contributors: vector<Contributor> = vector::empty<Contributor>();
 
@@ -117,20 +124,26 @@ module account_address::ProjectModule {
             low_bounty,
             contributors
         };
-        // Retrieve and update the User resource
-        // let user = borrow_global_mut<User>(creator_addr);
-        // vector::push_back(&mut user.projects, id);
 
         // Check that max_bounty is greater than zero
-        assert!(max_bounty > 0, 0);
+        // assert!(max_bounty > 0, 0);
 
         // Check that the creator has enough balance to cover max_bounty
-        let creator_balance = balance<AptosCoin>(creator_addr);
-        assert!(creator_balance >= max_bounty, 1);
+        // let creator_balance = balance<AptosCoin>(creator_addr);
+        // assert!(creator_balance >= max_bounty, 12);
 
         // Transfer max_bounty from creator to the contract(@account_address)
-        let contractaddress = @account_address;
-        transfer<AptosCoin>(creator, contractaddress, max_bounty);
+        // let contractaddress = @account_address;
+        // transfer<AptosCoin>(creator, contractaddress, max_bounty);
+
+        // assert!(exists<ProjectMapping>(creator_addr), 11);
+
+        // let project_mapping = borrow_global_mut<ProjectMapping>(creator_addr);
+        // simple_map::upsert(
+        //     &mut project_mapping.projects,
+        //     id,
+        //     project
+        // );
 
         // token::create_named_token(
         //     creator,
@@ -138,15 +151,8 @@ module account_address::ProjectModule {
         //     string::utf8(b"Description"),
         //     description,
         //     option::none(),
-        //     string::utf8(b"https://mycollection.com/my-named-token.jpeg")
+        //     string::utf8(b"https://mycollection.com/my-named-token.jpeg"),
         // );
-
-        let project_mapping = borrow_global_mut<ProjectMapping>(@account_address);
-        simple_map::upsert(
-            &mut project_mapping.projects,
-            id,
-            project
-        );
     }
 
 
@@ -220,6 +226,10 @@ module account_address::ProjectModule {
    #[view]
    public fun project_mapping_exist(account: address): bool {
    exists<ProjectMapping>(account)
-    
+   }
+
+   #[view]
+   public fun user_exist(account:address): bool {
+    exists<User>(account)
    }
 }

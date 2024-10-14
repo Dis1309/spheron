@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
+  "0xa790e457821752e6f058aa39afc887822fa419098d817e82f2c5452c0b161e7c";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -31,7 +31,7 @@ const Login = () => {
     try {
       const result = await aptos.view({
         payload: {
-          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
+          function: `${moduleAddress}::ProjectModule::project_mapping_exist`,
           typeArguments: [], 
           functionArguments: [account.address]
         }
@@ -44,7 +44,7 @@ const Login = () => {
       } else {
         console.log("No project mapping exists for the user.");
         // Add any other actions here based on this check
-      }
+
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
@@ -59,7 +59,22 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response1.hash });
       console.log("ProjectMap initialized!");
       console.log(response1);
+    }
+    const res = await aptos.view({
+      payload: {
+        function: `${moduleAddress}::ProjectModule::user_exist`,
+        typeArguments: [], 
+        functionArguments: [account.address]
+      }
+    });
 
+    // Check the result
+    if (res) {
+      console.log("user exists for the user.");
+      // Add any other actions here based on this check
+    } else {
+      console.log("No user exists for the user.");
+      // Add any other actions here based on this check
       const transaction2: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_user`,
@@ -72,6 +87,7 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response2.hash });
       console.log("Created new user and their collection");
       console.log(response2);
+    }
     } catch (error: any) {
       console.log(error);
     }
