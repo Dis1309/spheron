@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x8c7b4253190a0d6a5f2ef1536d2bd09912c4bbf2d830a8e96cebad12efdaec66";
+  "0x12c8c259151b344581b624c49c147dd40a2bacdd53784174d2b22ded31c20e7f";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -29,22 +29,22 @@ const Login = () => {
   async function createUser() {
     if (!account) return [];
     try {
-      const result = await aptos.view<[boolean]>({
-        payload: {
-          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
-          typeArguments: [], 
-          functionArguments: [account.address]
-        }
-      });
+      // const result = await aptos.view<[boolean]>({
+      //   payload: {
+      //     function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
+      //     typeArguments: [], 
+      //     functionArguments: [account.address]
+      //   }
+      // });
   
-      // Check the result
-      if (result) {
-        console.log("Project mapping exists for the user.");
-        // Add any other actions here based on this check
-      } else {
-        console.log("No project mapping exists for the user.");
-        // Add any other actions here based on this check
-      }
+      // // Check the result
+      // if (result) {
+      //   console.log("Project mapping exists for the user.");
+      //   // Add any other actions here based on this check
+      // } else {
+      //   console.log("No project mapping exists for the user.");
+      //   // Add any other actions here based on this check
+      // }
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,

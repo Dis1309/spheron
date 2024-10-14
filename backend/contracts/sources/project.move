@@ -126,8 +126,8 @@ module account_address::ProjectModule {
         assert!(creator_balance >= max_bounty, 1);
 
         // Transfer max_bounty from creator to the contract(@account_address)
-        let contractaddress = @account_address;
-        transfer<AptosCoin>(creator, contractaddress, max_bounty);
+        // let contractaddress = @account_address;
+        // transfer<AptosCoin>(creator, contractaddress, max_bounty);
 
         token::create_named_token(
             creator,

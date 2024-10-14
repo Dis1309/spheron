@@ -23,6 +23,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { InputTransactionData, useWallet } from "@aptos-labs/wallet-adapter-react";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+export const aptos = new Aptos(aptosConfig);
 
 // Zod schema with validation
 const formSchema = z
@@ -52,6 +56,8 @@ const formSchema = z
   });
 
 function ProjectForm() {
+  const { account, connected, signAndSubmitTransaction } = useWallet();
+  const moduleAddress = "0x12c8c259151b344581b624c49c147dd40a2bacdd53784174d2b22ded31c20e7f";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -98,24 +104,89 @@ function ProjectForm() {
     );
     console.log(tagOptions);
   };
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
+     // CREATE PROJECT
+    async function createProject(extractedValues:any) {
+      console.log("inside");
+      console.log(account?.address);
+      console.log(connected);
+    if (!account) return [];
+    try {
+      const transaction: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::create_project`,
+          functionArguments: [
+            extractedValues.projectid,
+            extractedValues.description,
+            1,
+            extractedValues.start_date,
+            extractedValues.end_date,
+            1,
+            1,
+            1,
+          ],
+        },
+      };
+      console.log("adding new project...");
+      console.log(transaction);
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+      toast.success("added new project");
+      console.log("added new project");
+      console.log(response);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const selectedTags = tagOptions
       .filter((option) => option.isChoosen)
       .map((option) => option.tag);
 
     // Add the selected tags array to the values object
     const finalValues = { ...values, tags: selectedTags };
+    
+    // generating projectid
+    let max=1000000;
+    let min = 1;
+    const projectid = Math.floor(Math.random() * (max - min + 1)) + min;
+    // Extract only the required fields and include an ID
+    const { description, maxbounty, startdate, enddate, critical, high, low } = finalValues;
+    
+    // Convert dates to BigInt in milliseconds
+    const start_date = BigInt(new Date(startdate).getTime());
+    const end_date = BigInt(new Date(enddate).getTime());
+
+    // Convert BigInt to string for sending
+    const start_date_str = start_date.toString();
+    const end_date_str = end_date.toString();
+    // Create a new object with the desired structure including the ID
+    const extractedValues = {
+      projectid,
+      description,
+      max_bounty: maxbounty,
+      start_date: start_date_str,
+      end_date: end_date_str,
+      critical_bounty: critical,
+      high_bounty: high,
+      low_bounty: low,
+    };
 
     // Log the final values with selected tags
     console.log(finalValues);
     toast.success("Form submitted successfully!");
+    
+    console.log("Hello");
+    await createProject(extractedValues);
+    
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+       onSubmit={(event) => {
+        event.preventDefault(); // Prevent default behavior
+        form.handleSubmit((values) => onSubmit(values))(event); // Call your submit function with values
+      }}
         className="space-y-8 text-white flex flex-row justify-center items-center gap-6 w-full"
       >
         <div className="flex flex-col gap-3 w-full">
@@ -278,6 +349,7 @@ function ProjectForm() {
             {tagOptions.map((option) => (
               <button
                 key={option.id}
+                type="button"
                 onClick={() => tagToggle(option.id)}
                 className={
                   option.isChoosen
