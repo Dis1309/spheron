@@ -86,3 +86,43 @@ export async function POST(req) {
     );
   }
 }
+
+// PATCH request to update an existing issue's isApproved status
+export async function PATCH(req) {
+  try {
+    await connectToDB();
+    const body = await req.json();
+
+    // Check if _id is provided in the request
+    const { _id } = body;
+
+    if (!_id) {
+      return NextResponse.json(
+        { message: "Issue _id is required" },
+        { status: 400 }
+      );
+    }
+
+    // Update the isApproved field to true
+    const updatedIssue = await IssueForm.findByIdAndUpdate(
+      _id,
+      { isApproved: true }, // Update the isApproved field to true
+      { new: true } // This returns the updated document
+    );
+
+    if (!updatedIssue) {
+      return NextResponse.json({ message: "Issue not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { message: "Issue updated successfully", issue: updatedIssue },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating issue:", error);
+    return NextResponse.json(
+      { message: "Error updating issue" },
+      { status: 500 }
+    );
+  }
+}
