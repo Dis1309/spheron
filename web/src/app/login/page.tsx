@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x8c7b4253190a0d6a5f2ef1536d2bd09912c4bbf2d830a8e96cebad12efdaec66";
+  "0x8da8714ba335ab70f186aef2f81ca95c2531871dfdd432939896a057f57c9222";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -29,22 +29,17 @@ const Login = () => {
   async function createUser() {
     if (!account) return [];
     try {
-      const result = await aptos.view<[boolean]>({
+      const result = await aptos.view({
         payload: {
-          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
-          typeArguments: [], 
-          functionArguments: [account.address]
-        }
-      });
-  
-      // Check the result
-      if (result) {
-        console.log("Project mapping exists for the user.");
-        // Add any other actions here based on this check
-      } else {
-        console.log("No project mapping exists for the user.");
-        // Add any other actions here based on this check
-      }
+          function: `${moduleAddress}::ProjectModule::project_mapping_exist`,
+          functionArguments: [account?.address],
+         }
+      })
+      console.log(result);
+      
+      var flag = result != null ? result[0] : true;
+      console.log(flag);
+      if(!flag){
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
@@ -72,6 +67,7 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response2.hash });
       console.log("Created new user and their collection");
       console.log(response2);
+    }
     } catch (error: any) {
       console.log(error);
     }
@@ -119,45 +115,7 @@ const Login = () => {
       console.log(error);
     }
   }
-  // GET PROJECT INFORMATION
-  async function getallprojectinfo() {
-    if (!account) return [];
-    try {
-      const projectMappingResource = await aptos.getAccountResource({
-        accountAddress: account?.address,
-        resourceType: `${moduleAddress}::ProjectModule::ProjectMapping`,
-      });
-      const userResource = await aptos.getAccountResource({
-        accountAddress: account?.address,
-        resourceType: `${moduleAddress}::ProjectModule::User`,
-      });
 
-      const userProjects = userResource.data.projects;
-      const projectsMap = projectMappingResource.data.projects;
-      const accountProjects = [];
-
-      for (const projectId in userProjects) {
-        const project = projectsMap[projectId];
-
-        accountProjects.push({
-          id: projectId,
-          description: project.description,
-          maxBounty: project.max_bounty,
-          startDate: project.start_date,
-          endDate: project.end_date,
-          criticalBounty: project.critical_bounty,
-          highBounty: project.high_bounty,
-          lowBounty: project.low_bounty,
-          contributors: project.contributors, // Array of contributors
-        });
-      }
-
-      // Display or return the projects for further use (e.g., in UI)
-      console.log("Account's Projects:", accountProjects);
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
 
   // CREATE CONTRIBUTION under the project
   async function onApproval() {

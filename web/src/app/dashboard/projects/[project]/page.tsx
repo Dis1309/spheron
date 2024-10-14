@@ -45,45 +45,6 @@ const page = () => {
   const [error, setError] = useState(null);
   const [projectLink, setProjectLink] = useState(project.githubLink);
   const { account, connected, signAndSubmitTransaction } = useWallet();
-    // GET PROJECT INFORMATION
-    async function getallprojectinfo() {
-      if (!account) return [];
-      try {
-        const projectMappingResource = await aptos.getAccountResource({
-          accountAddress: account?.address,
-          resourceType: `${moduleAddress}::ProjectModule::ProjectMapping`,
-        });
-        const userResource = await aptos.getAccountResource({
-          accountAddress: account?.address,
-          resourceType: `${moduleAddress}::ProjectModule::User`,
-        });
-  
-        const userProjects = userResource.data.projects;
-        const projectsMap = projectMappingResource.data.projects;
-        const accountProjects = [];
-  
-        for (const projectId in userProjects) {
-          const project = projectsMap[projectId];
-  
-          accountProjects.push({
-            id: projectId,
-            description: project.description,
-            maxBounty: project.max_bounty,
-            startDate: project.start_date,
-            endDate: project.end_date,
-            criticalBounty: project.critical_bounty,
-            highBounty: project.high_bounty,
-            lowBounty: project.low_bounty,
-            contributors: project.contributors, // Array of contributors
-          });
-        }
-  
-        // Display or return the projects for further use (e.g., in UI)
-        console.log("Account's Projects:", accountProjects);
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
 
   useEffect(() => {
     // async function fetchIssues() {
