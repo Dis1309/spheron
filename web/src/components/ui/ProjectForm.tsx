@@ -20,7 +20,7 @@ import {
   useWallet,
 } from "@aptos-labs/wallet-adapter-react";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
-import {aptos} from "@/app/login/page";
+import { aptos } from "@/app/login/page";
 import { moduleAddress } from "@/app/login/page";
 import { projectData } from "@/app/api/chatbot/data";
 
@@ -96,6 +96,9 @@ function ProjectForm() {
 
   const [tagOptions, setTagOptions] = useState<TagOption[]>(initialTagOptions);
   const [customTag, setCustomTag] = useState("");
+  const [showAIModal, setShowAIModal] = useState(false);
+  const [aiInput, setAiInput] = useState("");
+  const [loadingAI, setLoadingAI] = useState(false);
 
   const tagToggle = (id: number) => {
     setTagOptions((prevTagOptions) =>
@@ -114,32 +117,8 @@ function ProjectForm() {
       setCustomTag("");
     }
   };
-//   async function registerCoin() {
-//     if (!account) {
-//         toast.error("Wallet not connected!");
-//         return;
-//     }
-    
-//     try {
-//         const transaction: InputTransactionData = {
-//             data: {
-//                 function: `${moduleAddress}::CoinStore::register`, // Change this to the correct function
-//                 functionArguments: [
-//                     "CoinType", // Replace with your actual CoinType
-//                 ],
-//                 typeArguments: [],
-//             },
-//         };
-        
-//         console.log("Registering coin...");
-//         const response = await signAndSubmitTransaction(transaction);
-//         await aptos.waitForTransaction({ transactionHash: response.hash });
-//         toast.success("Coin registered successfully!");
-//     } catch (error: any) {
-//         console.error(error);
-//         toast.error("Failed to register coin.");
-//     }
-// }
+
+
      // CREATE PROJECT
     async function createProject(extractedValues:any) {
       console.log("inside");
@@ -176,23 +155,61 @@ function ProjectForm() {
       console.log(error);
     }
   }
+
+  const generateDescriptionWithAI = async () => {
+    setLoadingAI(true);
+    try {
+      const response = await fetch("/api/generate-description", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input: aiInput }),
+      });
+
+      const data = await response.json();
+
+      // Log the entire response for debugging
+      console.log("API Response:", data);
+
+      if (response.ok) {
+        if (data.description && data.description.text) {
+          // Update the description field in the form
+          form.setValue("description", data.description.text);
+          setShowAIModal(false);
+        } else {
+          alert("No description generated. Please try again.");
+        }
+      } else {
+        alert("Failed to generate description with AI");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error while generating description");
+    } finally {
+      setLoadingAI(false);
+    }
+  };
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const selectedTags = tagOptions
       .filter((option) => option.isChoosen)
       .map((option) => option.tag);
-  
+
     const finalValues = {
       ...values,
       tags: selectedTags,
       technologies: selectedTags, // This will be dynamically generated later or manually added by the user
     };
-  
+
     // Calculate the next project ID
     const newProjectId = projectData.length
       ? projectData[projectData.length - 1].project_id + 1
       : 1;
+
     console.log("hello");
       console.log(typeof(newProjectId));
+
     // Create the new project entry
     const newProject = {
       project_id: newProjectId,
@@ -209,6 +226,7 @@ function ProjectForm() {
       low: finalValues.low,
       tags: finalValues.tags,
     };
+
     
     const { description, maxbounty, startdate, enddate, critical, high, low } = finalValues;
 
@@ -230,15 +248,17 @@ function ProjectForm() {
       high_bounty: high,
       low_bounty: low,
     };
+
     // Call the API to save the project
-    fetch('/api/add-project', {
-      method: 'POST',
+    fetch("/api/add-project", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(newProject),
     })
       .then((res) => res.json())
+
       .then(async (data) => {
         toast.success('Form submitted successfully!');
         // console.log("registers");
@@ -261,12 +281,12 @@ function ProjectForm() {
       console.log("No user exists for the user.");
     }
     console.log('Project saved:', data);
+
       })
       .catch((error) => {
-        console.error('Error saving project:', error);
-        toast.error('Error submitting form.');
+        console.error("Error saving project:", error);
+        toast.error("Error submitting form.");
       });
-    
   }
 
   return (
@@ -336,10 +356,23 @@ function ProjectForm() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-semibold">
-                  Description
-                </FormLabel>
-                <FormControl>
+                <div className="flex justify-between items-center mb-4 mt-2">
+                  <FormLabel className="text-lg font-semibold">
+                    Description
+                  </FormLabel>
+                  {/* Adjusted button size and position */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAIModal(true);
+                      setLoadingAI(false); // Stop animation when the modal is opened
+                    }}
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-1 px-2 rounded-lg hover:shadow-lg transform transition-all duration-500 ease-in-out"
+                  >
+                    Write with AI
+                  </button>
+                </div>
+                <FormControl className="flex-grow">
                   <Textarea
                     placeholder="Project description (max 400 words)"
                     {...field}
@@ -349,6 +382,69 @@ function ProjectForm() {
               </FormItem>
             )}
           />
+
+          {/* AI Modal */}
+          {showAIModal && (
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/3 text-white">
+                <h2 className="text-xl font-bold mb-4">
+                  Generate Description with AI
+                </h2>
+                <textarea
+                  placeholder="Describe the project briefly or provide a project link..."
+                  className="w-full p-2 bg-gray-700 border border-gray-500 rounded-md text-white mb-4"
+                  value={aiInput}
+                  onChange={(e) => setAiInput(e.target.value)}
+                  rows={3}
+                ></textarea>
+                <div className="flex justify-end space-x-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowAIModal(false)}
+                    className="bg-gray-600 text-white px-4 py-2 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={generateDescriptionWithAI}
+                    className={`bg-blue-600 text-white px-4 py-2 rounded-md ${
+                      loadingAI ? "opacity-50" : ""
+                    }`}
+                    disabled={loadingAI}
+                  >
+                    {loadingAI ? (
+                      <div className="flex items-center">
+                        <svg
+                          className="animate-spin h-5 w-5 mr-3 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 0115.3-4.3 2 2 0 10-3.3 2.3A4.8 4.8 0 0012 12H4z"
+                          />
+                        </svg>
+                        Generating...
+                      </div>
+                    ) : (
+                      "Generate"
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Project URL */}
           <FormField
