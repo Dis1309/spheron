@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,14 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
+import { projectData } from "@/app/api/chatbot/data";
 
 // Zod schema with validation
 const formSchema = z
@@ -34,7 +27,7 @@ const formSchema = z
       message: "Start date cannot be in the past.",
     }),
     enddate: z.string().refine((date) => new Date(date) >= new Date(), {
-      message: "Start date cannot be in the past.",
+      message: "End date cannot be in the past.",
     }),
     description: z.string().max(400, {
       message: "Description cannot exceed 400 characters.",
@@ -46,10 +39,17 @@ const formSchema = z
     critical: z.number().min(0, { message: "Amount must be positive." }),
     high: z.number().min(0, { message: "Amount must be positive." }),
     low: z.number().min(0, { message: "Amount must be positive." }),
-  })
-  .refine((data) => data.critical + data.high + data.low === data.maxbounty, {
-    message: "Sum of Critical, High, and Low must equal Max Bounty.",
+    projecturl: z.string().url({
+      message: "Please enter a valid URL.",
+    }),
+    imageurl: z.string().url({
+      message: "Please enter a valid image URL.",
+    }),
   });
+  // .refine((data) => data.critical + data.high + data.low === data.maxbounty, {
+  //   message: "Sum of Critical, High, and Low must equal Max Bounty.",
+  // });
+
 
 function ProjectForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -63,16 +63,17 @@ function ProjectForm() {
       critical: 0,
       high: 0,
       low: 0,
+      projecturl: "",
+      imageurl: "",
     },
   });
-  // Define the type for each tag option
+
   interface TagOption {
     tag: string;
     id: number;
     isChoosen: boolean;
   }
 
-  // Initial tag options
   const initialTagOptions: TagOption[] = [
     { tag: "ai", id: 1, isChoosen: false },
     { tag: "security", id: 2, isChoosen: false },
@@ -88,30 +89,79 @@ function ProjectForm() {
   ];
 
   const [tagOptions, setTagOptions] = useState<TagOption[]>(initialTagOptions);
+  const [customTag, setCustomTag] = useState("");
 
-  // Toggle function to update isChoosen state
   const tagToggle = (id: number) => {
     setTagOptions((prevTagOptions) =>
       prevTagOptions.map((option) =>
         option.id === id ? { ...option, isChoosen: !option.isChoosen } : option
       )
     );
-    console.log(tagOptions);
+  };
+
+  const addCustomTag = () => {
+    if (customTag) {
+      setTagOptions((prev) => [
+        ...prev,
+        { tag: customTag, id: prev.length + 1, isChoosen: true },
+      ]);
+      setCustomTag("");
+    }
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log('Form submitting.');
     const selectedTags = tagOptions
       .filter((option) => option.isChoosen)
       .map((option) => option.tag);
-
-    // Add the selected tags array to the values object
-    const finalValues = { ...values, tags: selectedTags };
-
-    // Log the final values with selected tags
-    console.log(finalValues);
-    toast.success("Form submitted successfully!");
+  
+    const finalValues = {
+      ...values,
+      tags: selectedTags,
+      technologies: [], // This will be dynamically generated later or manually added by the user
+    };
+  
+    // Calculate the next project ID
+    const newProjectId = projectData.length
+      ? projectData[projectData.length - 1].project_id + 1
+      : 1;
+  
+    // Create the new project entry
+    const newProject = {
+      project_id: newProjectId,
+      title: finalValues.projectname,
+      description: finalValues.description,
+      technologies: [], // Placeholder for now, you can autofill or allow user input
+      url: finalValues.projecturl,
+      imageUrl: finalValues.imageurl,
+      startdate: finalValues.startdate,
+      enddate: finalValues.enddate,
+      maxbounty: finalValues.maxbounty,
+      critical: finalValues.critical,
+      high: finalValues.high,
+      low: finalValues.low,
+      tags: finalValues.tags,
+    };
+  
+    // Call the API to save the project
+    fetch('/api/add-project', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newProject),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success('Form submitted successfully!');
+        console.log('Project saved:', data);
+      })
+      .catch((error) => {
+        console.error('Error saving project:', error);
+        toast.error('Error submitting form.');
+      });
   }
-
+    
   return (
     <Form {...form}>
       <form
@@ -119,6 +169,7 @@ function ProjectForm() {
         className="space-y-8 text-white flex flex-row justify-center items-center gap-6 w-full"
       >
         <div className="flex flex-col gap-3 w-full">
+          {/* Project Name */}
           <FormField
             control={form.control}
             name="projectname"
@@ -135,6 +186,7 @@ function ProjectForm() {
             )}
           />
 
+          {/* Start Date */}
           <FormField
             control={form.control}
             name="startdate"
@@ -151,6 +203,7 @@ function ProjectForm() {
             )}
           />
 
+          {/* End Date */}
           <FormField
             control={form.control}
             name="enddate"
@@ -167,6 +220,7 @@ function ProjectForm() {
             )}
           />
 
+          {/* Description */}
           <FormField
             control={form.control}
             name="description"
@@ -186,6 +240,41 @@ function ProjectForm() {
             )}
           />
 
+          {/* Project URL */}
+          <FormField
+            control={form.control}
+            name="projecturl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-semibold">
+                  Project URL
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter project URL" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Image URL */}
+          <FormField
+            control={form.control}
+            name="imageurl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-semibold">Image URL</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter image URL" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className=" w-full flex flex-col gap-3">
+          {/* Max Bounty */}
           <FormField
             control={form.control}
             name="maxbounty"
@@ -208,16 +297,13 @@ function ProjectForm() {
               </FormItem>
             )}
           />
-        </div>
-        <div className=" w-full flex flex-col gap-3">
+          {/* Critical */}
           <FormField
             control={form.control}
             name="critical"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-semibold">
-                  Critical
-                </FormLabel>
+                <FormLabel className="text-lg font-semibold">Critical</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -233,6 +319,7 @@ function ProjectForm() {
             )}
           />
 
+          {/* High */}
           <FormField
             control={form.control}
             name="high"
@@ -254,6 +341,7 @@ function ProjectForm() {
             )}
           />
 
+          {/* Low */}
           <FormField
             control={form.control}
             name="low"
@@ -274,9 +362,12 @@ function ProjectForm() {
               </FormItem>
             )}
           />
+
+          {/* Tags Section */}
           <div className="flex flex-wrap gap-2">
             {tagOptions.map((option) => (
               <button
+              type="button"
                 key={option.id}
                 onClick={() => tagToggle(option.id)}
                 className={
@@ -289,6 +380,17 @@ function ProjectForm() {
               </button>
             ))}
           </div>
+
+          {/* Custom Tag Input */}
+          <div className="flex gap-3">
+            <Input
+              value={customTag}
+              placeholder="Add custom tag"
+              onChange={(e) => setCustomTag(e.target.value)}
+            />
+            <Button type="button" onClick={addCustomTag}>Add Tag</Button>
+          </div>
+
           <Button type="submit">Submit</Button>
         </div>
       </form>
