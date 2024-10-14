@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import IssueDialog from "@/components/ui/issueDialog";
 import { aptos, moduleAddress } from "@/app/login/page";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { AptosAccount, HexString } from "aptos";
-
 
 let project = {
   projectId: 4,
@@ -105,9 +103,6 @@ const page = () => {
   async function finalTransactions() {
     if (!account) return [];
     try {
-      const privateKeyHex = "0xeffb6df2e76f5bba885c542ea2629c52afae311fdf8807247b92f1f73c68106f";
-      const signer = new AptosAccount(Uint8Array.from(Buffer.from(privateKeyHex, 'hex')));
-      console.log(signer);
       let data = {
         deployer: deployer,
         projectid: 1,
