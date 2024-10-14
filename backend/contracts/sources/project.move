@@ -21,8 +21,8 @@ module account_address::ProjectModule {
     struct Project has copy, drop, store {
         description: string::String,
         max_bounty: u64,
-        start_date: u64,
-        end_date: u64,
+        start_date: string::String,
+        end_date: string::String,
         critical_bounty: u64,
         high_bounty: u64,
         low_bounty: u64,
@@ -94,8 +94,8 @@ module account_address::ProjectModule {
         id: u64,
         description: string::String,
         max_bounty: u64,
-        start_date: u64,
-        end_date: u64,
+        start_date: string::String,
+        end_date: string::String,
         critical_bounty: u64,
         high_bounty: u64,
         low_bounty: u64,
@@ -124,9 +124,6 @@ module account_address::ProjectModule {
         // Check that the creator has enough balance to cover max_bounty
         let creator_balance = balance<AptosCoin>(creator_addr);
         assert!(creator_balance >= max_bounty, 1);
-
-        // Ensure that end_date is after start_date
-        assert!(end_date > start_date, 2);
 
         // Transfer max_bounty from creator to the contract(@account_address)
         let contractaddress = @account_address;
@@ -170,7 +167,10 @@ module account_address::ProjectModule {
         );
     }
     
-
+   public fun project_mapping_exists(account: &signer): bool {
+    let check = exists<ProjectMapping>(signer::address_of(account));
+    return check
+   }
 
     public entry fun transaction_winners(
         deployer: &signer,

@@ -24,44 +24,54 @@ const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
   const router = useRouter();
   const level_wise_contributors = [0, 0, 0]; // low, high , critical
-  // INITIALISE PROJECT
-  async function initializeProjectMapping() {
+
+  // CREATE USER
+  async function createUser() {
+    if (!account) return [];
     try {
-      const transaction: InputTransactionData = {
+      const result = await aptos.view<[boolean]>({
+        payload: {
+          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
+          typeArguments: [], 
+          functionArguments: [account.address]
+        }
+      });
+  
+      // Check the result
+      if (result) {
+        console.log("Project mapping exists for the user.");
+        // Add any other actions here based on this check
+      } else {
+        console.log("No project mapping exists for the user.");
+        // Add any other actions here based on this check
+      }
+      const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
           functionArguments: [],
         },
       };
       // Replace `client` with your Aptos client instance and `account` with the signer object
-      const response = await signAndSubmitTransaction(transaction);
+      const response1 = await signAndSubmitTransaction(transaction1);
 
       // Optionally, wait for the transaction to be confirmed
       console.log("Initializing project mapping...");
-      await aptos.waitForTransaction({ transactionHash: response.hash });
+      await aptos.waitForTransaction({ transactionHash: response1.hash });
       console.log("ProjectMap initialized!");
-      console.log(response);
-    } catch (error) {
-      console.error("Failed to initialize ProjectMapping:", error);
-    }
-  }
+      console.log(response1);
 
-  // CREATE USER
-  async function createUser() {
-    if (!account) return [];
-    try {
-      const transaction: InputTransactionData = {
+      const transaction2: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_user`,
           functionArguments: [],
         },
       };
       console.log("Creating new user and their collection");
-      console.log(transaction);
-      const response = await signAndSubmitTransaction(transaction);
-      await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log(transaction2);
+      const response2 = await signAndSubmitTransaction(transaction2);
+      await aptos.waitForTransaction({ transactionHash: response2.hash });
       console.log("Created new user and their collection");
-      console.log(response);
+      console.log(response2);
     } catch (error: any) {
       console.log(error);
     }
@@ -70,17 +80,20 @@ const Login = () => {
   // CREATE PROJECT
   async function createProject() {
     if (!account) return [];
-    let newproject = {
-      id: 1,
-      description: "hello",
-      max_bounty: 100,
-      start_date: "10-10-2024",
-      end_date: "20-10-2024",
-      critical_bounty: 50,
-      high_bounty: 30,
-      low_bounty: 20,
-    };
     try {
+      const startDate = BigInt(new Date("2024-10-10").getTime());
+      const endDate = BigInt(new Date("2024-10-20").getTime());
+      let newproject = {
+        id: 1,
+        description: "hello",
+        max_bounty: 100,
+        start_date: startDate,
+        end_date: endDate,
+        critical_bounty: 50,
+        high_bounty: 30,
+        low_bounty: 20,
+      };
+
       const transaction: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_project`,
@@ -217,8 +230,7 @@ const Login = () => {
     if (connected == true) {
       const address = account?.address || "";
       console.log(address);
-      initializeProjectMapping();
-      // createUser();
+      createUser();
       // createProject();
       // onApproval();
       // getallprojectinfo();

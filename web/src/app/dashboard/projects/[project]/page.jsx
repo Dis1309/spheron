@@ -44,30 +44,30 @@ const page = ({ params }) => {
   const [projectLink, setProjectLink] = useState(project.githubLink);
 
   useEffect(() => {
-    async function fetchIssues() {
-      try {
-        const response = await fetch(`/api/issues?projectId=${projectId}`);
-        if (!response.ok) {
-          throw new Error("Error fetching issues");
-        }
+    // async function fetchIssues() {
+    //   try {
+    //     const response = await fetch(`/api/issues?projectId=${projectId}`);
+    //     if (!response.ok) {
+    //       throw new Error("Error fetching issues");
+    //     }
 
-        const data = await response.json();
-        console.log(data);
-        const storedValue = sessionStorage.getItem("accountAddress");
+    //     const data = await response.json();
+    //     console.log(data);
+    //     const storedValue = sessionStorage.getItem("accountAddress");
 
-        const filteredIssues = data.issues.filter(
-          (issue) => issue.ownerId === storedValue
-        );
-        setIssues(filteredIssues);
-      } catch (err) {
-        console.log(error);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchIssues();
-  }, [projectId]);
+    //     const filteredIssues = data.issues.filter(
+    //       (issue) => issue.ownerId === storedValue
+    //     );
+    //     setIssues(filteredIssues);
+    //   } catch (err) {
+    //     console.log(error);
+    //     setError(err.message);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
+    // fetchIssues();
+  });
 
   const LevelsDisplay = () => {
     return (
