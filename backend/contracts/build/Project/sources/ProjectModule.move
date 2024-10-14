@@ -11,6 +11,9 @@ module account_address::ProjectModule {
     use aptos_framework::aptos_coin::{Self, AptosCoin};
     use aptos_framework::event;
     use aptos_std::type_info;
+
+    //Error
+    const E_NOT_INITIALIZED: u64 = 1;
     /// Structure for Contribution details
     struct Contributor has copy, drop, store {
         issuer: address,
@@ -167,10 +170,7 @@ module account_address::ProjectModule {
         );
     }
     
-   public fun project_mapping_exists(account: &signer): bool {
-    let check = exists<ProjectMapping>(signer::address_of(account));
-    return check
-   }
+    
 
     public entry fun transaction_winners(
         deployer: &signer,
@@ -212,4 +212,14 @@ module account_address::ProjectModule {
          };
        };
     }
+
+   public fun project_mapping_exists(account: &signer): bool {
+   exists<ProjectMapping>(signer::address_of(account))
+    
+   }
+   #[view]
+   public fun project_mapping_exist(account: address): bool {
+   exists<ProjectMapping>(account)
+    
+   }
 }
