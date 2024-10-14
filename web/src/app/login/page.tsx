@@ -151,6 +151,8 @@ const Login = () => {
           contributors: project.contributors, // Array of contributors
         });
       }
+    }catch(error:any){
+      console.log(error);
     }
   }
   // CREATE CONTRIBUTION under the project
