@@ -27,7 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/ui/card.jsx",
-    "src/app/dashboard/projects/[project]/page.tsx",
+    "src/app/dashboard/projects/[project]/page.jsx",
     "src/app/dashboard/profile/page.tsx"
   ],
   "exclude": ["node_modules"]
