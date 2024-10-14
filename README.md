@@ -4,7 +4,7 @@
 <br />
 <h1 align="center">BugHuntX: Next-Generation Decentralized Bug Bounty Platform</h1>
 <div align="center">
-  <a href="https://github.com/Celebi07/bug-bounty-platform">
+  <a href="https://github.com/Dis1309/spheron">
     <img src="images/logo1.gif" alt="BugHuntX Logo" width="800" height="400">
   </a>
 </div>
@@ -14,9 +14,9 @@
   <a href="https://youtu.be/demo-link"><strong>Explore the Demo »</strong></a>
   <br />
   <br />
-  <a href="https://github.com/Celebi07/bug-bounty-platform/issues">Report Bug</a>
+  <a href="https://github.com/Dis1309/spheron/issues">Report Bug</a>
   ·
-  <a href="https://github.com/Celebi07/bug-bounty-platform/issues">Request Feature</a>
+  <a href="https://github.com/Dis1309/spheron/issues">Request Feature</a>
 </p>
 
 
@@ -28,17 +28,26 @@
     <li><a href="#mission">Mission</a></li>
     <li><a href="#value-proposition">Value Proposition</a></li>
     <li><a href="#key-features">Key Features</a></li>
+    <li><a href="#visuals">Visual Representation</a></li>
+    <li><a href="#why-bughuntx">Why BugHuntX?</a></li>
     <li><a href="#built-with">Built With</a></li>
-    <li><a href="#getting-started">Getting Started</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation Instructions</a></li>
+        <li><a href="#example">Example Usage</a></li>
+      </ul>
+    </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#team">Team Members</a></li>
+    <li><a href="#team">Team</a></li>
   </ol>
 </details>
 
+
 <h2 id="about-the-project">About The Project</h2>
 
-Our decentralized bug bounty platform is reshaping how security vulnerabilities are reported, managed, and rewarded. Using blockchain technology, each project is listed as an NFT, giving contributors a verifiable source of truth. Built on the Sphereon blockchain using the Move language, we offer secure, transparent, and efficient payments through smart contracts—ensuring that contributors are fairly compensated based on the issues they resolve.
+Our decentralized bug bounty platform is reshaping how security vulnerabilities are reported, managed, and rewarded. Using blockchain technology, each project is listed as an NFT, giving contributors a verifiable source of truth. Built on the Aptos blockchain using the Move language, we offer secure, transparent, and efficient payments through smart contracts—ensuring that contributors are fairly compensated based on the issues they resolve.
 
 <h3 id="mission">Mission:</h3>
 
@@ -50,6 +59,10 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 2. **Transparent Bounty Distribution**: Through blockchain-backed smart contracts, we ensure that each contributor is paid fairly and promptly for their work.
 3. **AI-Assisted Categorization**: Our AI-driven system streamlines the process of evaluating issues by automatically categorizing them into Critical, High, or Low tiers.
 4. **Blockchain-Powered Payments**: Contributors are paid securely in cryptocurrency upon completion of the project timeline, with funds distributed transparently based on the severity of the issue resolved.
+5. **Automated Transaction Management**: To ensure trust and transparency between contributors and project creators, bounty payments are securely held in smart contracts while the bounty is live. Once the bounty ends, the funds are automatically distributed among contributors based on their work.
+6. **AI-Powered Issue Prioritization**: In addition to categorizing issues, our AI system assists project managers by predicting the potential impact of each bug and suggesting priority levels, ensuring that the most critical issues are addressed first.
+7. **Smart Matching Algorithms**: Our AI algorithms match contributors to the issues that best align with their expertise, optimizing the process by assigning the right talents to the most relevant problems.
+8. **Real-Time Issue Insights**: AI-powered dashboards provide real-time insights into the nature and severity of bugs, helping contributors and project creators stay updated with the progress of the bounty.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,7 +77,7 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 <h2 id="key-features">Key Features</h2>
 
 1. **Project Listing as NFTs**:  
-   Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, **immutability**, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.
+   Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, *immutability*, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.
 
    <img src="images/nft-project-listing.gif" alt="NFT Project Listing" width="600"/>
 
@@ -79,12 +92,12 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
    <img src="images/ai-assisted-categorization.gif" alt="AI-Assisted Categorization" width="600"/>
 
 4. **Blockchain-Backed Payments**:  
-   Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, **transparent**, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
+   Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
 
    <img src="images/blockchain-payments.gif" alt="Blockchain Payments" width="600"/>
 
 5. **Decentralized Data Storage**:  
-   All project-related data, including reported issues and their corresponding bounties, are securely stored using **NFTs on the blockchain**. This decentralized storage model ensures a **tamper-proof**, **secure**, and **immutable** record of the entire bug-bounty process, reducing reliance on centralized servers and increasing data reliability.
+   All project-related data, including reported issues and their corresponding bounties, are securely stored using **NFTs on the blockchain**. This decentralized storage model ensures a *tamper-proof*, **secure**, and *immutable* record of the entire bug-bounty process, reducing reliance on centralized servers and increasing data reliability.
 
    <img src="images/decentralized-storage.gif" alt="Decentralized Data Storage" width="600"/>
 
@@ -93,102 +106,143 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 
    <img src="images/secure-transactions.gif" alt="Secure Transactions" width="600"/>
 
-7. **Real-Time Bounty Updates**:  
+7. **Automated Transaction Management**:  
+   To ensure **trust** and **transparency** between contributors and project creators, the bounty payments are securely held in **smart contracts** while the bounty is live. Once the bounty ends, the funds are automatically distributed among contributors based on their contributions. This feature eliminates manual handling of payments, reducing human error and increasing fairness.
+
+   <img src="images/automated-transactions.gif" alt="Automated Transactions" width="600"/>
+
+8. **Real-Time Bounty Updates**:  
    Contributors and project owners can track bounty progress in real-time. As issues are resolved and confirmed, bounties are automatically adjusted and reflected on the platform, providing full transparency and allowing for instant feedback loops between the two parties.
 
+   <img src="images/real-time-updates.gif" alt="Real-Time Bounty Updates" width="600"/>
+
+9. **AI-Powered Chatbot (Built with RASA)**:  
+   Our platform includes an **AI-powered chatbot** built with **RASA**, designed to provide an interactive experience for users. The chatbot helps users by:
+   - Answering questions about specific projects
+   - Offering suggestions for projects that align with users’ skills and interests
+   - Categorizing and assisting with project selection, ensuring users find the most relevant bounties
+
+   By integrating **RASA**, we deliver a sophisticated, conversational AI experience, ensuring users can navigate the platform efficiently and get real-time project-related information without any hassle.
+
+   <img src="images/rasa-chatbot.gif" alt="AI-Powered Chatbot" width="600"/>
+
+10. **Smart AI Matching**:  
+    Our platform’s **AI-driven algorithms** intelligently match contributors to the issues and projects best suited to their skills and expertise. This ensures that the most qualified individuals tackle the most critical problems, optimizing productivity and enhancing the quality of resolutions.
+
+    <img src="images/smart-matching.gif" alt="Smart AI Matching" width="600"/>
+
 ---
+
+Here’s the revised section that introduces the code snippet, focusing on the **Dynamic Bounty Distribution** feature implemented in Move language:
 
 ### Code Snippets to Highlight Features:
 
-For the **Dynamic Bounty Distribution** feature, here's an example of how smart contracts can dynamically allocate bounties based on issue severity using Solidity:
+For the **Dynamic Bounty Distribution** feature, here’s how smart contracts can dynamically allocate bounties based on issue severity using Move:
 
-```solidity
-// Example Solidity contract for dynamic bounty allocation
+```move
+// BountyDistribution.move
 
-pragma solidity ^0.8.0;
+module BountyDistribution {
+    use aptos_framework::coin;
+    use aptos_framework::account;
 
-contract BountyDistribution {
-    address owner;
-    uint public criticalReward = 10 ether;
-    uint public highReward = 5 ether;
-    uint public lowReward = 2 ether;
-    
-    mapping(address => uint) public rewards;
-
-    constructor() {
-        owner = msg.sender;
+    struct BountyDistribution {
+        owner: address,
+        rewards: map<address, u64>,
     }
 
-    // Function to allocate rewards based on severity
-    function allocateBounty(address contributor, uint severity) external {
-        require(msg.sender == owner, "Only owner can allocate bounties");
+    // Initialize the Bounty Distribution contract
+    public fun initialize(owner: address) {
+        let distribution = BountyDistribution {
+            owner,
+            rewards: map::empty<address, u64>(),
+        };
+        account::save_owner(owner, distribution);
+    }
 
-        if (severity == 1) {
-            rewards[contributor] += criticalReward;
-        } else if (severity == 2) {
-            rewards[contributor] += highReward;
-        } else if (severity == 3) {
-            rewards[contributor] += lowReward;
+    // Allocate rewards based on severity
+    public fun allocate_bounty(distribution: &mut BountyDistribution, contributor: address, severity: u8) {
+        assert!(msg::sender() == distribution.owner, "Only owner can allocate bounties");
+        
+        let reward = match severity {
+            1 => 10_000_000, // Critical
+            2 => 5_000_000,  // High
+            3 => 2_000_000,  // Low
+            _ => 0,
+        };
+
+        if reward > 0 {
+            let current_reward = map::get(&distribution.rewards, contributor).unwrap_or(0);
+            map::insert(&mut distribution.rewards, contributor, current_reward + reward);
         }
     }
 
-    // Function for contributors to claim rewards
-    function claimReward() external {
-        uint reward = rewards[msg.sender];
-        require(reward > 0, "No rewards to claim");
-        rewards[msg.sender] = 0;
-        payable(msg.sender).transfer(reward);
+    // Claim rewards by the contributor
+    public fun claim_reward(distribution: &mut BountyDistribution, contributor: address) {
+        let reward = map::remove(&mut distribution.rewards, contributor).unwrap_or(0);
+        assert!(reward > 0, "No rewards to claim");
+
+        coin::transfer(&distribution.owner, contributor, reward);
     }
-    
-    // Function to fund the contract
-    function deposit() external payable {}
 }
 ```
 
-### Explanation:
-- **Severity-Based Bounty Allocation**: The contract allows for dynamic allocation of bounties to contributors based on the severity of the issue (Critical, High, Low).
-- **Claim Functionality**: Contributors can claim their rewards, which are automatically transferred via blockchain-backed payments.
-- **Security**: Only the owner of the contract (project owner) can allocate bounties.
+### Key Functions:
 
+1. **`initialize`**: Sets up the contract with the owner's address and initializes the rewards mapping.
+2. **`allocate_bounty`**: Allows the owner to allocate rewards based on the severity of reported issues (Critical, High, Low).
+3. **`claim_reward`**: Enables contributors to claim their allocated rewards securely.
 ---
 
-To showcase the **AI-Assisted Issue Categorization**, we can use TensorFlow models to predict issue severity based on input data:
+To showcase the **AI-Assisted Issue Categorization**, we developed a chatbot using **RASA** that helps users find relevant projects based on their prompts and can provide detailed information about specific projects.
 
-```python
-# Example Python code using TensorFlow for AI-Assisted Categorization
+### RASA Chatbot Implementation
 
-import tensorflow as tf
-from tensorflow.keras import layers, models
+The RASA chatbot utilizes natural language processing to understand user queries and suggest projects that align with their interests. Below is a simplified implementation highlighting key components of the RASA framework:
 
-# Sample neural network for issue severity prediction
-def create_model():
-    model = models.Sequential()
-    model.add(layers.Dense(64, activation='relu', input_shape=(input_shape,)))
-    model.add(layers.Dense(32, activation='relu'))
-    model.add(layers.Dense(3, activation='softmax'))  # Output: Critical, High, Low
-    return model
+```yaml
+# config.yml - RASA configuration file
 
-# Compile the model
-model = create_model()
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+language: en
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: CountVectorsFeaturizer
+  - name: DIETClassifier
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+  - name: DialoguePolicy
 
-# Example issue data for training the AI model
-train_data = ...
-train_labels = ...
+# domain.yml - RASA domain file
+intents:
+  - greet
+  - ask_projects
+  - request_details
 
-# Train the model to predict issue severity
-model.fit(train_data, train_labels, epochs=10, batch_size=32)
+responses:
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+  utter_ask_projects:
+    - text: "I can help you find projects based on your interests. What are you looking for?"
+  utter_project_details:
+    - text: "Here are the details of the project you're interested in: {project_name}"
 
-# Predict the category of a new issue
-new_issue_data = ...
-predicted_severity = model.predict(new_issue_data)
-
-# Output: Predicted severity category (Critical, High, Low)
+# stories.yml - Example user stories
+stories:
+  - story: greet and ask for projects
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_projects
+      - action: utter_ask_projects
 ```
 
-### Explanation:
-- **AI Model**: A simple neural network is used to categorize issues based on the input data (issue reports).
-- **Prediction**: The model can predict whether an issue falls into **Critical**, **High**, or **Low** severity categories.
+### Key Features:
+
+1. **Project Recommendations**: The chatbot understands user prompts to suggest relevant projects based on their interests and requirements.
+2. **Detailed Information**: Users can request more information about specific projects, and the chatbot provides insights on features, technology stacks, and more.
+3. **Interactive Experience**: Users can engage in a conversation with the chatbot, making it easier to find projects that suit their needs.
+
+This RASA-powered chatbot enhances user experience by leveraging AI to provide tailored project recommendations and information, streamlining the process of finding suitable projects within our platform.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 ---
@@ -266,31 +320,37 @@ Once you have the prerequisites, follow these steps:
 
 To see the platform in action, check out the demo or refer to the example usage guide in the documentation:
 
-- **Demo**: [Watch the Demo](https://youtu.be/demo-link)
-- **Example Workflow**: [Check out the workflow outputs](./docs/workflow.md)
-
-Here’s a detailed workflow file for your platform, structured to present everything clearly and visually engaging. This includes outputs in the form of images and GIFs to enhance understanding.
+Here's the adjusted content presented as a topic within the same page, maintaining coherence and clarity:
 
 ---
 
-# Workflow File: Decentralized Project Management Platform
+## **Demo**  
+[**Watch the Demo**](https://youtu.be/demo-link)
 
-## Platform Overview
-Our platform connects non-technical individuals seeking to build projects with technical contributors looking to collaborate and earn. Utilizing blockchain technology, AI, and a decentralized system, we provide an efficient and transparent workflow for project owners and developers.
+### **Example Workflow**  
+
+Here’s a detailed overview of our decentralized project management platform, structured to present everything clearly and visually engaging. This includes outputs in the form of images and GIFs to enhance understanding.
 
 ---
 
-## 1. **NFT-Based Project Creation**
+### **Platform Overview**  
+Our platform connects **non-technical individuals** seeking to build projects with **technical contributors** looking to collaborate and earn. Utilizing **blockchain technology**, **AI**, and a decentralized system, we provide an efficient and transparent workflow for project owners and developers.
+
+---
+
+### **1. NFT-Based Project Creation**
 
 - **Feature**: Projects are minted as NFTs.
 - **Details**:
-  - Each NFT contains metadata: title, description, tech stack, bounty details.
-  - Ensures transparency and immutability.
+  - Each NFT contains metadata: **title**, **description**, **tech stack**, and **bounty details**.
+  - Ensures full **transparency** and **immutability** on the blockchain.
 
 ![NFT Creation GIF](link-to-nft-creation.gif)  
-*(GIF showing the NFT minting process)*
+*_(GIF showing the NFT minting process)_*
 
 ---
+
+This structure allows you to present the demo and workflow as an integrated part of your page, maintaining a unified and professional appearance. Let me know if you'd like any further adjustments!
 
 ## 2. **Max Bounty and Task-Level Payment Distribution**
 
@@ -452,6 +512,7 @@ By integrating blockchain technology, AI assistance, and a decentralized project
 - **Styling**: TailwindCSS
 - **AI Frameworks**: TensorFlow, Keras
 - **Version Control**: Git
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h2 id="license">License</h2>
@@ -486,10 +547,43 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 
 <h2 id="team">Team Members</h2>
 
-- **Kashish Garg** - Co-Founder & Developer
-- **Disha** - Co-Founder & Product Manager
+<div style="display: flex; flex-direction: column; gap: 20px;">
+  <div style="display: flex; align-items: center;">
+    <img src="path-to-kashish-photo.jpg" alt="Kashish Garg" width="100" style="border-radius: 50%; margin-right: 10px;">
+    <div>
+      <strong>Kashish Garg</strong> - Co-Founder & Developer
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center;">
+    <img src="path-to-disha-photo.jpg" alt="Disha" width="100" style="border-radius: 50%; margin-right: 10px;">
+    <div>
+      <strong>Disha</strong> - Co-Founder & Product Manager
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center;">
+    <img src="path-to-vanshika-photo.jpg" alt="Vanshika Malik" width="100" style="border-radius: 50%; margin-right: 10px;">
+    <div>
+      <strong>Vanshika Malik</strong> - Full Stack Developer
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center;">
+    <img src="path-to-aviral-photo.jpg" alt="Aviral Katiyar" width="100" style="border-radius: 50%; margin-right: 10px;">
+    <div>
+      <strong>Aviral Katiyar</strong> - AI-ML Developer
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center;">
+    <img src="path-to-jyotika-photo.jpg" alt="Jyotika" width="100" style="border-radius: 50%; margin-right: 10px;">
+    <div>
+      <strong>Jyotika</strong> - Blockchain Aptos Developer
+    </div>
+  </div>
+</div>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 ```
-
-This version elevates the language, highlights the benefits, and organizes the content in the requested format to make it more professional and appealing.
