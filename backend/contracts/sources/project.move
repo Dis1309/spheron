@@ -185,8 +185,7 @@ module account_address::ProjectModule {
     
 
     public entry fun transaction_winners(
-        creator: &signer,
-        deployer: signer,
+        deployer: &signer,
         project_id: u64,
         high: u64,
         critical: u64,
@@ -221,7 +220,7 @@ module account_address::ProjectModule {
          if(simple_map::contains_key(&mut mp,&contributor.issuer)==true) {
             let value = *simple_map::borrow(&mut mp,&contributor.issuer);
             let add:address = @account_address;
-            transfer(&deployer, contributor.issuer, value);
+            transfer(deployer, contributor.issuer, value);
          };
        };
     }
