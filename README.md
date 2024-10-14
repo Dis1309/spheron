@@ -551,14 +551,14 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
   <div style="display: flex; align-items: center;">
     <img src="path-to-kashish-photo.jpg" alt="Kashish Garg" width="100" style="border-radius: 50%; margin-right: 10px;">
     <div>
-      <strong>Kashish Garg</strong> - Co-Founder & Developer
+      <strong>Kashish Garg</strong> - AI-ML Developer
     </div>
   </div>
 
   <div style="display: flex; align-items: center;">
     <img src="path-to-disha-photo.jpg" alt="Disha" width="100" style="border-radius: 50%; margin-right: 10px;">
     <div>
-      <strong>Disha</strong> - Co-Founder & Product Manager
+      <strong>Disha Dwivedi</strong> - Blockchain Aptos Developer
     </div>
   </div>
 
