@@ -31,15 +31,20 @@ const Login = () => {
     try {
       const result = await aptos.view({
         payload: {
-          function:`${moduleAddress}::ProjectModule::project_mapping_exist`,
-          functionArguments: [account?.address],
-         }
-      })
-      console.log(result);
-      
-      var flag = result != null ? result[0] : true;
-      console.log(flag);
-      if(!flag){
+          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
+          typeArguments: [], 
+          functionArguments: [account.address]
+        }
+      });
+  
+      // Check the result
+      if (result) {
+        console.log("Project mapping exists for the user.");
+        // Add any other actions here based on this check
+      } else {
+        console.log("No project mapping exists for the user.");
+        // Add any other actions here based on this check
+      }
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
@@ -67,7 +72,6 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response2.hash });
       console.log("Created new user and their collection");
       console.log(response2);
-    }
     } catch (error: any) {
       console.log(error);
     }
@@ -147,14 +151,8 @@ const Login = () => {
           contributors: project.contributors, // Array of contributors
         });
       }
-
-      // Display or return the projects for further use (e.g., in UI)
-      console.log("Account's Projects:", accountProjects);
-    } catch (error: any) {
-      console.log(error);
     }
   }
-
   // CREATE CONTRIBUTION under the project
   async function onApproval() {
     if (!account) return [];

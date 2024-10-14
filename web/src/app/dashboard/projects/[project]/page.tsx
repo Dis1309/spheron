@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import TagsDisplay from "../../../../components/ui/tagsDisplay";
 import { Button } from "@/components/ui/button";
 import IssueDialog from "@/components/ui/issueDialog";
+import { aptos, moduleAddress } from "@/app/login/page";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 let project = {
   projectId: 4,
@@ -22,8 +24,8 @@ let project = {
     Low: 1759,
   },
 };
-
-const page = ({ params }) => {
+// removed params and commented issues
+const page = () => {
   const [projectId, setProjectId] = useState(project.projectId);
   const [desc, setDesc] = useState(project.description);
   const [imgUrl, setImgUrl] = useState(project.imageurl);
@@ -42,6 +44,7 @@ const page = ({ params }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [projectLink, setProjectLink] = useState(project.githubLink);
+  const { account, connected, signAndSubmitTransaction } = useWallet();
 
   useEffect(() => {
     // async function fetchIssues() {
@@ -150,11 +153,11 @@ const page = ({ params }) => {
               <p>No issues found.</p>
             ) : (
               <ul>
-                {issues.map((issue) => (
+                {/* {issues.map((issue) => (
                   <li key={issue.issueId} className="text-white">
                     <strong>{issue.description}</strong>
                   </li>
-                ))}
+                ))} */}
               </ul>
             )}
           </div>
