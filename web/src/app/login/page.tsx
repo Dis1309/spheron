@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x8c7b4253190a0d6a5f2ef1536d2bd09912c4bbf2d830a8e96cebad12efdaec66";
+  "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -29,7 +29,7 @@ const Login = () => {
   async function createUser() {
     if (!account) return [];
     try {
-      const result = await aptos.view<[boolean]>({
+      const result = await aptos.view({
         payload: {
           function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
           typeArguments: [], 
@@ -51,7 +51,7 @@ const Login = () => {
           functionArguments: [],
         },
       };
-      // Replace `client` with your Aptos client instance and `account` with the signer object
+      // Replace ⁠ client ⁠ with your Aptos client instance and ⁠ account ⁠ with the signer object
       const response1 = await signAndSubmitTransaction(transaction1);
 
       // Optionally, wait for the transaction to be confirmed
@@ -78,47 +78,47 @@ const Login = () => {
   }
 
   // CREATE PROJECT
-  async function createProject() {
-    if (!account) return [];
-    try {
-      const startDate = BigInt(new Date("2024-10-10").getTime());
-      const endDate = BigInt(new Date("2024-10-20").getTime());
-      let newproject = {
-        id: 1,
-        description: "hello",
-        max_bounty: 100,
-        start_date: startDate,
-        end_date: endDate,
-        critical_bounty: 50,
-        high_bounty: 30,
-        low_bounty: 20,
-      };
+  // async function createProject() {
+  //   if (!account) return [];
+  //   try {
+  //     const startDate = BigInt(new Date("2024-10-10").getTime());
+  //     const endDate = BigInt(new Date("2024-10-20").getTime());
+  //     let newproject = {
+  //       id: 1,
+  //       description: "hello",
+  //       max_bounty: 100,
+  //       start_ate: startDate,
+  //       end_date: endDate,
+  //       critical_bounty: 50,
+  //       high_bounty: 30,
+  //       low_bounty: 20,
+  //     };
 
-      const transaction: InputTransactionData = {
-        data: {
-          function: `${moduleAddress}::ProjectModule::create_project`,
-          functionArguments: [
-            newproject.id,
-            newproject.description,
-            newproject.max_bounty,
-            newproject.start_date,
-            newproject.end_date,
-            newproject.critical_bounty,
-            newproject.high_bounty,
-            newproject.low_bounty,
-          ],
-        },
-      };
-      console.log("adding new project...");
-      console.log(transaction);
-      const response = await signAndSubmitTransaction(transaction);
-      await aptos.waitForTransaction({ transactionHash: response.hash });
-      console.log("added new project");
-      console.log(response);
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
+  //     const transaction: InputTransactionData = {
+  //       data: {
+  //         function: `${moduleAddress}::ProjectModule::create_project`,
+  //         functionArguments: [
+  //           newproject.id,
+  //           newproject.description,
+  //           newproject.max_bounty,
+  //           newproject.start_date,
+  //           newproject.end_date,
+  //           newproject.critical_bounty,
+  //           newproject.high_bounty,
+  //           newproject.low_bounty,
+  //         ],
+  //       },
+  //     };
+  //     console.log("adding new project...");
+  //     console.log(transaction);
+  //     const response = await signAndSubmitTransaction(transaction);
+  //     await aptos.waitForTransaction({ transactionHash: response.hash });
+  //     console.log("added new project");
+  //     console.log(response);
+  //   } catch (error: any) {
+  //     console.log(error);
+  //   }
+  // }
   // GET PROJECT INFORMATION
   async function getallprojectinfo() {
     if (!account) return [];
@@ -151,14 +151,10 @@ const Login = () => {
           contributors: project.contributors, // Array of contributors
         });
       }
-
-      // Display or return the projects for further use (e.g., in UI)
-      console.log("Account's Projects:", accountProjects);
-    } catch (error: any) {
+    }catch(error:any){
       console.log(error);
     }
   }
-
   // CREATE CONTRIBUTION under the project
   async function onApproval() {
     if (!account) return [];

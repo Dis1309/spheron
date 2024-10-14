@@ -102,7 +102,7 @@ module account_address::ProjectModule {
         critical_bounty: u64,
         high_bounty: u64,
         low_bounty: u64,
-    ) acquires User, ProjectMapping{
+    ) acquires ProjectMapping{
         let creator_addr = signer::address_of(creator);
         // Create a vector to hold Contributor structs
         let contributors: vector<Contributor> = vector::empty<Contributor>();
@@ -118,8 +118,8 @@ module account_address::ProjectModule {
             contributors
         };
         // Retrieve and update the User resource
-        let user = borrow_global_mut<User>(creator_addr);
-        vector::push_back(&mut user.projects, id);
+        // let user = borrow_global_mut<User>(creator_addr);
+        // vector::push_back(&mut user.projects, id);
 
         // Check that max_bounty is greater than zero
         assert!(max_bounty > 0, 0);
@@ -132,14 +132,14 @@ module account_address::ProjectModule {
         let contractaddress = @account_address;
         transfer<AptosCoin>(creator, contractaddress, max_bounty);
 
-        token::create_named_token(
-            creator,
-            string::utf8(b"User NFT collection"),
-            string::utf8(b"Description"),
-            description,
-            option::none(),
-            string::utf8(b"https://mycollection.com/my-named-token.jpeg")
-        );
+        // token::create_named_token(
+        //     creator,
+        //     string::utf8(b"User NFT collection"),
+        //     string::utf8(b"Description"),
+        //     description,
+        //     option::none(),
+        //     string::utf8(b"https://mycollection.com/my-named-token.jpeg")
+        // );
 
         let project_mapping = borrow_global_mut<ProjectMapping>(@account_address);
         simple_map::upsert(

@@ -16,42 +16,51 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { projectData } from "@/app/api/chatbot/data";
+import {
+  InputTransactionData,
+  useWallet,
+} from "@aptos-labs/wallet-adapter-react";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+export const aptos = new Aptos(aptosConfig);
+import { projectData } from "@/app/api/chatbot/data";
 
 // Zod schema with validation
-const formSchema = z
-  .object({
-    projectname: z.string().min(2, {
-      message: "Project name must be at least 2 characters.",
-    }),
-    startdate: z.string().refine((date) => new Date(date) >= new Date(), {
-      message: "Start date cannot be in the past.",
-    }),
-    enddate: z.string().refine((date) => new Date(date) >= new Date(), {
-      message: "End date cannot be in the past.",
-    }),
-    description: z.string().max(400, {
-      message: "Description cannot exceed 400 characters.",
-    }),
-    maxbounty: z
-      .number()
-      .positive()
-      .min(1, { message: "Max bounty must be at least 1 USD." }),
-    critical: z.number().min(0, { message: "Amount must be positive." }),
-    high: z.number().min(0, { message: "Amount must be positive." }),
-    low: z.number().min(0, { message: "Amount must be positive." }),
-    projecturl: z.string().url({
-      message: "Please enter a valid URL.",
-    }),
-    imageurl: z.string().url({
-      message: "Please enter a valid image URL.",
-    }),
-  });
-  // .refine((data) => data.critical + data.high + data.low === data.maxbounty, {
-  //   message: "Sum of Critical, High, and Low must equal Max Bounty.",
-  // });
-
+const formSchema = z.object({
+  projectname: z.string().min(2, {
+    message: "Project name must be at least 2 characters.",
+  }),
+  startdate: z.string().refine((date) => new Date(date) >= new Date(), {
+    message: "Start date cannot be in the past.",
+  }),
+  enddate: z.string().refine((date) => new Date(date) >= new Date(), {
+    message: "End date cannot be in the past.",
+  }),
+  description: z.string().max(400, {
+    message: "Description cannot exceed 400 characters.",
+  }),
+  maxbounty: z
+    .number()
+    .positive()
+    .min(1, { message: "Max bounty must be at least 1 USD." }),
+  critical: z.number().min(0, { message: "Amount must be positive." }),
+  high: z.number().min(0, { message: "Amount must be positive." }),
+  low: z.number().min(0, { message: "Amount must be positive." }),
+  projecturl: z.string().url({
+    message: "Please enter a valid URL.",
+  }),
+  imageurl: z.string().url({
+    message: "Please enter a valid image URL.",
+  }),
+});
+// .refine((data) => data.critical + data.high + data.low === data.maxbounty, {
+//   message: "Sum of Critical, High, and Low must equal Max Bounty.",
+// });
 
 function ProjectForm() {
+  const { account, connected, signAndSubmitTransaction } = useWallet();
+  const moduleAddress =
+    "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -108,64 +117,89 @@ function ProjectForm() {
       setCustomTag("");
     }
   };
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log('Form submitting.');
+  // CREATE PROJECT
+  async function createProject(extractedValues: any) {
+    console.log("inside");
+    console.log(account?.address);
+    console.log(connected);
+    if (!account) return [];
+    try {
+      const transaction: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::create_project`,
+          functionArguments: [
+            extractedValues.projectid,
+            extractedValues.description,
+            1,
+            extractedValues.start_date,
+            extractedValues.end_date,
+            1,
+            1,
+            1,
+          ],
+        },
+      };
+      console.log("adding new project...");
+      console.log(transaction);
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+      toast.success("added new project");
+      console.log("added new project");
+      console.log(response);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const selectedTags = tagOptions
       .filter((option) => option.isChoosen)
       .map((option) => option.tag);
-  
-    const finalValues = {
-      ...values,
-      tags: selectedTags,
-      technologies: [], // This will be dynamically generated later or manually added by the user
+
+    // Add the selected tags array to the values object
+    const finalValues = { ...values, tags: selectedTags };
+
+    // generating projectid
+    let max = 1000000;
+    let min = 1;
+    const projectid = Math.floor(Math.random() * (max - min + 1)) + min;
+    // Extract only the required fields and include an ID
+    const { description, maxbounty, startdate, enddate, critical, high, low } =
+      finalValues;
+
+    // Convert dates to BigInt in milliseconds
+    const start_date = BigInt(new Date(startdate).getTime());
+    const end_date = BigInt(new Date(enddate).getTime());
+
+    // Convert BigInt to string for sending
+    const start_date_str = start_date.toString();
+    const end_date_str = end_date.toString();
+    // Create a new object with the desired structure including the ID
+    const extractedValues = {
+      projectid,
+      description,
+      max_bounty: maxbounty,
+      start_date: start_date_str,
+      end_date: end_date_str,
+      critical_bounty: critical,
+      high_bounty: high,
+      low_bounty: low,
     };
-  
-    // Calculate the next project ID
-    const newProjectId = projectData.length
-      ? projectData[projectData.length - 1].project_id + 1
-      : 1;
-  
-    // Create the new project entry
-    const newProject = {
-      project_id: newProjectId,
-      title: finalValues.projectname,
-      description: finalValues.description,
-      technologies: [], // Placeholder for now, you can autofill or allow user input
-      url: finalValues.projecturl,
-      imageUrl: finalValues.imageurl,
-      startdate: finalValues.startdate,
-      enddate: finalValues.enddate,
-      maxbounty: finalValues.maxbounty,
-      critical: finalValues.critical,
-      high: finalValues.high,
-      low: finalValues.low,
-      tags: finalValues.tags,
-    };
-  
-    // Call the API to save the project
-    fetch('/api/add-project', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newProject),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        toast.success('Form submitted successfully!');
-        console.log('Project saved:', data);
-      })
-      .catch((error) => {
-        console.error('Error saving project:', error);
-        toast.error('Error submitting form.');
-      });
+
+    // Log the final values with selected tags
+    console.log(finalValues);
+    toast.success("Form submitted successfully!");
+
+    console.log("Hello");
+    await createProject(extractedValues);
   }
-    
+
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={(event) => {
+          event.preventDefault(); // Prevent default behavior
+          form.handleSubmit((values) => onSubmit(values))(event); // Call your submit function with values
+        }}
         className="space-y-8 text-white flex flex-row justify-center items-center gap-6 w-full"
       >
         <div className="flex flex-col gap-3 w-full">
@@ -263,7 +297,9 @@ function ProjectForm() {
             name="imageurl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-semibold">Image URL</FormLabel>
+                <FormLabel className="text-lg font-semibold">
+                  Image URL
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter image URL" {...field} />
                 </FormControl>
@@ -303,7 +339,9 @@ function ProjectForm() {
             name="critical"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-semibold">Critical</FormLabel>
+                <FormLabel className="text-lg font-semibold">
+                  Critical
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -367,7 +405,7 @@ function ProjectForm() {
           <div className="flex flex-wrap gap-2">
             {tagOptions.map((option) => (
               <button
-              type="button"
+                type="button"
                 key={option.id}
                 onClick={() => tagToggle(option.id)}
                 className={
@@ -388,7 +426,9 @@ function ProjectForm() {
               placeholder="Add custom tag"
               onChange={(e) => setCustomTag(e.target.value)}
             />
-            <Button type="button" onClick={addCustomTag}>Add Tag</Button>
+            <Button type="button" onClick={addCustomTag}>
+              Add Tag
+            </Button>
           </div>
 
           <Button type="submit">Submit</Button>
