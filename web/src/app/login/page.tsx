@@ -23,6 +23,8 @@ export const moduleAddress =
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
   const router = useRouter();
+  const level_wise_contributors = [0, 0, 0]; // low, high , critical
+  // INITIALISE PROJECT
   async function initializeProjectMapping() {
     try {
       const transaction: InputTransactionData = {
@@ -34,14 +36,17 @@ const Login = () => {
       // Replace `client` with your Aptos client instance and `account` with the signer object
       const response = await signAndSubmitTransaction(transaction);
 
-      // // Optionally, wait for the transaction to be confirmed
+      // Optionally, wait for the transaction to be confirmed
+      console.log("Initializing project mapping...");
       await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log("ProjectMap initialized!");
       console.log(response);
     } catch (error) {
       console.error("Failed to initialize ProjectMapping:", error);
     }
   }
 
+  // CREATE USER
   async function createUser() {
     if (!account) return [];
     try {
@@ -51,36 +56,172 @@ const Login = () => {
           functionArguments: [],
         },
       };
+      console.log("Creating new user and their collection");
       console.log(transaction);
       const response = await signAndSubmitTransaction(transaction);
       await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log("Created new user and their collection");
       console.log(response);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
 
+  // CREATE PROJECT
+  async function createProject() {
+    if (!account) return [];
+    let newproject = {
+      id: 1,
+      description: "hello",
+      max_bounty: 100,
+      start_date: "10-10-2024",
+      end_date: "20-10-2024",
+      critical_bounty: 50,
+      high_bounty: 30,
+      low_bounty: 20,
+    };
+    try {
+      const transaction: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::create_project`,
+          functionArguments: [
+            newproject.id,
+            newproject.description,
+            newproject.max_bounty,
+            newproject.start_date,
+            newproject.end_date,
+            newproject.critical_bounty,
+            newproject.high_bounty,
+            newproject.low_bounty,
+          ],
+        },
+      };
+      console.log("adding new project...");
+      console.log(transaction);
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log("added new project");
+      console.log(response);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+  // GET PROJECT INFORMATION
+  async function getprojectinfo() {
+    if (!account) return [];
+    try {
       const projectMappingResource = await aptos.getAccountResource({
         accountAddress: account?.address,
         resourceType: `${moduleAddress}::ProjectModule::ProjectMapping`,
       });
-      // Extract the users mapping from the ProjectMapping resource
-      const users = projectMappingResource.data.users;
+      const userResource = await aptos.getAccountResource({
+        accountAddress: account?.address,
+        resourceType: `${moduleAddress}::ProjectModule::User`,
+      });
 
-      // Check if the user's address is present in the users mapping
-      if (users[account?.address]) {
-        console.log(`User found:`, users[account?.address]);
-        return users[account?.address];
+      const userProjects = userResource.data.projects;
+      const projectsMap = projectMappingResource.data.projects;
+      const accountProjects = [];
+
+      for (const projectId in userProjects) {
+        const project = projectsMap[projectId];
+
+        accountProjects.push({
+          id: projectId,
+          description: project.description,
+          maxBounty: project.max_bounty,
+          startDate: project.start_date,
+          endDate: project.end_date,
+          criticalBounty: project.critical_bounty,
+          highBounty: project.high_bounty,
+          lowBounty: project.low_bounty,
+          contributors: project.contributors, // Array of contributors
+        });
+      }
+
+      // Display or return the projects for further use (e.g., in UI)
+      console.log("Account's Projects:", accountProjects);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  // CREATE CONTRIBUTION under the project
+  async function onApproval() {
+    if (!account) return [];
+    let newcontribution = {
+      id: 1,
+      level: "critical",
+    };
+    try {
+      const transaction: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::create_contribution`,
+          functionArguments: [newcontribution.id, newcontribution.level],
+        },
+      };
+      console.log("adding as contributor");
+      console.log(transaction);
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log("added as contributor");
+      console.log(response);
+
+      // updating level wise contributors no.
+      if (newcontribution.level == "low") {
+        level_wise_contributors[0]++;
+      } else if (newcontribution.level == "high") {
+        level_wise_contributors[1]++;
       } else {
-        console.log("User not found.");
-        return null;
+        level_wise_contributors[2]++;
       }
     } catch (error: any) {
       console.log(error);
     }
   }
+
+  // SENDING Transactions
+  // async function finalTransactions() {
+  //   if (!account) return [];
+  //   try {
+  //     let data = {
+  //       deployer: deployer,
+  //       projectid: 1,
+  //       high: 1,
+  //       critical: 1,
+  //       low: 1,
+  //     };
+  //     const transaction: InputTransactionData = {
+  //       data: {
+  //         function: `${moduleAddress}::ProjectModule::transaction_winners`,
+  //         functionArguments: [
+  //           data.deployer,
+  //           data.projectid,
+  //           data.high,
+  //           data.critical,
+  //           data.low,
+  //         ],
+  //       },
+  //     };
+  //     console.log("sending transactions");
+  //     console.log(transaction);
+  //     const response = await signAndSubmitTransaction(transaction);
+  //     await aptos.waitForTransaction({ transactionHash: response.hash });
+  //     console.log("all transactions sent");
+  //     console.log(response);
+  //   } catch (error: any) {
+  //     console.log(error);
+  //   }
+  // }
   useEffect(() => {
     if (connected == true) {
       const address = account?.address || "";
       console.log(address);
-      initializeProjectMapping();
-      createUser();
+      // initializeProjectMapping();
+      // createUser();
+      createProject();
+      // onApproval();
+      // getprojectinfo();
       sessionStorage.setItem("accountAddress", address);
       router.push("/dashboard");
     }

@@ -10,7 +10,13 @@ module account_address::ProjectModule {
     use aptos_framework::coin::{Self, balance, transfer};
     use aptos_framework::aptos_coin::{Self, AptosCoin};
     use aptos_framework::event;
-   use aptos_std::type_info;
+    use aptos_std::type_info;
+    /// Structure for Contribution details
+    struct Contributor has copy, drop, store {
+        issuer: address,
+        level: string::String
+    }
+
     /// Structure for Project details
     struct Project has copy, drop, store {
         description: string::String,
@@ -23,13 +29,7 @@ module account_address::ProjectModule {
         contributors: vector<Contributor>
     }
 
-    /// Structure for Contribution details
-    struct Contributor has copy, drop, store {
-        issuer: address,
-        level: string::String
-    }
-
-    struct User has copy, drop, store {
+    struct User has key {
         projects: vector<u64>,
         earned_money: u64,
         contributions: vector<u64>
@@ -39,20 +39,13 @@ module account_address::ProjectModule {
     struct ProjectMapping has key, store {
         contributions: SimpleMap<u64,Contributor>,
         projects: SimpleMap<u64,Project>,
-        no_contributer: u64,
-        no_project: u64,
-        users: SimpleMap<address,User>,
-
     }
 
     /// Initialize the project mapping resource for a given signer
-    public fun initialize_project_mapping(account: &signer) {
+    public entry fun initialize_project_mapping(account: &signer) {
         let project_mapping = ProjectMapping {
             contributions: simple_map::new(),
             projects: simple_map::new(),
-            no_contributer: 0,
-            no_project: 0,
-            users: simple_map::new(),
         };
         move_to(account, project_mapping);
     }
@@ -69,7 +62,8 @@ module account_address::ProjectModule {
         project_id: u64,
         message: string::String
     }
-    public fun create_user(creator: &signer){
+
+    public entry fun create_user(creator: &signer) {
         let creator_addr = signer::address_of(creator);
         let user = User{
             projects:vector::empty<u64>(),
@@ -84,20 +78,7 @@ module account_address::ProjectModule {
             string::utf8(b"https://mycollection.com")
         );
         
-        let project_mapping = ProjectMapping {
-            contributions: simple_map::new(),
-            projects: simple_map::new(),
-            no_contributer: 0,
-            no_project: 0,
-            users: simple_map::new(),
-        };
-        
-        simple_map::upsert(
-            &mut project_mapping.users,
-            creator_addr,
-            user
-        );
-        move_to(creator, project_mapping);
+        move_to(creator, user);
         
         event::emit(
             CreateCollectionEvent {
@@ -108,7 +89,7 @@ module account_address::ProjectModule {
         );
     }
 
-    public fun create_project(
+    public entry fun create_project(
         creator:&signer,
         id: u64,
         description: string::String,
@@ -118,9 +99,10 @@ module account_address::ProjectModule {
         critical_bounty: u64,
         high_bounty: u64,
         low_bounty: u64,
-        contributors: vector<Contributor>
-    ) acquires ProjectMapping {
+    ) acquires User, ProjectMapping{
         let creator_addr = signer::address_of(creator);
+        // Create a vector to hold Contributor structs
+        let contributors: vector<Contributor> = vector::empty<Contributor>();
 
         let project = Project {
             description,
@@ -132,7 +114,10 @@ module account_address::ProjectModule {
             low_bounty,
             contributors
         };
-        
+        // Retrieve and update the User resource
+        let user = borrow_global_mut<User>(creator_addr);
+        vector::push_back(&mut user.projects, id);
+
         // Check that max_bounty is greater than zero
         assert!(max_bounty > 0, 0);
 
@@ -144,7 +129,8 @@ module account_address::ProjectModule {
         assert!(end_date > start_date, 2);
 
         // Transfer max_bounty from creator to the contract(@account_address)
-        transfer<AptosCoin>(creator, creator_addr, max_bounty);
+        let contractaddress = @account_address;
+        transfer<AptosCoin>(creator, contractaddress, max_bounty);
 
         token::create_named_token(
             creator,
@@ -155,7 +141,6 @@ module account_address::ProjectModule {
             string::utf8(b"https://mycollection.com/my-named-token.jpeg")
         );
 
-
         let project_mapping = borrow_global_mut<ProjectMapping>(@account_address);
         simple_map::upsert(
             &mut project_mapping.projects,
@@ -164,13 +149,17 @@ module account_address::ProjectModule {
         );
     }
 
-    public fun create_contribution(
+
+    public entry fun create_contribution(
         account: &signer,
         id: u64,
         level: string::String,
-    ) acquires ProjectMapping, {
+    ) acquires ProjectMapping,User{
         let contributor_addr = signer::address_of(account);
         let contribution = Contributor { issuer: contributor_addr, level: level};
+
+        let user = borrow_global_mut<User>(contributor_addr);
+        vector::push_back(&mut user.contributions, id);
 
         // Retrieve ProjectMapping
         let project_mapping = borrow_global_mut<ProjectMapping>(@account_address);
@@ -183,7 +172,7 @@ module account_address::ProjectModule {
     
 
 
-    public fun transaction_winners(
+    public entry fun transaction_winners(
         deployer: &signer,
         project_id: u64,
         high: u64,

@@ -3,7 +3,7 @@ compiled_package_info:
   package_name: Project
   address_alias_instantiation:
     Extensions: "0000000000000000000000000000000000000000000000000000000000000001"
-    account_address: 6d977e33f5b64e6d1913ff5ced32abe326045d95c95eaaf264df1d3d04eaf95b
+    account_address: 58587dafc2ab44c46a20d2f24eb9339f9e2eafb7980b378a1f479204238c9797
     aptos_framework: "0000000000000000000000000000000000000000000000000000000000000001"
     aptos_fungible_asset: 000000000000000000000000000000000000000000000000000000000000000a
     aptos_std: "0000000000000000000000000000000000000000000000000000000000000001"
@@ -14,7 +14,7 @@ compiled_package_info:
     std: "0000000000000000000000000000000000000000000000000000000000000001"
     vm: "0000000000000000000000000000000000000000000000000000000000000000"
     vm_reserved: "0000000000000000000000000000000000000000000000000000000000000000"
-  source_digest: 362DC9E7F3DF73B97C86FA2EA953BDDC609A0A122298CC09FE5B16FFAE01A15E
+  source_digest: C8CC39671B4F39FC8133D9E987BA80B5D3C26CE58930FE657740D821AB3DD19E
   build_flags:
     dev_mode: false
     test_mode: false
@@ -25,12 +25,13 @@ compiled_package_info:
     full_model_generation: false
     install_dir: ~
     force_recompilation: false
-    additional_named_addresses: {}
+    additional_named_addresses:
+      account_address: 58587dafc2ab44c46a20d2f24eb9339f9e2eafb7980b378a1f479204238c9797
     architecture: ~
     fetch_deps_only: false
     skip_fetch_latest_git_deps: false
     compiler_config:
-      bytecode_version: 7
+      bytecode_version: 6
       known_attributes:
         - bytecode_instruction
         - deprecated
