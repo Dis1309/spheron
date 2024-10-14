@@ -58,8 +58,6 @@ const formSchema = z.object({
 
 function ProjectForm() {
   const { account, connected, signAndSubmitTransaction } = useWallet();
-  const moduleAddress =
-    "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -147,13 +145,15 @@ function ProjectForm() {
       console.log("inside");
       console.log(account?.address);
       console.log(connected);
+      console.log(typeof(extractedValues.projectid));
+
     if (!account) return [];
     try {
       const transaction: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_project`,
           functionArguments: [
-            extractedValues.projectid,
+            1,
             extractedValues.description,
             1,
             extractedValues.start_date,
@@ -161,6 +161,7 @@ function ProjectForm() {
             1,
             1,
             1,
+            account?.address.toString()
           ],
         },
       };
@@ -190,7 +191,8 @@ function ProjectForm() {
     const newProjectId = projectData.length
       ? projectData[projectData.length - 1].project_id + 1
       : 1;
-  
+    console.log("hello");
+      console.log(typeof(newProjectId));
     // Create the new project entry
     const newProject = {
       project_id: newProjectId,
@@ -207,7 +209,27 @@ function ProjectForm() {
       low: finalValues.low,
       tags: finalValues.tags,
     };
-  
+    
+    const { description, maxbounty, startdate, enddate, critical, high, low } = finalValues;
+
+    // Convert dates to BigInt in milliseconds
+    const start_date = BigInt(new Date(startdate).getTime());
+    const end_date = BigInt(new Date(enddate).getTime());
+
+    // Convert BigInt to string for sending
+    const start_date_str = start_date.toString();
+    const end_date_str = end_date.toString();
+    // Create a new object with the desired structure including the ID
+    const extractedValues = {
+      newProjectId,
+      description,
+      max_bounty: maxbounty,
+      start_date: start_date_str,
+      end_date: end_date_str,
+      critical_bounty: critical,
+      high_bounty: high,
+      low_bounty: low,
+    };
     // Call the API to save the project
     fetch('/api/add-project', {
       method: 'POST',
@@ -217,10 +239,27 @@ function ProjectForm() {
       body: JSON.stringify(newProject),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         toast.success('Form submitted successfully!');
         // console.log("registers");
     // await registerCoin();
+    // await createProject(extrac);
+    const res = await aptos.view({
+      payload: {
+        function: `${moduleAddress}::ProjectModule::user_exist`,
+        typeArguments: [], 
+        functionArguments: [account?.address]
+      }
+    });
+
+    // Check the result
+    if (res[0]) {
+      console.log("user exists for the user.");
+      await createProject(extractedValues);
+      // Add any other actions here based on this check
+    } else {
+      console.log("No user exists for the user.");
+    }
     console.log('Project saved:', data);
       })
       .catch((error) => {

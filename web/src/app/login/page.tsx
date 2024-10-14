@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0xa790e457821752e6f058aa39afc887822fa419098d817e82f2c5452c0b161e7c";
+  "0x929a07cbcc19dfad320fdacea4581bbefe16acb680cbda23fb4913bb6cd59d4b";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -38,8 +38,21 @@ const Login = () => {
       });
   
       // Check the result
-      if (result) {
+      if (result[0]) {
         console.log("Project mapping exists for the user.");
+        let name = (account.address).toString();
+        const transaction2: InputTransactionData = {
+          data: {
+            function: `${moduleAddress}::ProjectModule::create_user`,
+            functionArguments: [name],
+          },
+        };
+        console.log("Creating new user and their collection");
+        console.log(transaction2);
+        const response2 = await signAndSubmitTransaction(transaction2);
+        await aptos.waitForTransaction({ transactionHash: response2.hash });
+        console.log("Created new user and their collection");
+        console.log(response2);
         // Add any other actions here based on this check
       } else {
         console.log("No project mapping exists for the user.");
@@ -69,24 +82,14 @@ const Login = () => {
     });
 
     // Check the result
-    if (res) {
+    console.log(res);
+    if (res[0]) {
       console.log("user exists for the user.");
       // Add any other actions here based on this check
     } else {
       console.log("No user exists for the user.");
       // Add any other actions here based on this check
-      const transaction2: InputTransactionData = {
-        data: {
-          function: `${moduleAddress}::ProjectModule::create_user`,
-          functionArguments: [],
-        },
-      };
-      console.log("Creating new user and their collection");
-      console.log(transaction2);
-      const response2 = await signAndSubmitTransaction(transaction2);
-      await aptos.waitForTransaction({ transactionHash: response2.hash });
-      console.log("Created new user and their collection");
-      console.log(response2);
+      
     }
     } catch (error: any) {
       console.log(error);
