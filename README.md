@@ -5,7 +5,7 @@
 <h1 align="center">Next-Generation Decentralized Bug Bounty Platform</h1>
 <div align="center">
   <a href="https://github.com/Celebi07/bug-bounty-platform">
-    <img src="images/logo.png" alt="Logo" width="200" height="200">
+    <img src="images/Screenshot 2024-10-14 185508.png" alt="Logo" width="800" height="300">
   </a>
   <p>
     Welcome to the future of bug bounty platforms, where we leverage the power of blockchain, NFTs, and AI to revolutionize security processes. Built on the Move language and deployed on Sphereon blockchain, this platform provides a decentralized, secure, and transparent way for project owners and contributors to collaborate and earn.
