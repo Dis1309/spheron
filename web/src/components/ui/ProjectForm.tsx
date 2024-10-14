@@ -154,43 +154,52 @@ function ProjectForm() {
     const selectedTags = tagOptions
       .filter((option) => option.isChoosen)
       .map((option) => option.tag);
-
-    // Add the selected tags array to the values object
-    const finalValues = { ...values, tags: selectedTags };
-
-    // generating projectid
-    let max = 1000000;
-    let min = 1;
-    const projectid = Math.floor(Math.random() * (max - min + 1)) + min;
-    // Extract only the required fields and include an ID
-    const { description, maxbounty, startdate, enddate, critical, high, low } =
-      finalValues;
-
-    // Convert dates to BigInt in milliseconds
-    const start_date = BigInt(new Date(startdate).getTime());
-    const end_date = BigInt(new Date(enddate).getTime());
-
-    // Convert BigInt to string for sending
-    const start_date_str = start_date.toString();
-    const end_date_str = end_date.toString();
-    // Create a new object with the desired structure including the ID
-    const extractedValues = {
-      projectid,
-      description,
-      max_bounty: maxbounty,
-      start_date: start_date_str,
-      end_date: end_date_str,
-      critical_bounty: critical,
-      high_bounty: high,
-      low_bounty: low,
+  
+    const finalValues = {
+      ...values,
+      tags: selectedTags,
+      technologies: selectedTags, // This will be dynamically generated later or manually added by the user
     };
-
-    // Log the final values with selected tags
-    console.log(finalValues);
-    toast.success("Form submitted successfully!");
-
-    console.log("Hello");
-    await createProject(extractedValues);
+  
+    // Calculate the next project ID
+    const newProjectId = projectData.length
+      ? projectData[projectData.length - 1].project_id + 1
+      : 1;
+  
+    // Create the new project entry
+    const newProject = {
+      project_id: newProjectId,
+      title: finalValues.projectname,
+      description: finalValues.description,
+      technologies: finalValues.technologies, // Placeholder for now, you can autofill or allow user input
+      url: finalValues.projecturl,
+      imageUrl: finalValues.imageurl,
+      startdate: finalValues.startdate,
+      enddate: finalValues.enddate,
+      maxbounty: finalValues.maxbounty,
+      critical: finalValues.critical,
+      high: finalValues.high,
+      low: finalValues.low,
+      tags: finalValues.tags,
+    };
+  
+    // Call the API to save the project
+    fetch('/api/add-project', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newProject),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success('Form submitted successfully!');
+        console.log('Project saved:', data);
+      })
+      .catch((error) => {
+        console.error('Error saving project:', error);
+        toast.error('Error submitting form.');
+      });
   }
 
   return (

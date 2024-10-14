@@ -1,230 +1,188 @@
-
 const projectData = [
   {
     "project_id": 1,
-    "title": "AI Image Classifier",
-    "description": "A model that classifies images into categories using deep learning.",
+    "title": "Deep Learning Image Classification",
+    "description": "A deep learning model to classify images into multiple categories using a ResNet architecture.",
     "technologies": [
-      "TensorFlow",
       "Python",
-      "CNN"
+      "TensorFlow",
+      "ResNet"
     ],
-    "url": "https://www.example.com/ai-image-classifier",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-10-01",
-    "enddate": "2024-12-01",
+    "url": "https://github.com/keras-team/keras/blob/master/examples/cifar10_cnn.py",
+    "imageUrl": "https://images.contentstack.io/v3/assets/blt71da4c740e00faaa/blt3d68595c30078e34/5eb1e7deb71f0b01514a2591/Image-Classification-Banner_(1).jpg?format=webp",
+    "startdate": "2024-01-10",
+    "enddate": "2024-04-15",
+    "maxbounty": 1000,
+    "critical": 500,
+    "high": 300,
+    "low": 200,
+    "tags": [
+      "ai",
+      "deep-learning",
+      "tensorflow"
+    ]
+  },
+  {
+    "project_id": 2,
+    "title": "Django React E-Commerce",
+    "description": "A fully functional e-commerce web application built with Django and React for product management, shopping cart, and order processing.",
+    "technologies": [
+      "Python",
+      "Django",
+      "React"
+    ],
+    "url": "https://github.com/justdjango/django-react-ecommerce",
+    "imageUrl": "https://www.poptin.com/blog/wp-content/uploads/2019/03/ecommerce-1024x768.jpg",
+    "startdate": "2024-05-01",
+    "enddate": "2024-08-01",
+    "maxbounty": 1500,
+    "critical": 700,
+    "high": 500,
+    "low": 300,
+    "tags": [
+      "django",
+      "react",
+      "ecommerce"
+    ]
+  },
+  {
+    "project_id": 3,
+    "title": "Real-time Chat Application",
+    "description": "A real-time chat application using WebSockets and Node.js for scalable communication between clients.",
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "WebSockets"
+    ],
+    "url": "https://github.com/bradtraversy/chatcord",
+    "imageUrl": "https://files.ably.io/ghost/prod/2023/01/build-a-realtime-chat-app-from-scratch--1-.png",
+    "startdate": "2024-03-01",
+    "enddate": "2024-05-30",
+    "maxbounty": 1300,
+    "critical": 600,
+    "high": 400,
+    "low": 300,
+    "tags": [
+      "nodejs",
+      "chat",
+      "websockets"
+    ]
+  },
+  {
+    "project_id": 4,
+    "title": "Go URL Shortener",
+    "description": "A simple and efficient URL shortening service built using Go with a focus on performance.",
+    "technologies": [
+      "Go",
+      "Gin",
+      "MongoDB"
+    ],
+    "url": "https://github.com/imamun93/golang-url-shortener",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fHNob3J0ZW5pbmd8ZW58MHx8fHwxNjg3MDI0NTM2&ixlib=rb-4.0.3&q=80&w=400",
+    "startdate": "2024-02-01",
+    "enddate": "2024-06-01",
+    "maxbounty": 1200,
+    "critical": 500,
+    "high": 400,
+    "low": 300,
+    "tags": [
+      "go",
+      "url-shortener",
+      "mongodb"
+    ]
+  },
+  {
+    "project_id": 5,
+    "title": "Personal Portfolio",
+    "description": "A personal portfolio website template using HTML, CSS, and JavaScript to showcase projects, resume, and skills.",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "url": "https://github.com/rshrc/personal-portfolio",
+    "imageUrl": "https://cdn.prod.website-files.com/62c5836076839ad95e36215d/64fb2b64316862df3d2e099a_rcQYosTUaQ6hiJSAk7JphBXJCcZpPSAnq6u8U_3pnj0UVcHM5niGdGNBZ625bnZmRDTg4UQFOjd8tuczIfNSZ7JQeRBtnY4NHvGyGjRBe_DVE4QiDsVy9vcllRT7B1Ut7wx9CBDr945F26Um1hF4xM4.png",
+    "startdate": "2024-04-15",
+    "enddate": "2024-06-15",
     "maxbounty": 1000,
     "critical": 400,
     "high": 300,
     "low": 300,
     "tags": [
-      "ai",
-      "ml",
-      "python"
-    ]
-  },
-  {
-    "project_id": 2,
-    "title": "Weather Forecasting App",
-    "description": "An application that provides accurate weather forecasts using machine learning.",
-    "technologies": [
-      "Python",
-      "Flask",
-      "OpenWeatherMap API"
-    ],
-    "url": "https://www.example.com/weather-forecast-app",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-09-01",
-    "enddate": "2024-11-30",
-    "maxbounty": 1500,
-    "critical": 600,
-    "high": 500,
-    "low": 400,
-    "tags": [
-      "ml",
-      "flask",
-      "api"
-    ]
-  },
-  {
-    "project_id": 3,
-    "title": "Chatbot for Customer Support",
-    "description": "A chatbot that provides real-time assistance to customers using natural language processing.",
-    "technologies": [
-      "Node.js",
-      "Dialogflow",
-      "React"
-    ],
-    "url": "https://www.example.com/chatbot-customer-support",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-08-15",
-    "enddate": "2024-10-15",
-    "maxbounty": 1200,
-    "critical": 400,
-    "high": 500,
-    "low": 300,
-    "tags": [
-      "nodejs",
-      "react",
-      "nlp"
-    ]
-  },
-  {
-    "project_id": 4,
-    "title": "E-Commerce Recommendation System",
-    "description": "A recommendation system that suggests products to users based on their browsing history and preferences.",
-    "technologies": [
-      "Python",
-      "Scikit-learn",
-      "Collaborative Filtering"
-    ],
-    "url": "https://www.example.com/ecommerce-recommendation-system",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-10-10",
-    "enddate": "2025-01-10",
-    "maxbounty": 2000,
-    "critical": 800,
-    "high": 700,
-    "low": 500,
-    "tags": [
-      "python",
-      "ml",
-      "recommendation"
-    ]
-  },
-  {
-    "project_id": 5,
-    "title": "Fitness Tracker App",
-    "description": "A mobile app that tracks user fitness activities and provides health insights using wearable device data.",
-    "technologies": [
-      "Flutter",
-      "Firebase",
-      "Google Fit API"
-    ],
-    "url": "https://www.example.com/fitness-tracker-app",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-09-20",
-    "enddate": "2024-12-20",
-    "maxbounty": 1800,
-    "critical": 700,
-    "high": 600,
-    "low": 500,
-    "tags": [
-      "flutter",
-      "firebase",
-      "api"
+      "portfolio",
+      "html",
+      "css"
     ]
   },
   {
     "project_id": 6,
-    "title": "Stock Market Prediction System",
-    "description": "An AI-powered system that predicts stock market trends using historical data and sentiment analysis.",
+    "title": "Smart Home Automation System",
+    "description": "A system to control home appliances remotely via a mobile app using IoT technology and Raspberry Pi.",
     "technologies": [
       "Python",
-      "Keras",
-      "Pandas"
+      "Raspberry Pi",
+      "IoT"
     ],
-    "url": "https://www.example.com/stock-market-prediction-system",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-08-05",
-    "enddate": "2024-11-05",
-    "maxbounty": 2500,
+    "url": "https://github.com/yourusername/smart-home-automation",
+    "imageUrl": "https://cdn.homemate.co.in/wp-content/uploads/2023/11/homemate_blog_23-nov.jpg",
+    "startdate": "2024-06-01",
+    "enddate": "2024-09-01",
+    "maxbounty": 2000,
     "critical": 1000,
-    "high": 900,
+    "high": 800,
     "low": 600,
     "tags": [
-      "ai",
-      "keras",
-      "financial"
+      "iot",
+      "home-automation",
+      "raspberry-pi"
     ]
   },
   {
     "project_id": 7,
-    "title": "Language Translation API",
-    "description": "A translation API that provides real-time language translation using neural machine translation models.",
+    "title": "AI-Powered Expense Tracker",
+    "description": "An application that uses AI to analyze and categorize expenses, helping users manage their finances better.",
     "technologies": [
+      "JavaScript",
       "Node.js",
-      "Google Cloud Translation API",
-      "Express.js"
+      "Machine Learning"
     ],
-    "url": "https://www.example.com/language-translation-api",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-10-01",
-    "enddate": "2024-12-01",
-    "maxbounty": 1400,
-    "critical": 500,
-    "high": 600,
-    "low": 300,
+    "url": "https://github.com/yourusername/ai-expense-tracker",
+    "imageUrl": "https://i.redd.it/vkn2xmj9fpeb1.jpg",
+    "startdate": "2024-07-15",
+    "enddate": "2024-10-15",
+    "maxbounty": 1500,
+    "critical": 700,
+    "high": 500,
+    "low": 400,
     "tags": [
-      "nodejs",
-      "api",
-      "nlp"
+      "ai",
+      "finance",
+      "javascript"
     ]
   },
   {
     "project_id": 8,
-    "title": "Mask Detector",
-    "description": "Detects masks on faces using AI models.",
+    "title": "Virtual Reality Fitness App",
+    "description": "A VR app that creates immersive workout experiences, encouraging users to stay active and healthy.",
     "technologies": [
-      "Rust",
-      "Python"
+      "Unity",
+      "C#",
+      "VR"
     ],
-    "url": "https://mask-detector.example.com",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-07-01",
-    "enddate": "2024-10-01",
-    "maxbounty": 1300,
-    "critical": 500,
-    "high": 500,
-    "low": 300,
+    "url": "https://github.com/yourusername/vr-fitness-app",
+    "imageUrl": "https://media.npr.org/assets/img/2024/01/16/supernatural_custom-ee40f9aec1337251a0b0c487fbb5f7e50b37b8a9.jpg",
+    "startdate": "2024-08-01",
+    "enddate": "2025-01-01",
+    "maxbounty": 2500,
+    "critical": 1200,
+    "high": 900,
+    "low": 600,
     "tags": [
-      "ai",
-      "ml",
-      "python"
-    ]
-  },
-  {
-    "project_id": 9,
-    "title": "Hand Detection",
-    "description": "This project utilizes YOLOv8 for real-time hand detection with applications in gesture recognition and sign language interpretation.",
-    "technologies": [
-      "YOLOv8",
-      "Python"
-    ],
-    "url": "https://hand-detection.example.com",
-    "imageUrl": "https://random.imagecdn.app/300/300",
-    "startdate": "2024-06-01",
-    "enddate": "2024-09-01",
-    "maxbounty": 1600,
-    "critical": 600,
-    "high": 600,
-    "low": 400,
-    "tags": [
-      "yolov8",
-      "ml",
-      "python"
-    ]
-  },
-  {
-    "project_id": 10,
-    "title": "Aviral",
-    "description": "new pROJECT",
-    "technologies": [],
-    "url": "https://google.com/",
-    "imageUrl": "https://google.com/",
-    "startdate": "2025-01-01",
-    "enddate": "2026-01-01",
-    "maxbounty": 100,
-    "critical": 10,
-    "high": 10,
-    "low": 545,
-    "tags": [
-      "ai",
-      "ml",
-      "NEWtAG"
+      "vr",
+      "fitness",
+      "unity"
     ]
   }
 ];
 
 export { projectData };
-    
