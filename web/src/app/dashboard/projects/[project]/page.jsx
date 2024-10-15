@@ -88,12 +88,12 @@ const page = () => {
       }
 
       const data = await response.json();
+      await onApproval();
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === id ? { ...issue, isApproved: true } : issue
         )
       );
-      await onApproval();
     } catch (error) {
       console.error(error);
     }
@@ -132,6 +132,30 @@ const page = () => {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    async function fetchIssues() {
+      try {
+        const response = await fetch(`/api/issues?projectId=${projectId}`);
+        if (!response.ok) {
+          throw new Error("Error fetching issues");
+        }
+        const data = await response.json();
+        console.log(data);
+        const storedValue = sessionStorage.getItem("accountAddress");
+        const filteredIssues = data.issues.filter(
+          (issue) => issue.ownerId === storedValue
+        );
+        setIssues(filteredIssues);
+      } catch (err) {
+        console.log(error);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchIssues();
+  }, [projectId]);
   
   const LevelsDisplay = () => {
     return (

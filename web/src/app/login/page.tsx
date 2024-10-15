@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x42732ac48e1b4ed51b6b19d1dd473e0e2d363507e33e7f2c8a8d13541c1c4324";
+  "0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -36,23 +36,13 @@ const Login = () => {
           functionArguments: [account.address]
         }
       });
-  
+      console.log(result[0])
       // Check the result
       if (result[0]) {
         console.log("Project mapping exists for the user.");
         let name = (account.address).toString();
-        const transaction2: InputTransactionData = {
-          data: {
-            function: `${moduleAddress}::ProjectModule::create_user`,
-            functionArguments: [name],
-          },
-        };
-        console.log("Creating new user and their collection");
-        console.log(transaction2);
-        const response2 = await signAndSubmitTransaction(transaction2);
-        await aptos.waitForTransaction({ transactionHash: response2.hash });
-        console.log("Created new user and their collection");
-        console.log(response2);
+        sessionStorage.setItem("accountAddress", account?.address);
+        router.push("/dashboard");
         // Add any other actions here based on this check
       } else {
         console.log("No project mapping exists for the user.");
@@ -72,25 +62,24 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response1.hash });
       console.log("ProjectMap initialized!");
       console.log(response1);
+      var  name = account?.address.toString();
+    const transaction2: InputTransactionData = {
+      data: {
+        function: `${moduleAddress}::ProjectModule::create_user`,
+        functionArguments: [name],
+      },
+    };
+    console.log("Creating new user and their collection");
+    console.log(transaction2);
+    const response2 = await signAndSubmitTransaction(transaction2);
+    await aptos.waitForTransaction({ transactionHash: response2.hash });
+    console.log("Created new user and their collection");
+    console.log(response2);
+      sessionStorage.setItem("accountAddress", account?.address);
+    router.push("/dashboard");
     }
-    const res = await aptos.view({
-      payload: {
-        function: `${moduleAddress}::ProjectModule::user_exist`,
-        typeArguments: [], 
-        functionArguments: [account.address]
-      }
-    });
+    
 
-    // Check the result
-    console.log(res);
-    if (res[0]) {
-      console.log("user exists for the user.");
-      // Add any other actions here based on this check
-    } else {
-      console.log("No user exists for the user.");
-      // Add any other actions here based on this check
-      
-    }
     } catch (error: any) {
       console.log(error);
     }
@@ -243,14 +232,11 @@ const Login = () => {
   // }
   useEffect(() => {
     if (connected == true) {
-      const address = account?.address || "";
-      console.log(address);
-      createUser();
       // createProject();
       // onApproval();
       // getallprojectinfo();
-      sessionStorage.setItem("accountAddress", address);
-      router.push("/dashboard");
+     
+      createUser();
     }
   }, [connected]);
   return (

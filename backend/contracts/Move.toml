@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-account_address="_"
+account_address="0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b"
 creater="0x12"
 
 
