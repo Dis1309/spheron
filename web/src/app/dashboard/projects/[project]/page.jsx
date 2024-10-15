@@ -134,7 +134,7 @@ const page = ({ params }) => {
     setTotalBounty(project.maxbounty);
     setProjectLink(project.url);
     setLevels({
-      Critial: project.critical,
+      Critical: project.critical,
       High: project.high,
       Low: project.low,
     });

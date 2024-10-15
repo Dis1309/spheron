@@ -3,7 +3,7 @@ import DashboardSidebar from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import DialogDemo from "@/components/ui/ProjectDialog";
-import robot from "../../public/robotic.png";
+import robot from "../../public/chat-bot-icon.gif";
 import Image from "next/image";
 import Link from "next/link";
 export default function DashboardLayout({
@@ -23,13 +23,13 @@ export default function DashboardLayout({
         <div className="pt-20">{children}</div>
       </div>
       <Link href="/chatbot">
-        <div className="fixed right-10 bottom-10 p-1 bg-white rounded-full hover:scale-105">
+        <div className="fixed right-10 bottom-10 p-1 bg-white rounded-full hover:scale-125">
           <Image
             src={robot}
             alt="Profile Picture"
-            width={50}
-            height={50}
-            className=" object-cover"
+            width={55}
+            height={55}
+            className=" object-cover rounded-full"
           />
         </div>
       </Link>
