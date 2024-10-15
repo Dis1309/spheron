@@ -124,8 +124,11 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 
    By integrating **RASA**, we deliver a sophisticated, conversational AI experience, ensuring users can navigate the platform efficiently and get real-time project-related information without any hassle.
 
-   <img src="images/rasa-chatbot.gif" alt="AI-Powered Chatbot" width="600"/>
-
+    <div align="center">
+      <a href="https://github.com/Dis1309/spheron">
+        <img src="images/chatbot_demo.gif" alt="BugHuntX Logo" width="800" height="400">
+      </a>
+    </div>
 10. **Smart AI Matching**:  
     Our platform’s **AI-driven algorithms** intelligently match contributors to the issues and projects best suited to their skills and expertise. This ensures that the most qualified individuals tackle the most critical problems, optimizing productivity and enhancing the quality of resolutions.
 
