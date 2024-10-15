@@ -126,20 +126,23 @@ function ProjectForm() {
     console.log(typeof extractedValues.projectid);
 
     if (!account) return [];
+    var name = account?.address.toString();
+
     try {
+      console.log(extractedValues.projectname);
       const transaction: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_project`,
           functionArguments: [
             1,
-            extractedValues.description,
+            extractedValues.projectname,
             1,
             extractedValues.start_date,
             extractedValues.end_date,
             1,
             1,
             1,
-            account?.address.toString(),
+            name,
           ],
         },
       };
@@ -226,8 +229,16 @@ function ProjectForm() {
       tags: finalValues.tags,
     };
 
-    const { description, maxbounty, startdate, enddate, critical, high, low } =
-      finalValues;
+    const {
+      description,
+      maxbounty,
+      startdate,
+      enddate,
+      critical,
+      high,
+      low,
+      projectname,
+    } = finalValues;
 
     // Convert dates to BigInt in milliseconds
     const start_date = BigInt(new Date(startdate).getTime());
@@ -238,6 +249,7 @@ function ProjectForm() {
     const end_date_str = end_date.toString();
     // Create a new object with the desired structure including the ID
     const extractedValues = {
+      projectname,
       newProjectId,
       description,
       max_bounty: maxbounty,
@@ -247,7 +259,7 @@ function ProjectForm() {
       high_bounty: high,
       low_bounty: low,
     };
-
+    console.log(extractedValues);
     // Call the API to save the project
     fetch("/api/add-project", {
       method: "POST",

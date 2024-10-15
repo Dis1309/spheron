@@ -71,12 +71,12 @@ const page = ({ params }) => {
       }
 
       const data = await response.json();
+      await onApproval();
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === id ? { ...issue, isApproved: true } : issue
         )
       );
-      await onApproval();
     } catch (error) {
       console.error(error);
     }

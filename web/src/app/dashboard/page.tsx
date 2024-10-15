@@ -24,6 +24,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Briefcase, Users } from "lucide-react";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 // mock data for the bar chart
 const barChartdata = [
@@ -68,10 +69,14 @@ const pieChartConfig = {
 } satisfies ChartConfig;
 
 export default function Dashboard() {
+
+  const {account} = useWallet();
   return (
     <div className="p-8 space-y-8">
       <h1 className="text-3xl font-bold text-primary">
-        Welcome back, John Doe!
+        Welcome back, {account?.address
+    ? `${account.address.slice(0, 4)}...${account.address.slice(-4)}`
+    : "No account connected"}
       </h1>
 
       <div className="grid gap-4 md:grid-cols-3">

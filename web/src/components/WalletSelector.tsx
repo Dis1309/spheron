@@ -75,7 +75,7 @@ export function WalletSelector() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onSelect={copyAddress} className="gap-2">
+        <DropdownMenuItem onSelect={copyAddress} className="gap-2 text-white">
           <Copy className="h-4 w-4" /> Copy address
         </DropdownMenuItem>
         {wallet && isAptosConnectWallet(wallet) && (
@@ -90,7 +90,7 @@ export function WalletSelector() {
             </a>
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem onSelect={disconnect} className="gap-2">
+        <DropdownMenuItem onSelect={disconnect} className="gap-2 text-white">
           <LogOut className="h-4 w-4" /> Disconnect
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -98,7 +98,7 @@ export function WalletSelector() {
   ) : (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button>Connect a Wallet</Button>
+        <Button style={{ font: "white" }}>Connect a Wallet</Button>
       </DialogTrigger>
       <ConnectWalletDialog close={closeDialog} />
     </Dialog>
@@ -120,7 +120,7 @@ function ConnectWalletDialog({ close }: ConnectWalletDialogProps) {
     <DialogContent className="max-h-screen overflow-auto">
       <AboutAptosConnect renderEducationScreen={renderEducationScreen}>
         <DialogHeader>
-          <DialogTitle className="flex flex-col text-center leading-snug">
+          <DialogTitle className="flex flex-col text-center leading-snug text-white">
             {hasAptosConnectWallets ? (
               <>
                 <span>Log in or sign up</span>
@@ -147,13 +147,13 @@ function ConnectWalletDialog({ close }: ConnectWalletDialogProps) {
                 Aptos Connect <ArrowRight size={16} />
               </AboutAptosConnect.Trigger>
             </p>
-            <AptosPrivacyPolicy className="flex flex-col items-center py-1">
+            <AptosPrivacyPolicy className="flex flex-col items-center py-1 text-white">
               <p className="text-xs leading-5">
                 <AptosPrivacyPolicy.Disclaimer />{" "}
                 <AptosPrivacyPolicy.Link className="text-muted-foreground underline underline-offset-4" />
                 <span className="text-muted-foreground">.</span>
               </p>
-              <AptosPrivacyPolicy.PoweredBy className="flex gap-1.5 items-center text-xs leading-5 text-muted-foreground" />
+              <AptosPrivacyPolicy.PoweredBy className="flex gap-1.5 items-center text-xs text-white leading-5 text-muted-foreground" />
             </AptosPrivacyPolicy>
             <div className="flex items-center gap-3 pt-4 text-muted-foreground">
               <div className="h-px w-full bg-secondary" />
@@ -170,7 +170,7 @@ function ConnectWalletDialog({ close }: ConnectWalletDialogProps) {
           {!!installableWallets.length && (
             <Collapsible className="flex flex-col gap-3">
               <CollapsibleTrigger asChild>
-                <Button size="sm" variant="ghost" className="gap-2">
+                <Button size="sm" variant="ghost" className="gap-2 text-white">
                   More wallets <ChevronDown />
                 </Button>
               </CollapsibleTrigger>
@@ -201,11 +201,11 @@ function WalletRow({ wallet, onConnect }: WalletRowProps) {
     <WalletItem
       wallet={wallet}
       onConnect={onConnect}
-      className="flex items-center justify-between px-4 py-3 gap-4 border rounded-md"
+      className="text-white flex items-center justify-between px-4 py-3 gap-4 border rounded-md"
     >
       <div className="flex items-center gap-4">
         <WalletItem.Icon className="h-6 w-6" />
-        <WalletItem.Name className="text-base font-normal" />
+        <WalletItem.Name className="text-white font-normal" />
       </div>
       {isInstallRequired(wallet) ? (
         <Button size="sm" variant="ghost" asChild>
@@ -224,7 +224,7 @@ function AptosConnectWalletRow({ wallet, onConnect }: WalletRowProps) {
   return (
     <WalletItem wallet={wallet} onConnect={onConnect}>
       <WalletItem.ConnectButton asChild>
-        <Button size="lg" variant="outline" className="w-full gap-4">
+        <Button size="lg" variant="outline" className="w-full gap-4 ttext-white">
           <WalletItem.Icon className="h-5 w-5" />
           <WalletItem.Name className="text-base font-normal" />
         </Button>
@@ -258,7 +258,7 @@ function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
           size="sm"
           variant="ghost"
           onClick={screen.back}
-          className="justify-self-start"
+          className="justify-self-start text-white"
         >
           Back
         </Button>
@@ -273,7 +273,7 @@ function renderEducationScreen(screen: AboutAptosConnectEducationScreen) {
           size="sm"
           variant="ghost"
           onClick={screen.next}
-          className="gap-2 justify-self-end"
+          className="gap-2 justify-self-end text-white"
         >
           {screen.screenIndex === screen.totalScreens - 1 ? "Finish" : "Next"}
           <ArrowRight size={16} />

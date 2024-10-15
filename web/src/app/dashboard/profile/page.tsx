@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ProfilePieChart from "@/components/ui/ProfilePieChart";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 const page = () => {
   const [user, setUser] = useState(
@@ -33,6 +34,8 @@ const page = () => {
   const [contributionCount, setContributionCount] = useState("34");
   const [projectCount, setProjectsCount] = useState("3");
   const [revenue, setRevenue] = useState("58000");
+  const { account } = useWallet();
+
   const [issues, setIssues] = useState<Issue[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -98,7 +101,12 @@ const page = () => {
                     className="rounded-full object-cover"
                   />
                   <h1 className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-gray-300 text-center text-[3.5rem] tracking-tight font-bold max-w-screen-lg leading-[1.1] font-secondary">
-                    {name}
+                    {account?.address
+                      ? `${account.address.slice(
+                          0,
+                          3
+                        )}...${account.address.slice(-3)}`
+                      : "No account connected"}
                   </h1>
                 </div>
                 <div className="flex flex-row gap-6 justify-between items-start w-full">
