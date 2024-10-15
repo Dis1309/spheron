@@ -1,3 +1,4 @@
+
 const projectData = [
   {
     "project_id": 1,
@@ -182,7 +183,31 @@ const projectData = [
       "fitness",
       "unity"
     ]
+  },
+  {
+    "project_id": 9,
+    "title": "InvigoPulse",
+    "description": "this is inventory management ",
+    "technologies": [
+      "ai",
+      "security",
+      "react"
+    ],
+    "url": "https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures",
+    "imageUrl": "https://imgbb.com/",
+    "startdate": "2025-01-10",
+    "enddate": "2025-02-10",
+    "maxbounty": 1000,
+    "critical": 500,
+    "high": 200,
+    "low": 300,
+    "tags": [
+      "ai",
+      "security",
+      "react"
+    ]
   }
 ];
 
 export { projectData };
+    
