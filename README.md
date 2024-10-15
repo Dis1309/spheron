@@ -80,7 +80,9 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 1. **Project Listing as NFTs**:  
    Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, *immutability*, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.
 
-   <img src="images/nft-project-listing.gif" alt="NFT Project Listing" width="600"/>
+   <div align="center">
+        <img src="images/add-project.gif" alt="add project Demo" width="800" height="400">
+    </div>
 
 2. **Dynamic Bounty Distribution**:  
    Our platform provides a flexible, tier-based bounty distribution system, enabling project owners to allocate rewards dynamically. Based on the severity of identified vulnerabilities, contributors are compensated under **Critical**, **High**, and **Low** tiers. This ensures fair and **meritocratic distribution** of rewards, motivating bug hunters to resolve more significant security issues for higher incentives.
@@ -91,7 +93,7 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
    **AI integration** allows our platform to categorize issues based on their severity efficiently. By using cutting-edge machine learning models trained on vast security data, our AI system automatically assigns issues into the appropriate tiers: **Critical**, **High**, or **Low**. This saves project owners time and reduces manual evaluation efforts while improving accuracy in identifying priority vulnerabilities.
 
    <div align="center">
-        <img src="images/priority_classify.gif" alt="Recommendation Demo" width="800" height="400">
+        <img src="images/priority_classify.gif" alt="issue categorize" width="800" height="400">
     </div>
 
 4. **Blockchain-Backed Payments**:  
