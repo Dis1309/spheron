@@ -18,7 +18,7 @@ const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const aptos = new Aptos(aptosConfig);
 // change this to be your module account address
 export const moduleAddress =
-  "0x5e342fa3a46a5524aebc468ad98bb4aa756d53a3bdd3662e3c131aee2b6b43bf";
+  "0x42732ac48e1b4ed51b6b19d1dd473e0e2d363507e33e7f2c8a8d13541c1c4324";
 
 const Login = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
@@ -31,20 +31,33 @@ const Login = () => {
     try {
       const result = await aptos.view({
         payload: {
-          function: `${moduleAddress}::ProjectModule::project_mapping_exists`,
+          function: `${moduleAddress}::ProjectModule::project_mapping_exist`,
           typeArguments: [], 
           functionArguments: [account.address]
         }
       });
   
       // Check the result
-      if (result) {
+      if (result[0]) {
         console.log("Project mapping exists for the user.");
+        let name = (account.address).toString();
+        const transaction2: InputTransactionData = {
+          data: {
+            function: `${moduleAddress}::ProjectModule::create_user`,
+            functionArguments: [name],
+          },
+        };
+        console.log("Creating new user and their collection");
+        console.log(transaction2);
+        const response2 = await signAndSubmitTransaction(transaction2);
+        await aptos.waitForTransaction({ transactionHash: response2.hash });
+        console.log("Created new user and their collection");
+        console.log(response2);
         // Add any other actions here based on this check
       } else {
         console.log("No project mapping exists for the user.");
         // Add any other actions here based on this check
-      }
+
       const transaction1: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
@@ -59,19 +72,25 @@ const Login = () => {
       await aptos.waitForTransaction({ transactionHash: response1.hash });
       console.log("ProjectMap initialized!");
       console.log(response1);
+    }
+    const res = await aptos.view({
+      payload: {
+        function: `${moduleAddress}::ProjectModule::user_exist`,
+        typeArguments: [], 
+        functionArguments: [account.address]
+      }
+    });
 
-      const transaction2: InputTransactionData = {
-        data: {
-          function: `${moduleAddress}::ProjectModule::create_user`,
-          functionArguments: [],
-        },
-      };
-      console.log("Creating new user and their collection");
-      console.log(transaction2);
-      const response2 = await signAndSubmitTransaction(transaction2);
-      await aptos.waitForTransaction({ transactionHash: response2.hash });
-      console.log("Created new user and their collection");
-      console.log(response2);
+    // Check the result
+    console.log(res);
+    if (res[0]) {
+      console.log("user exists for the user.");
+      // Add any other actions here based on this check
+    } else {
+      console.log("No user exists for the user.");
+      // Add any other actions here based on this check
+      
+    }
     } catch (error: any) {
       console.log(error);
     }

@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Projecturl5 from "../../../../public/Project4.jpg";
-import { useState, useEffect } from "react";
 import TagsDisplay from "../../../../components/ui/tagsDisplay";
 import { Button } from "@/components/ui/button";
 import IssueDialog from "@/components/ui/issueDialog";
@@ -24,7 +23,7 @@ let project = {
     Low: 1759,
   },
 };
-// removed params and commented issues
+
 const page = () => {
   const [projectId, setProjectId] = useState(project.projectId);
   const [desc, setDesc] = useState(project.description);
@@ -32,58 +31,48 @@ const page = () => {
   const [title, setTitle] = useState(project.Title);
   const [startDate, setStartDate] = useState(project.startDate);
   const [endDate, setEndDate] = useState(project.endDate);
-  const [tags, setTags] = useState(["ui/ux", "ai", "data"]);
+  const [tags, setTags] = useState(project.tags);
   const [totalBounty, setTotalBounty] = useState(project.MaxBountyAmount);
   const [open, setOpen] = useState(false);
-  const [levels, setLevels] = useState({
-    Critical: 0,
-    High: 0,
-    Low: 0,
-  });
+  const [levels, setLevels] = useState(project.levels);
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [projectLink, setProjectLink] = useState(project.githubLink);
-  const { account, connected, signAndSubmitTransaction } = useWallet();
-  // GET PROJECT INFORMATION
-  //   async function getallprojectinfo() {
-  //     if (!account) return [];
-  //     try {
-  //       const projectMappingResource = await aptos.getAccountResource({
-  //         accountAddress: account?.address,
-  //         resourceType: ${moduleAddress}::ProjectModule::ProjectMapping,
-  //       });
-  //       const userResource = await aptos.getAccountResource({
-  //         accountAddress: account?.address,
-  //         resourceType: ${moduleAddress}::ProjectModule::User,
-  //       });
+  const { account, signAndSubmitTransaction } = useWallet();
+  const level_wise_contributors = [0, 0, 0];
 
-  //       const userProjects = userResource.data.projects;
-  //       const projectsMap = projectMappingResource.data.projects;
-  //       const accountProjects = [];
+  async function onApproval() {
+    console.log("hey")
+    console.log(account)
+    if (!account) return [];
+    let newcontribution = {
+      id: 1,
+      level: "critical",
+    };
+    try {
+      const transaction = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::create_contribution`,
+          functionArguments: [newcontribution.id, newcontribution.level],
+        },
+      };
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+           console.log(response);
+      // Update level-wise contributors
+      if (newcontribution.level === "low") {
+        level_wise_contributors[0]++;
+      } else if (newcontribution.level === "high") {
+        level_wise_contributors[1]++;
+      } else {
+        level_wise_contributors[2]++;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //       for (const projectId in userProjects) {
-  //         const project = projectsMap[projectId];
-
-  //         accountProjects.push({
-  //           id: projectId,
-  //           description: project.description,
-  //           maxBounty: project.max_bounty,
-  //           startDate: project.start_date,
-  //           endDate: project.end_date,
-  //           criticalBounty: project.critical_bounty,
-  //           highBounty: project.high_bounty,
-  //           lowBounty: project.low_bounty,
-  //           contributors: project.contributors, // Array of contributors
-  //         });
-  //       }
-
-  //       // Display or return the projects for further use (e.g., in UI)
-  //       console.log("Account's Projects:", accountProjects);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
   const approve = async (id) => {
     try {
       const response = await fetch("/api/issues", {
@@ -91,7 +80,7 @@ const page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ _id: id }), // Pass the issueId
+        body: JSON.stringify({ _id: id }),
       });
 
       if (!response.ok) {
@@ -99,40 +88,51 @@ const page = () => {
       }
 
       const data = await response.json();
-      console.log("Issue approved:", data);
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === id ? { ...issue, isApproved: true } : issue
         )
       );
+      await onApproval();
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {
-    async function fetchIssues() {
-      try {
-        const response = await fetch(`/api/issues?projectId=${projectId}`);
-        if (!response.ok) {
-          throw new Error("Error fetching issues");
-        }
-        const data = await response.json();
-        console.log(data);
-        const storedValue = sessionStorage.getItem("accountAddress");
-        const filteredIssues = data.issues.filter(
-          (issue) => issue.ownerId === storedValue
-        );
-        setIssues(filteredIssues);
-      } catch (err) {
-        console.log(error);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchIssues();
-  }, [projectId]);
 
+  // SENDING Transactions
+  async function finalTransactions() {
+    if (!account) return [];
+    try {
+      let data = {
+        deployer: deployer,
+        projectid: 1,
+        high: 1,
+        critical: 1,
+        low: 1,
+      };
+      const transaction = {
+        data: {
+          function: `${moduleAddress}::ProjectModule::transaction_winners`,
+          functionArguments: [
+            data.deployer,
+            data.projectid,
+            data.high,
+            data.critical,
+            data.low,
+          ],
+        },
+      };
+      console.log("sending transactions");
+      console.log(transaction);
+      const response = await signAndSubmitTransaction(transaction);
+      await aptos.waitForTransaction({ transactionHash: response.hash });
+      console.log("all transactions sent");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   const LevelsDisplay = () => {
     return (
       <div className="flex flex-row gap-5 justify-start items-center max-w-5xl">
@@ -159,8 +159,9 @@ const page = () => {
   };
   if (loading == true) {
     return (
-      <div className="h-screen w-screen flex justify-center items-center text-white text-xl">
-        Loading....
+      <div>
+      <button onClick={async()=>  await onApproval()} className="bg-white flex items-center gap-x-1.5 group text-black px-4 py-2 rounded-full relative"> click Transaction</button> 
+      <button onClick={async()=>  await finalTransactions()} className="bg-white flex items-center gap-x-1.5 group text-black px-4 py-2 rounded-full relative"> click Winner</button> 
       </div>
     );
   }

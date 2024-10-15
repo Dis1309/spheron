@@ -36,7 +36,7 @@ export function Chatbot() {
         {recommendedProjects.map((project) => (
           <div
             key={project.project_id}
-            className="border p-4 rounded-lg shadow-md bg-white"
+            className="border p-4 rounded-lg shadow-md bg-gray-300"
           >
             {/* Display project image */}
             <img
@@ -65,7 +65,7 @@ export function Chatbot() {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] w-full max-w-[672px] mx-auto bg-background rounded-lg shadow-lg">
+    <div className="flex flex-col h-[80vh] w-full max-w-[672px] mx-auto bg-gray-950 rounded-lg shadow-lg">
       <div className="flex-1 overflow-auto p-6">
         {messages.length === 0 && (
           <div className="flex flex-col justify-center items-center h-full">
@@ -108,7 +108,7 @@ export function Chatbot() {
                       />
                     </div>
                     <div className="bg-muted rounded-lg p-3 max-w-[70%]">
-                      <Markdown className="text-sm text-muted-foreground">
+                      <Markdown className="text-sm text-white">
                         {message.content}
                       </Markdown>
                       {projectIds.length > 0 && renderProjectCards(projectIds)}
