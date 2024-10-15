@@ -130,10 +130,12 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
         <img src="images/chatbot_demo.gif" alt="Chatbot Demo" width="800" height="400">
       </a>
     </div>
-10. **Smart AI Matching**:  
-    Our platform’s **AI-driven algorithms** intelligently match contributors to the issues and projects best suited to their skills and expertise. This ensures that the most qualified individuals tackle the most critical problems, optimizing productivity and enhancing the quality of resolutions.
+10. **Personalized AI Recommendations**:  
+    Our platform leverages **advanced AI** algorithms to provide personalized project and issue recommendations tailored to each contributor's skills and expertise. By analyzing user profiles and project data, the AI ensures that contributors are matched with the most relevant tasks, maximizing their impact and productivity while aligning with their strengths. This intelligent system enhances the quality of contributions and helps contributors tackle challenges best suited to their abilities.
 
-    <img src="images/smart-matching.gif" alt="Smart AI Matching" width="600"/>
+    <div align="center">
+        <img src="images/recommendation.gif" alt="Recommendation Demo" width="800" height="400">
+    </div>
 
 11. **Write With AI**:  
     Our platform includes an innovative Write with AI feature that allows users to generate project descriptions automatically using AI-powered assistance. This feature leverages cutting-edge natural language processing models to create detailed and contextually accurate descriptions based on the project details provided by the user.

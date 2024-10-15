@@ -107,7 +107,7 @@ const page = () => {
                           0,
                           3
                         )}...${account.address.slice(-3)}`
-                      : "No account connected"}
+                      : "Hello, Aviral Katiyar"}
                   </h1>
                 </div>
                 <div className="flex flex-row gap-6 justify-between items-start w-full">
