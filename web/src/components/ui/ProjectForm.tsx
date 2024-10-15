@@ -118,13 +118,12 @@ function ProjectForm() {
     }
   };
 
-
-     // CREATE PROJECT
-    async function createProject(extractedValues:any) {
-      console.log("inside");
-      console.log(account?.address);
-      console.log(connected);
-      console.log(typeof(extractedValues.projectid));
+  // CREATE PROJECT
+  async function createProject(extractedValues: any) {
+    console.log("inside");
+    console.log(account?.address);
+    console.log(connected);
+    console.log(typeof extractedValues.projectid);
 
     if (!account) return [];
     try {
@@ -140,7 +139,7 @@ function ProjectForm() {
             1,
             1,
             1,
-            account?.address.toString()
+            account?.address.toString(),
           ],
         },
       };
@@ -208,7 +207,7 @@ function ProjectForm() {
       : 1;
 
     console.log("hello");
-      console.log(typeof(newProjectId));
+    console.log(typeof newProjectId);
 
     // Create the new project entry
     const newProject = {
@@ -227,8 +226,8 @@ function ProjectForm() {
       tags: finalValues.tags,
     };
 
-    
-    const { description, maxbounty, startdate, enddate, critical, high, low } = finalValues;
+    const { description, maxbounty, startdate, enddate, critical, high, low } =
+      finalValues;
 
     // Convert dates to BigInt in milliseconds
     const start_date = BigInt(new Date(startdate).getTime());
@@ -260,28 +259,27 @@ function ProjectForm() {
       .then((res) => res.json())
 
       .then(async (data) => {
-        toast.success('Form submitted successfully!');
+        toast.success("Form submitted successfully!");
         // console.log("registers");
-    // await registerCoin();
-    // await createProject(extrac);
-    const res = await aptos.view({
-      payload: {
-        function: `${moduleAddress}::ProjectModule::user_exist`,
-        typeArguments: [], 
-        functionArguments: [account?.address]
-      }
-    });
+        // await registerCoin();
+        // await createProject(extrac);
+        const res = await aptos.view({
+          payload: {
+            function: `${moduleAddress}::ProjectModule::user_exist`,
+            typeArguments: [],
+            functionArguments: [account?.address],
+          },
+        });
 
-    // Check the result
-    if (res[0]) {
-      console.log("user exists for the user.");
-      await createProject(extractedValues);
-      // Add any other actions here based on this check
-    } else {
-      console.log("No user exists for the user.");
-    }
-    console.log('Project saved:', data);
-
+        // Check the result
+        if (res[0]) {
+          console.log("user exists for the user.");
+          await createProject(extractedValues);
+          // Add any other actions here based on this check
+        } else {
+          console.log("No user exists for the user.");
+        }
+        console.log("Project saved:", data);
       })
       .catch((error) => {
         console.error("Error saving project:", error);

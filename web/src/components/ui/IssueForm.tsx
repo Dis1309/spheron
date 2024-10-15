@@ -61,7 +61,8 @@ export default function IssueForm() {
       projectId: 4, // static projectId
       isApproved: false, // static isApproved (default: false)
       contributerId: sessionStorage.getItem("accountAddress"),
-      ownerId: "1234",
+      ownerId:
+        "0x30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a841f7752d96f73",
     };
 
     try {

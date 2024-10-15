@@ -9,6 +9,7 @@ import {
   ArrowLeft,
   Briefcase,
   LogOut,
+  BadgeCent,
 } from "lucide-react";
 import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebar";
 import Logo from "@/public/logo.svg";
@@ -36,6 +37,11 @@ const links = [
     label: "Settings",
     href: "#",
     icon: Settings,
+  },
+  {
+    label: "NFT Market",
+    href: "#",
+    icon: BadgeCent,
   },
 ];
 

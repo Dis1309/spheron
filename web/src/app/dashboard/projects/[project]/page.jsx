@@ -6,45 +6,28 @@ import { Button } from "@/components/ui/button";
 import IssueDialog from "@/components/ui/issueDialog";
 import { aptos, moduleAddress } from "@/app/login/page";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { projectData } from "@/app/api/chatbot/data";
 
-let project = {
-  projectId: 4,
-  imageurl: Projecturl5,
-  Title: "Card smx",
-  description: "This is a description for project 5.",
-  tags: ["ui/ux", "ai", "data"],
-  startDate: "2024-10-24",
-  endDate: "2024-08-04",
-  MaxBountyAmount: 13146,
-  githubLink: "https://github.com/user/project_5",
-  levels: {
-    Critical: 7802,
-    High: 3124,
-    Low: 1759,
-  },
-};
-
-const page = () => {
-  const [projectId, setProjectId] = useState(project.projectId);
-  const [desc, setDesc] = useState(project.description);
-  const [imgUrl, setImgUrl] = useState(project.imageurl);
-  const [title, setTitle] = useState(project.Title);
-  const [startDate, setStartDate] = useState(project.startDate);
-  const [endDate, setEndDate] = useState(project.endDate);
-  const [tags, setTags] = useState(project.tags);
-  const [totalBounty, setTotalBounty] = useState(project.MaxBountyAmount);
-  const [open, setOpen] = useState(false);
-  const [levels, setLevels] = useState(project.levels);
+const page = ({ params }) => {
+  const [projectId, setProjectId] = useState();
+  const [desc, setDesc] = useState();
+  const [imgUrl, setImgUrl] = useState();
+  const [title, setTitle] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [tags, setTags] = useState([]);
+  const [totalBounty, setTotalBounty] = useState();
+  const [open, setOpen] = useState();
+  const [levels, setLevels] = useState();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [projectLink, setProjectLink] = useState(project.githubLink);
+  const [error, setError] = useState();
+  const [projectLink, setProjectLink] = useState();
   const { account, signAndSubmitTransaction } = useWallet();
-  const level_wise_contributors = [0, 0, 0];
 
   async function onApproval() {
-    console.log("hey")
-    console.log(account)
+    console.log("hey");
+    console.log(account);
     if (!account) return [];
     let newcontribution = {
       id: 1,
@@ -59,7 +42,7 @@ const page = () => {
       };
       const response = await signAndSubmitTransaction(transaction);
       await aptos.waitForTransaction({ transactionHash: response.hash });
-           console.log(response);
+      console.log(response);
       // Update level-wise contributors
       if (newcontribution.level === "low") {
         level_wise_contributors[0]++;
@@ -71,7 +54,7 @@ const page = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   const approve = async (id) => {
     try {
@@ -132,7 +115,58 @@ const page = () => {
       console.log(error);
     }
   }
-  
+  useEffect(() => {
+    console.log(params.project);
+    const projectIdFromParams = parseInt(params.project);
+
+    // Find the project in projectData where project_id matches params.project
+    const project = projectData.find(
+      (project) => project.project_id === projectIdFromParams
+    );
+
+    setProjectId(params.project);
+    setImgUrl(project.imageUrl);
+    setTitle(project.title);
+    setDesc(project.description);
+    setTags(project.tags);
+    setStartDate(project.startdate);
+    setEndDate(project.enddate);
+    setTotalBounty(project.maxbounty);
+    setProjectLink(project.url);
+    setLevels({
+      Critial: project.critical,
+      High: project.high,
+      Low: project.low,
+    });
+
+    async function fetchIssues() {
+      try {
+        const response = await fetch(`/api/issues?projectId=${projectId}`);
+        if (!response.ok) {
+          throw new Error("Error fetching issues");
+        }
+        const data = await response.json();
+        console.log(data);
+        if (data.length == 0) {
+          console.log(data.message);
+        }
+        const storedValue = sessionStorage.getItem("accountAddress");
+        const filteredIssues = data.issues.filter(
+          (issue) => issue.ownerId === storedValue
+        );
+        setIssues(filteredIssues);
+      } catch (err) {
+        console.log(error);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (projectId != null) {
+      fetchIssues();
+    }
+  }, [projectId]);
+
   const LevelsDisplay = () => {
     return (
       <div className="flex flex-row gap-5 justify-start items-center max-w-5xl">
@@ -159,9 +193,8 @@ const page = () => {
   };
   if (loading == true) {
     return (
-      <div>
-      <button onClick={async()=>  await onApproval()} className="bg-white flex items-center gap-x-1.5 group text-black px-4 py-2 rounded-full relative"> click Transaction</button> 
-      <button onClick={async()=>  await finalTransactions()} className="bg-white flex items-center gap-x-1.5 group text-black px-4 py-2 rounded-full relative"> click Winner</button> 
+      <div className="w-screen h-screen justify-center items-center text-white text-3xl">
+        Loading...
       </div>
     );
   }
@@ -176,7 +209,7 @@ const page = () => {
             </h1>
           </div>
           <div className="inline-flex justify-center items-center">
-            <h1 className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-gray-300 text-center text-[5.2rem] tracking-tight font-bold max-w-screen-lg leading-[1.1] font-secondary">
+            <h1 className="text-start max-w-xl text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-gray-300  text-[3.2rem] tracking-tight font-bold  leading-[1.1] font-secondary">
               {title}
             </h1>
           </div>

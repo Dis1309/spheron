@@ -18,22 +18,22 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const projectId = searchParams.get("projectId");
 
-    if (!projectId) {
-      return NextResponse.json(
-        { message: "Project ID is required" },
-        { status: 400 }
-      );
+    let issues;
+
+    // If `projectId` is provided, find issues by `projectId`, otherwise return all issues
+    if (projectId) {
+      issues = await IssueForm.find({ projectId });
+
+      if (issues.length === 0) {
+        return NextResponse.json(
+          { message: "No issues found for the given projectId" },
+          { status: 404 }
+        );
+      }
+    } else {
+      issues = await IssueForm.find(); // Return all issues if no `projectId` is provided
     }
 
-    // Find all issue forms with the provided `projectId`
-    const issues = await IssueForm.find({ projectId });
-
-    if (issues.length === 0) {
-      return NextResponse.json(
-        { message: "No issues found for the given projectId" },
-        { status: 404 }
-      );
-    }
     console.log(issues);
     return NextResponse.json({ issues }, { status: 200 });
   } catch (error) {
