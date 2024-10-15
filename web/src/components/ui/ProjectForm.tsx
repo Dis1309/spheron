@@ -130,12 +130,13 @@ function ProjectForm() {
     var name =account?.address.toString();
 
     try {
+      console.log(extractedValues.projectname)
       const transaction: InputTransactionData = {
         data: {
           function: `${moduleAddress}::ProjectModule::create_project`,
           functionArguments: [
             1,
-            "new project",
+            extractedValues.projectname,
             1,
             extractedValues.start_date,
             extractedValues.end_date,
