@@ -7,6 +7,7 @@ import IssueDialog from "@/components/ui/issueDialog";
 import { aptos, moduleAddress } from "@/app/login/page";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { projectData } from "@/app/api/chatbot/data";
+import { IconChevronsDownLeft } from "@tabler/icons-react";
 
 const page = ({ params }) => {
   const [projectId, setProjectId] = useState();
@@ -150,10 +151,16 @@ const page = ({ params }) => {
         if (data.length == 0) {
           console.log(data.message);
         }
-        const storedValue = sessionStorage.getItem("accountAddress");
-        const filteredIssues = data.issues.filter(
-          (issue) => issue.ownerId === storedValue
-        );
+        let storedValue = sessionStorage.getItem("accountAddress");
+        storedValue = storedValue.trimEnd();
+        console.log(typeof storedValue);
+        const filteredIssues = data.issues.filter((issue) => {
+          console.log(issue.ownerId + "helloe");
+          console.log(storedValue + "helloe");
+          return issue.ownerId == storedValue;
+        });
+        console.log(filteredIssues);
+        console.log(storedValue);
         setIssues(filteredIssues);
       } catch (err) {
         console.log(error);

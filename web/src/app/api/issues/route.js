@@ -71,6 +71,8 @@ export async function POST(req) {
       priority: body.priority,
       projectId: body.projectId || null,
       isApproved: body.isApproved || false,
+      contributerId: body.contributerId,
+      ownerId: body.ownerId,
     });
 
     await newIssue.save();
