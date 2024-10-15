@@ -90,7 +90,9 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 3. **AI-Assisted Issue Categorization**:  
    **AI integration** allows our platform to categorize issues based on their severity efficiently. By using cutting-edge machine learning models trained on vast security data, our AI system automatically assigns issues into the appropriate tiers: **Critical**, **High**, or **Low**. This saves project owners time and reduces manual evaluation efforts while improving accuracy in identifying priority vulnerabilities.
 
-   <img src="images/ai-assisted-categorization.gif" alt="AI-Assisted Categorization" width="600"/>
+   <div align="center">
+        <img src="images/priority_classify.gif" alt="Recommendation Demo" width="800" height="400">
+    </div>
 
 4. **Blockchain-Backed Payments**:  
    Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
