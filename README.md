@@ -68,7 +68,7 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 
 <h2 id="visuals">Visual Representation</h2>
 
-<img src="images/bug-bounty-flowchart.png" alt="Bug Bounty Process Flowchart" width="800" />
+<img src="images/Screenshot 2024-10-15 142254.png" alt="Bug Bounty Process Flowchart" width="800" />
 
 *The above diagram illustrates the process flow from project listing to vulnerability reporting and payment distribution.*
 
@@ -557,45 +557,41 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 - **Contribute to Development**: Check our [GitHub Repository](https://github.com/Dis1309/spheron) for contribution guidelines.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<h2 id="team">Team Members</h2>
+## Meet the Team
 
-<div style="display: flex; flex-direction: column; gap: 20px;">
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-kashish-photo.jpg" alt="Kashish Garg" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Kashish Garg</strong> - AI-ML Developer
-    </div>
-  </div>
+<table cellpadding="0" align="center">
+  <tr style="padding: 0">
+    <td valign="top"><div width="20%">
+      <img src="images/k.jpg" alt="Kashish Garg" width="165px" height="200px" />
+      <h3>Kashish Garg</h3>
+      <p>AI-ML Developer</p>
+    </div></td>
+    
+   <td valign="top"><div width="20%">
+      <img src="images/l.jpg" alt="Disha Dwivedi" width="165px" height="200px" />
+      <h3>Disha Dwivedi</h3>
+      <p>Blockchain Aptos Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-disha-photo.jpg" alt="Disha" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Disha Dwivedi</strong> - Blockchain Aptos Developer
-    </div>
-  </div>
+  <td valign="top"><div width="20%">
+      <img src="images/v.jpg" alt="Vanshika Malik" width="165px" height="200px" />
+      <h3>Vanshika Malik</h3>
+      <p>Full Stack Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-vanshika-photo.jpg" alt="Vanshika Malik" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Vanshika Malik</strong> - Full Stack Developer
-    </div>
-  </div>
+   <td valign="top"><div width="20%">
+      <img src="images/av.jpg" alt="Aviral Katiyar" width="165px" height="200px" />
+      <h3>Aviral Katiyar</h3>
+      <p>AI-ML Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-aviral-photo.jpg" alt="Aviral Katiyar" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Aviral Katiyar</strong> - AI-ML Developer
-    </div>
-  </div>
-
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-jyotika-photo.jpg" alt="Jyotika" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Jyotika</strong> - Blockchain Aptos Developer
-    </div>
-  </div>
-</div>
+  <td valign="top"><div width="20%">
+      <img src="images/j.jpg" alt="Jyotika" width="165px" height="200px" />
+      <h3>Jyotika</h3>
+      <p>Blockchain Aptos Developer</p>
+    </div></td>
+  </tr>
+</table>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-```
