@@ -38,6 +38,7 @@
         <li><a href="#example">Example Usage</a></li>
       </ul>
     </li>
+    <li><a href="#contract">Contract Addresses</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#team">Team</a></li>
@@ -68,7 +69,7 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 
 <h2 id="visuals">Visual Representation</h2>
 
-<img src="images/bug-bounty-flowchart.png" alt="Bug Bounty Process Flowchart" width="800" />
+<img src="images/Screenshot 2024-10-15 142254.png" alt="Bug Bounty Process Flowchart" width="800" />
 
 *The above diagram illustrates the process flow from project listing to vulnerability reporting and payment distribution.*
 
@@ -79,7 +80,9 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 1. **Project Listing as NFTs**:  
    Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, *immutability*, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.
 
-   <img src="images/nft-project-listing.gif" alt="NFT Project Listing" width="600"/>
+   <div align="center">
+        <img src="images/add-project.gif" alt="add project Demo" width="800" height="400">
+    </div>
 
 2. **Dynamic Bounty Distribution**:  
    Our platform provides a flexible, tier-based bounty distribution system, enabling project owners to allocate rewards dynamically. Based on the severity of identified vulnerabilities, contributors are compensated under **Critical**, **High**, and **Low** tiers. This ensures fair and **meritocratic distribution** of rewards, motivating bug hunters to resolve more significant security issues for higher incentives.
@@ -89,7 +92,9 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 3. **AI-Assisted Issue Categorization**:  
    **AI integration** allows our platform to categorize issues based on their severity efficiently. By using cutting-edge machine learning models trained on vast security data, our AI system automatically assigns issues into the appropriate tiers: **Critical**, **High**, or **Low**. This saves project owners time and reduces manual evaluation efforts while improving accuracy in identifying priority vulnerabilities.
 
-   <img src="images/ai-assisted-categorization.gif" alt="AI-Assisted Categorization" width="600"/>
+   <div align="center">
+        <img src="images/priority_classify.gif" alt="issue categorize" width="800" height="400">
+    </div>
 
 4. **Blockchain-Backed Payments**:  
    Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
@@ -129,10 +134,12 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
         <img src="images/chatbot_demo.gif" alt="Chatbot Demo" width="800" height="400">
       </a>
     </div>
-10. **Smart AI Matching**:  
-    Our platform’s **AI-driven algorithms** intelligently match contributors to the issues and projects best suited to their skills and expertise. This ensures that the most qualified individuals tackle the most critical problems, optimizing productivity and enhancing the quality of resolutions.
+10. **Personalized AI Recommendations**:  
+    Our platform leverages **advanced AI** algorithms to provide personalized project and issue recommendations tailored to each contributor's skills and expertise. By analyzing user profiles and project data, the AI ensures that contributors are matched with the most relevant tasks, maximizing their impact and productivity while aligning with their strengths. This intelligent system enhances the quality of contributions and helps contributors tackle challenges best suited to their abilities.
 
-    <img src="images/smart-matching.gif" alt="Smart AI Matching" width="600"/>
+    <div align="center">
+        <img src="images/recommendation.gif" alt="Recommendation Demo" width="800" height="400">
+    </div>
 
 11. **Write With AI**:  
     Our platform includes an innovative Write with AI feature that allows users to generate project descriptions automatically using AI-powered assistance. This feature leverages cutting-edge natural language processing models to create detailed and contextually accurate descriptions based on the project details provided by the user.
@@ -527,6 +534,19 @@ By integrating blockchain technology, AI assistance, and a decentralized project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<h2 id="contract">Contract Addresses</h2>
+
+| Role         | Address                                                                                     
+|--------------|---------------------------------------------------------------------------------------------
+| Owner        | OxdbaOa8c309cfa037778d8955cd50730bc5056e9922d25a                                             
+| Contributor  | Ox30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a84                                       
+| Module       | Ox4ccce76a4bcf03d8b9892455e74a017bf1 d2a4faa48b83fba127                                      
+| Owner        | Oxe4d3303b1 Ofd33ac781000363d5627eb                                                          
+| Contributor  | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8                                       
+| Jyothika     | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                           
+| Module/Contract | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b 
+
+
 <h2 id="license">License</h2>
 
 This project is licensed under the MIT License. For more information, please see the [LICENSE](LICENSE) file in the repository.
@@ -557,45 +577,41 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 - **Contribute to Development**: Check our [GitHub Repository](https://github.com/Dis1309/spheron) for contribution guidelines.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<h2 id="team">Team Members</h2>
+## Meet the Team
 
-<div style="display: flex; flex-direction: column; gap: 20px;">
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-kashish-photo.jpg" alt="Kashish Garg" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Kashish Garg</strong> - AI-ML Developer
-    </div>
-  </div>
+<table cellpadding="0" align="center">
+  <tr style="padding: 0">
+    <td valign="top"><div width="20%">
+      <img src="images/k.jpg" alt="Kashish Garg" width="165px" height="200px" />
+      <h3>Kashish Garg</h3>
+      <p>AI-ML Developer</p>
+    </div></td>
+    
+   <td valign="top"><div width="20%">
+      <img src="images/l.jpg" alt="Disha Dwivedi" width="165px" height="200px" />
+      <h3>Disha Dwivedi</h3>
+      <p>Blockchain Aptos Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-disha-photo.jpg" alt="Disha" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Disha Dwivedi</strong> - Blockchain Aptos Developer
-    </div>
-  </div>
+  <td valign="top"><div width="20%">
+      <img src="images/v.jpg" alt="Vanshika Malik" width="165px" height="200px" />
+      <h3>Vanshika Malik</h3>
+      <p>Full Stack Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-vanshika-photo.jpg" alt="Vanshika Malik" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Vanshika Malik</strong> - Full Stack Developer
-    </div>
-  </div>
+   <td valign="top"><div width="20%">
+      <img src="images/av.jpg" alt="Aviral Katiyar" width="165px" height="200px" />
+      <h3>Aviral Katiyar</h3>
+      <p>AI-ML Developer</p>
+    </div></td>
 
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-aviral-photo.jpg" alt="Aviral Katiyar" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Aviral Katiyar</strong> - AI-ML Developer
-    </div>
-  </div>
-
-  <div style="display: flex; align-items: center;">
-    <img src="path-to-jyotika-photo.jpg" alt="Jyotika" width="100" style="border-radius: 50%; margin-right: 10px;">
-    <div>
-      <strong>Jyotika</strong> - Blockchain Aptos Developer
-    </div>
-  </div>
-</div>
+  <td valign="top"><div width="20%">
+      <img src="images/j.jpg" alt="Jyotika" width="165px" height="200px" />
+      <h3>Jyotika</h3>
+      <p>Blockchain Aptos Developer</p>
+    </div></td>
+  </tr>
+</table>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-```

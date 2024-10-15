@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import ProfileLinearChart from "@/components/ui/ProfileLinearChart";
 import profilePic from "../../../public/avatar.png";
+import PersonalizedRecommendation from "@/components/ui/PersonalizedRecommendation";
 import {
   Card,
   CardContent,
@@ -106,7 +107,7 @@ const page = () => {
                           0,
                           3
                         )}...${account.address.slice(-3)}`
-                      : "No account connected"}
+                      : "Hello, Aviral Katiyar"}
                   </h1>
                 </div>
                 <div className="flex flex-row gap-6 justify-between items-start w-full">
@@ -305,7 +306,8 @@ const page = () => {
             <ProfilePieChart />
           </div>
           <div className="w-full h-full">
-            <ProfilePieChart />
+            {/* <ProfilePieChart /> */}
+            <PersonalizedRecommendation />
           </div>
         </div>
       </div>

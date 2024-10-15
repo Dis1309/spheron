@@ -73,6 +73,7 @@ export async function POST(req) {
       isApproved: body.isApproved || false,
       contributerId: body.contributerId,
       ownerId: body.ownerId,
+      money: 1,
     });
 
     await newIssue.save();
