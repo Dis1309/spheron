@@ -601,6 +601,166 @@ const projectData = [
     "tags": [
       "blockchain"
     ]
+  },
+  {
+    "project_id": 31,
+    "title": "Dis13",
+    "description": "This project focuses on developing an inventory and deadstock management application.  Leveraging time series analysis, the application predicts future sales, enabling proactive inventory management.  By anticipating demand, businesses can optimize stock levels, minimize waste, and maximize profitability. \n",
+    "technologies": [
+      "ai",
+      "ml",
+      "frontend"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2025-01-11",
+    "enddate": "2025-01-12",
+    "maxbounty": 1000,
+    "critical": 500,
+    "high": 300,
+    "low": 200,
+    "tags": [
+      "ai",
+      "ml",
+      "frontend"
+    ]
+  },
+  {
+    "project_id": 32,
+    "title": "dis13",
+    "description": "This project involves designing a user-friendly website for selling baby products. The website will feature a comprehensive product catalog, secure payment processing, and easy navigation.  The goal is to create an online shopping experience that is both convenient and enjoyable for parents. \n",
+    "technologies": [
+      "ai"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-17",
+    "enddate": "2024-10-19",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai"
+    ]
+  },
+  {
+    "project_id": 33,
+    "title": "Dis1309",
+    "description": "This project aims to build a website platform specifically designed for superstars. It will provide a space for them to connect with fans, manage their careers, and share exclusive content. The website will include features such as personalized profiles, fan forums, and a marketplace for merchandise and experiences. \n",
+    "technologies": [
+      "ai"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-17",
+    "enddate": "2024-10-19",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai"
+    ]
+  },
+  {
+    "project_id": 34,
+    "title": "Dis1309",
+    "description": "This project aims to build a website platform specifically designed for superstars. It will provide a space for them to connect with fans, manage their careers, and share exclusive content. The website will include features such as personalized profiles, fan forums, and a marketplace for merchandise and experiences. \n",
+    "technologies": [
+      "ai",
+      "frontend"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-17",
+    "enddate": "2024-10-19",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai",
+      "frontend"
+    ]
+  },
+  {
+    "project_id": 35,
+    "title": "Dis1309",
+    "description": "This project aims to build a website platform specifically designed for superstars. It will provide a space for them to connect with fans, manage their careers, and share exclusive content. The website will include features such as personalized profiles, fan forums, and a marketplace for merchandise and experiences. \n",
+    "technologies": [
+      "ai",
+      "frontend"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-17",
+    "enddate": "2024-10-19",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai",
+      "frontend"
+    ]
+  },
+  {
+    "project_id": 36,
+    "title": "Dis13",
+    "description": "hello",
+    "technologies": [
+      "ai"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-17",
+    "enddate": "2024-10-19",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai"
+    ]
+  },
+  {
+    "project_id": 37,
+    "title": "Dis13",
+    "description": "blon",
+    "technologies": [
+      "ai"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-16",
+    "enddate": "2024-10-17",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai"
+    ]
+  },
+  {
+    "project_id": 38,
+    "title": "Dis13",
+    "description": "blon",
+    "technologies": [
+      "ai"
+    ],
+    "url": "https://github.com/Dis1309",
+    "imageUrl": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    "startdate": "2024-10-16",
+    "enddate": "2024-10-17",
+    "maxbounty": 10,
+    "critical": 5,
+    "high": 3,
+    "low": 2,
+    "tags": [
+      "ai"
+    ]
   }
 ];
 
