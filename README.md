@@ -536,16 +536,12 @@ By integrating blockchain technology, AI assistance, and a decentralized project
 
 <h2 id="contract">Contract Addresses</h2>
 
-| Role         | Address                                                                                     
-|--------------|---------------------------------------------------------------------------------------------
-| Owner        | OxdbaOa8c309cfa037778d8955cd50730bc5056e9922d25a                                             
-| Contributor  | Ox30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a84                                       
-| Module       | Ox4ccce76a4bcf03d8b9892455e74a017bf1 d2a4faa48b83fba127                                      
-| Owner        | Oxe4d3303b1 Ofd33ac781000363d5627eb                                                          
-| Contributor  | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8                                       
-| Jyothika     | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                           
-| Module/Contract | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b 
+Module Address                                                                                     
+--------------------------------------------------------------------------------------------
+| Account Address| 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                                                                             
+| Module Address | 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b    
 
+<a href="https://testnet.tracemove.io/account/0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b"> Check-Out Module Address On Aptos Testnet Scan</a>
 
 <h2 id="license">License</h2>
 
