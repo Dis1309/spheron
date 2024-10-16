@@ -1,0 +1,16 @@
+[package]
+name = "name"
+version = "1.0.0"
+authors = []
+
+[addresses]
+MyNFTMarketplace="0xed904d3cb8e239b0184a1081a4dfbff8c11dba3802b84e7c38c419a2c217036c"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]
