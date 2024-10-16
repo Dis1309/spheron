@@ -11,7 +11,7 @@
 <p align="center">
     Welcome to the future of bug bounty platforms, where we leverage the power of blockchain, NFTs, and AI to revolutionize security processes. Built on the Move language and deployed on Aptos blockchain, this platform provides a decentralized, secure, and transparent way for non-tech savy project owners and technically eliquent contributors to collaborate and earn.
   <br />
-  <a href="https://youtu.be/demo-link"><strong>Explore the Demo »</strong></a>
+  <a href="https://youtu.be/qybtwzmaOis"><strong>Explore the Demo »</strong></a>
   <br />
   <br />
   <a href="https://github.com/Dis1309/spheron/issues">Report Bug</a>
@@ -337,7 +337,7 @@ Here's the adjusted content presented as a topic within the same page, maintaini
 ---
 
 ## **Demo**  
-[**Watch the Demo**](https://youtu.be/demo-link)
+[**Watch the Demo**](https://youtu.be/qybtwzmaOis)
 
 ### **Example Workflow**  
 
@@ -348,10 +348,12 @@ Here’s a detailed overview of our decentralized project management platform, s
 <h2 id="technology-stack">Technology Stack</h2>
 
 - **Blockchain Technology**: Aptos
-- **Smart Contracts Language**: Move
-- **Web Framework**: Next.js
+- **Smart Contracts Language**: Move, rust
+- **Web Framework**: Next.js, Node.js
+- **Languages**:Typescript, Javascript
+- **Integration**- wallet-adapter, Provider, Typecript-sdk, petra-wallet
 - **Database**: MongoDB
-- **Styling**: TailwindCSS
+- **Styling**: TailwindCSS,Shadcn/ui,acertanityui, gsap animaton library
 - **AI Frameworks**: TensorFlow, Keras, RASA
 - **Version Control**: Git
 
