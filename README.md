@@ -348,10 +348,12 @@ Here’s a detailed overview of our decentralized project management platform, s
 <h2 id="technology-stack">Technology Stack</h2>
 
 - **Blockchain Technology**: Aptos
-- **Smart Contracts Language**: Move
-- **Web Framework**: Next.js
+- **Smart Contracts Language**: Move, rust
+- **Web Framework**: Next.js, Node.js
+- **Languages**:Typescript, Javascript
+- **Integration**- wallet-adapter, Provider, Typecript-sdk, petra-wallet
 - **Database**: MongoDB
-- **Styling**: TailwindCSS
+- **Styling**: TailwindCSS,Shadcn/ui,acertanityui, gsap animaton library
 - **AI Frameworks**: TensorFlow, Keras, RASA
 - **Version Control**: Git
 
