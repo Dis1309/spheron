@@ -38,8 +38,6 @@
       </ul>
     </li>
     <li><a href="#contract">Contract Addresses</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#team">Team</a></li>
   </ol>
 </details>
@@ -381,33 +379,12 @@ Module Address
 
 <a href="https://testnet.tracemove.io/account/0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b"> Check-Out Module Address On Aptos Testnet Scan</a>
 
-<h2 id="license">License</h2>
-
-This project is licensed under the MIT License. For more information, please see the [LICENSE](LICENSE) file in the repository.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<h2 id="contributing">Contributing</h2>
-
-We welcome contributions! Please check our [Contributing Guide](docs/contributing.md) for detailed instructions on how to get involved.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<h2 id="support">Support</h2>
-
-If you have questions or need assistance, please refer to the following resources:
-
-- **Documentation**: [Access the Full Documentation](./docs/documentation.md)
-- **Community Forum**: [Join Our Community](https://forum.bughuntx.com)
-- **Contact Us**: For direct inquiries, email us at [support@bughuntx.com](mailto:support@bughuntx.com).
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h2 id="call-to-action">Get Involved</h2>
 
 Join us in revolutionizing bug bounty platforms! Whether you're a security researcher, a project owner, or an enthusiast, we welcome you to contribute, report bugs, or share your feedback. 
 
-- **Join the Discussion**: [Join Our Discord Community](https://discord.gg/bughuntx)
-- **Follow Us on Twitter**: [@BugHuntX](https://twitter.com/BugHuntX) for updates and announcements.
 - **Contribute to Development**: Check our [GitHub Repository](https://github.com/Dis1309/spheron) for contribution guidelines.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
