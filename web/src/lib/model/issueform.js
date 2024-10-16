@@ -35,6 +35,9 @@ const issueFormModel = new mongoose.Schema({
   ownerId: {
     type: String,
   },
+  money: {
+    type: Number,
+  },
 });
 
 export const IssueForm =

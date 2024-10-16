@@ -52,12 +52,12 @@ const page = () => {
         const data = await response.json();
 
         // Assuming the logged-in user's `contributerId` is stored in sessionStorage
-        const storedContributerId = user;
+        const storedContributerId = sessionStorage.getItem("accountAddress");
         console.log(data);
         if (storedContributerId) {
           // Filter issues to show only those that match the `contributerId`
           const filteredIssues = data.issues.filter(
-            (issue: Issue) => issue.contributerId === storedContributerId
+            (issue: Issue) => issue.contributerId == storedContributerId
           );
           setIssues(filteredIssues);
           console.log(filteredIssues);

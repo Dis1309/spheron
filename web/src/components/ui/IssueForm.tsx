@@ -36,7 +36,9 @@ const formSchema = z.object({
 export default function IssueForm() {
   const [isLoading, setIsLoading] = useState(false); // Loading state for AI call
   const [aiError, setAiError] = useState<string | null>(null);
-  const [calculatedPriority, setCalculatedPriority] = useState<string | null>(null); // State for calculated priority
+  const [calculatedPriority, setCalculatedPriority] = useState<string | null>(
+    null
+  ); // State for calculated priority
   const [isPriorityCalculated, setIsPriorityCalculated] = useState(false); // State to control button disable
   const [isFormBlurred, setIsFormBlurred] = useState(false); // State to blur the form
 
@@ -149,7 +151,9 @@ export default function IssueForm() {
                     type="number"
                     placeholder="Enter Issue ID"
                     {...field}
-                    onChange={(e) => field.onChange(parseInt(e.target.value, 10))}
+                    onChange={(e) =>
+                      field.onChange(parseInt(e.target.value, 10))
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -224,7 +228,9 @@ export default function IssueForm() {
             disabled={!isPriorityCalculated} // Disable until priority is calculated
           >
             Submit
-            {isLoading && <div className="ml-2 w-3 h-3 border-2 border-t-transparent rounded-full animate-spin" />}
+            {isLoading && (
+              <div className="ml-2 w-3 h-3 border-2 border-t-transparent rounded-full animate-spin" />
+            )}
           </Button>
         </form>
       </Form>

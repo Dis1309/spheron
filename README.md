@@ -9,7 +9,7 @@
   </a>
 </div>
 <p align="center">
-    Welcome to the future of bug bounty platforms, where we leverage the power of blockchain, NFTs, and AI to revolutionize security processes. Built on the Move language and deployed on Sphereon blockchain, this platform provides a decentralized, secure, and transparent way for project owners and contributors to collaborate and earn.
+    Welcome to the future of bug bounty platforms, where we leverage the power of blockchain, NFTs, and AI to revolutionize security processes. Built on the Move language and deployed on Aptos blockchain, this platform provides a decentralized, secure, and transparent way for non-tech savy project owners and technically eliquent contributors to collaborate and earn.
   <br />
   <a href="https://youtu.be/demo-link"><strong>Explore the Demo »</strong></a>
   <br />
@@ -26,10 +26,9 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#mission">Mission</a></li>
-    <li><a href="#value-proposition">Value Proposition</a></li>
     <li><a href="#key-features">Key Features</a></li>
     <li><a href="#visuals">Visual Representation</a></li>
-    <li><a href="#why-bughuntx">Why BugHuntX?</a></li>
+    <li><a href="#why-bughuntx">Future Prospects</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -48,24 +47,15 @@
 
 <h2 id="about-the-project">About The Project</h2>
 
-Our decentralized bug bounty platform is reshaping how security vulnerabilities are reported, managed, and rewarded. Using blockchain technology, each project is listed as an NFT, giving contributors a verifiable source of truth. Built on the Aptos blockchain using the Move language, we offer secure, transparent, and efficient payments through smart contracts—ensuring that contributors are fairly compensated based on the issues they resolve.
+Our decentralized bug bounty platform is reshaping the future of project development by bridging the gap between ideas and technical knowledge. Using blockchain technology, each project is listed as an NFT, giving contributors a verifiable source of truth. Built on the Aptos blockchain using the Move language, we offer secure, transparent, and efficient payments through smart contracts—ensuring that contributors are fairly compensated based on the issues they resolve.
 
-<h3 id="mission">Mission:</h3>
+<h2 id="mission">Mission:</h2>
 
-We aim to provide a seamless, secure, and transparent bug bounty experience for both project owners and contributors. By decentralizing the process, our platform removes intermediaries, reduces delays, and ensures real-time payments for contributors who resolve issues.
+We aim to provide a **seamless, secure, and transparent bug bounty experience** for both project owners and contributors. By decentralizing the process, our platform **removes intermediaries, reduces delays**, and ensures **real-time payments** for contributors who resolve issues.
 
-<h3 id="value-proposition">Value Proposition:</h3>
+Additionally, we focus on **bridging the gap between creativity and technical knowledge deficiency**. Anyone with an innovative idea but lacking the technical resources can come to our platform, describe their vision, and **connect with technically knowledgeable contributors** who can bring their ideas to life.
 
-1. **Decentralized Security**: Our projects are stored as NFTs, providing decentralized protection and eliminating the reliance on centralized systems prone to vulnerabilities.
-2. **Transparent Bounty Distribution**: Through blockchain-backed smart contracts, we ensure that each contributor is paid fairly and promptly for their work.
-3. **AI-Assisted Categorization**: Our AI-driven system streamlines the process of evaluating issues by automatically categorizing them into Critical, High, or Low tiers.
-4. **Blockchain-Powered Payments**: Contributors are paid securely in cryptocurrency upon completion of the project timeline, with funds distributed transparently based on the severity of the issue resolved.
-5. **Automated Transaction Management**: To ensure trust and transparency between contributors and project creators, bounty payments are securely held in smart contracts while the bounty is live. Once the bounty ends, the funds are automatically distributed among contributors based on their work.
-6. **AI-Powered Issue Prioritization**: In addition to categorizing issues, our AI system assists project managers by predicting the potential impact of each bug and suggesting priority levels, ensuring that the most critical issues are addressed first.
-7. **Smart Matching Algorithms**: Our AI algorithms match contributors to the issues that best align with their expertise, optimizing the process by assigning the right talents to the most relevant problems.
-8. **Real-Time Issue Insights**: AI-powered dashboards provide real-time insights into the nature and severity of bugs, helping contributors and project creators stay updated with the progress of the bounty.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+With our platform, project owners can transform their concepts into reality, while contributors gain the opportunity to apply their skills in impactful ways and earn money.
 
 <h2 id="visuals">Visual Representation</h2>
 
@@ -78,7 +68,7 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 <h2 id="key-features">Key Features</h2>
 
 1. **Project Listing as NFTs**:  
-   Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, *immutability*, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.
+   Every project on our platform is tokenized as a unique NFT. This ensures **transparency**, *immutability*, and a **trustless** environment. Contributors can verify the project’s authenticity and ownership directly on the blockchain, eliminating potential fraud and manipulation. By leveraging the decentralized nature of NFTs, project owners can prove that the project details are securely stored and immutable.They can further sell their NFT on marketplace to earn in exchange of their ownership rights.
 
    <div align="center">
         <img src="images/add-project.gif" alt="add project Demo" width="800" height="400">
@@ -116,10 +106,8 @@ We aim to provide a seamless, secure, and transparent bug bounty experience for 
 
    <img src="images/automated-transactions.gif" alt="Automated Transactions" width="600"/>
 
-8. **Real-Time Bounty Updates**:  
+8. **Real-Time Bounty Updates:** 
    Contributors and project owners can track bounty progress in real-time. As issues are resolved and confirmed, bounties are automatically adjusted and reflected on the platform, providing full transparency and allowing for instant feedback loops between the two parties.
-
-   <img src="images/real-time-updates.gif" alt="Real-Time Bounty Updates" width="600"/>
 
 9. **AI-Powered Chatbot (Built with RASA)**:  
    Our platform includes an **AI-powered chatbot** built with **RASA**, designed to provide an interactive experience for users. The chatbot helps users by:
@@ -156,61 +144,56 @@ Here’s the revised section that introduces the code snippet, focusing on the *
 
 ### Code Snippets to Highlight Features:
 
-For the **Dynamic Bounty Distribution** feature, here’s how smart contracts can dynamically allocate bounties based on issue severity using Move:
+For the **Dynamic Bounty Prize Distribution** feature, here’s how smart contracts can dynamically allocate bounties based on issue severity using Move:
 
 ```move
-// BountyDistribution.move
+public entry fun transaction_winners(
+        deployer: &signer,
+        project_id: u64,
+        high: u64,
+        critical: u64,
+        low: u64
+    ) acquires ProjectMapping, {
+       let project_mapping = borrow_global<ProjectMapping>(@account_address);
+       let all_projects = project_mapping.projects;
+       let projectMain =simple_map::borrow(&mut all_projects,&project_id);
+       let project = projectMain.contributors;
+       let len = vector::length(&project);
+        let mp:SimpleMap<address,u64> = simple_map::create(); 
+       for (i in 0..len) {
+         let contributor = vector::borrow(&project,i);
+         let amount:u64 = 0;
+         
+         if(contributor.level ==  string::utf8(b"High")) {
+           amount = projectMain.high_bounty/high;
+         } else if(contributor.level ==  string::utf8(b"Critical")) {
+           amount = projectMain.critical_bounty/critical;
+         } else amount = projectMain.low_bounty/low;
 
-module BountyDistribution {
-    use aptos_framework::coin;
-    use aptos_framework::account;
-
-    struct BountyDistribution {
-        owner: address,
-        rewards: map<address, u64>,
+         if(simple_map::contains_key(&mut mp,&contributor.issuer)==false) {
+             simple_map::add(&mut mp, contributor.issuer,amount); 
+         } else {
+            let tmp:u64 = *simple_map::borrow(&mut mp,&contributor.issuer);
+            amount = amount + tmp;
+            simple_map::upsert(&mut mp,contributor.issuer,amount );
+         };
+       };
+       for (i in 0..len) {
+         let contributor = vector::borrow(&project,i);
+         if(simple_map::contains_key(&mut mp,&contributor.issuer)==true) {
+            let value = *simple_map::borrow(&mut mp,&contributor.issuer);
+            let add:address = @account_address;
+            transfer(deployer, contributor.issuer, value);
+         };
+       };
     }
-
-    // Initialize the Bounty Distribution contract
-    public fun initialize(owner: address) {
-        let distribution = BountyDistribution {
-            owner,
-            rewards: map::empty<address, u64>(),
-        };
-        account::save_owner(owner, distribution);
-    }
-
-    // Allocate rewards based on severity
-    public fun allocate_bounty(distribution: &mut BountyDistribution, contributor: address, severity: u8) {
-        assert!(msg::sender() == distribution.owner, "Only owner can allocate bounties");
-        
-        let reward = match severity {
-            1 => 10_000_000, // Critical
-            2 => 5_000_000,  // High
-            3 => 2_000_000,  // Low
-            _ => 0,
-        };
-
-        if reward > 0 {
-            let current_reward = map::get(&distribution.rewards, contributor).unwrap_or(0);
-            map::insert(&mut distribution.rewards, contributor, current_reward + reward);
-        }
-    }
-
-    // Claim rewards by the contributor
-    public fun claim_reward(distribution: &mut BountyDistribution, contributor: address) {
-        let reward = map::remove(&mut distribution.rewards, contributor).unwrap_or(0);
-        assert!(reward > 0, "No rewards to claim");
-
-        coin::transfer(&distribution.owner, contributor, reward);
-    }
-}
 ```
 
 ### Key Functions:
 
-1. **`initialize`**: Sets up the contract with the owner's address and initializes the rewards mapping.
-2. **`allocate_bounty`**: Allows the owner to allocate rewards based on the severity of reported issues (Critical, High, Low).
-3. **`claim_reward`**: Enables contributors to claim their allocated rewards securely.
+1. **`initialize`**: reads the required contributors of the project
+2. **`allocates bounty`**: Allows the owner to allocate rewards based on the severity of reported issues (Critical, High, Low).
+3. **`send bounties`**: Enables contributors to get the allocated bounties.
 ---
 
 To showcase the **AI-Assisted Issue Categorization**, we developed a chatbot using **RASA** that helps users find relevant projects based on their prompts and can provide detailed information about specific projects.
@@ -264,25 +247,28 @@ stories:
 This RASA-powered chatbot enhances user experience by leveraging AI to provide tailored project recommendations and information, streamlining the process of finding suitable projects within our platform.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
----
-
-## Why BugHuntX?
-
-### The Need for Decentralization
-In today’s rapidly evolving digital landscape, cybersecurity threats are more prevalent than ever. Traditional bug bounty platforms often suffer from centralization issues, leading to delays in reward distribution and a lack of transparency. **BugHuntX** is designed to address these shortcomings by decentralizing the entire process, ensuring that both project owners and contributors can engage in a secure and efficient environment.
-
-### Empowering Contributors
-By tokenizing projects as NFTs, we not only ensure transparency but also empower contributors by providing them with a verifiable record of their contributions. This recognition not only motivates bug hunters but also builds a community of skilled security professionals eager to collaborate on projects.
-
-### Enhanced Security with Smart Contracts
-Our use of blockchain technology eliminates the need for intermediaries, ensuring that transactions are handled directly between project owners and contributors. This not only speeds up the payment process but also enhances security, as all transactions are recorded on the blockchain for public verification.
-
----
 
 ### Future Prospects
-As we continue to develop and refine BugHuntX, our goal is to incorporate even more advanced AI-driven tools to improve the categorization and evaluation of security vulnerabilities. Additionally, we aim to expand our community and partnerships to foster collaboration and growth in the cybersecurity space.
 
-Join us on this exciting journey to reshape the bug bounty landscape!
+1. Cross-Chain and Multi-Blockchain Integration
+Interoperability: You could expand your platform to support other blockchains (besides Aptos), allowing users to choose which blockchain best fits their project. This increases flexibility and attracts a wider audience.
+Cross-Chain Bounties: Introduce cross-chain bug bounty programs where projects and rewards can be hosted on multiple blockchains, encouraging contributors from various ecosystems to participate.
+
+2. Enhanced Security Tools for Contributors
+Automated Vulnerability Scanners: Offer contributors AI-based automated vulnerability scanning tools that can provide them with a head start on identifying potential issues in a project.
+On-Chain Auditing: Develop on-chain auditing mechanisms where projects can be automatically audited and verified for their security practices before being listed, providing an additional layer of trust.
+
+3. Reputation System
+Introduce a tokenized reputation system where contributors build reputation scores based on their work quality. High-reputation contributors could access exclusive bounties or higher-tier projects.
+
+4. Real-Time Collaboration Tools
+ Develop real-time collaborative environments where contributors can work together on issues. Contributors can stream their debugging sessions, share screens, or collaborate in real-time while solving complex problems.
+
+5. AI-Powered Bug Bounty Prediction
+Using machine learning models, you could predict potential areas in a project that are most vulnerable, giving contributors an edge and improving overall platform effectiveness.
+
+6. Metaverse-Enabled Bug Bounties
+Explore creating virtual spaces in the metaverse where contributors can collaborate and solve issues together, providing a more immersive experience.
 
 ---
 
@@ -304,7 +290,7 @@ Join us on this exciting journey to reshape the bug bounty landscape!
 ![Diffusers](https://img.shields.io/badge/Diffusers-00897B.svg?style=for-the-badge)
 
 
-- **Blockchain Platform**: Sphereon Blockchain
+- **Blockchain Platform**: Aptos Blockchain
 - **Smart Contracts**: Written in Move Language
 - **AI**: Automated Issue Categorization
 - **Payments**: Cryptocurrency Transactions via Blockchain
@@ -315,25 +301,32 @@ Join us on this exciting journey to reshape the bug bounty landscape!
 
 <h3 id="installation">Installation Instructions:</h3>
 
-To set up the bug bounty platform locally, you'll need to have the following prerequisites installed on your system:
+## Prerequisites
 
-1. **Move Language SDK**: Follow the [Move SDK installation guide](https://move-language.com) to get started.
+1. **Petro Wallet**: Make sure you have a Petro Wallet to connect. You can either:
+   - Download the Petro Wallet from the Chrome Extension Store.
+2. **Web2 Onboarding**:Without Petro wallet one can also onboard using gmail.
+   - Alternatively, sign in using Google for Web2 onboarding (No need of wallet).
 
-Once you have the prerequisites, follow these steps:
+Once you have the prerequisites, follow these steps to set up the bug bounty platform locally:
+
+## Setup Instructions
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Celebi07/bug-bounty-platform
+   git clone https://github.com/Dis1309/spheron
+   ```
 
 2. **Navigate to the project directory**:
    ```bash
-   cd spheron
+   cd web
    ```
 
 3. **Install dependencies**:
    ```bash
    npm install
    ```
+
 
 <h3 id="example">Example Usage:</h3>
 
@@ -352,200 +345,26 @@ Here’s a detailed overview of our decentralized project management platform, s
 
 ---
 
-### **Platform Overview**  
-Our platform connects **non-technical individuals** seeking to build projects with **technical contributors** looking to collaborate and earn. Utilizing **blockchain technology**, **AI**, and a decentralized system, we provide an efficient and transparent workflow for project owners and developers.
-
----
-
-### **1. NFT-Based Project Creation**
-
-- **Feature**: Projects are minted as NFTs.
-- **Details**:
-  - Each NFT contains metadata: **title**, **description**, **tech stack**, and **bounty details**.
-  - Ensures full **transparency** and **immutability** on the blockchain.
-
-![NFT Creation GIF](link-to-nft-creation.gif)  
-*_(GIF showing the NFT minting process)_*
-
----
-
-This structure allows you to present the demo and workflow as an integrated part of your page, maintaining a unified and professional appearance. Let me know if you'd like any further adjustments!
-
-## 2. **Max Bounty and Task-Level Payment Distribution**
-
-- **Feature**: Bounty specified by project owners.
-- **Details**:
-  - Owners divide the total budget (Max Bounty) into tasks categorized as Critical, High, and Low priority.
-  - Developers can select tasks based on assigned bounty values.
-
-![Bounty Distribution Image](link-to-bounty-distribution.png)  
-*(Image illustrating task categorization and payment distribution)*
-
----
-
-## 3. **Visible Bounty Distribution**
-
-- **Feature**: Public visibility of project details.
-- **Details**:
-  - Developers can assess tasks and bounty distributions for informed contributions.
-
-![Visible Bounty Distribution GIF](link-to-visible-bounty.gif)  
-*(GIF demonstrating how bounty distribution is visible to developers)*
-
----
-
-## 4. **Contributor Engagement and Collaboration**
-
-- **Feature**: GitHub repository access.
-- **Details**:
-  - Developers can raise issues and submit contributions.
-  - Contribution forms track their work and enable reward distribution.
-
-![Collaboration Image](link-to-collaboration.png)  
-*(Image showing collaboration steps between contributors and project owners)*
-
----
-
-## 5. **AI-Powered Project Assistance**
-
-- **Feature**: AI chatbot for project owners.
-- **Details**:
-  - Assists in crafting project descriptions and task breakdowns.
-  - Recommends contributors based on skills and experience.
-
-![AI Chatbot GIF](link-to-ai-chatbot.gif)  
-*(GIF illustrating interaction with the AI chatbot)*
-
----
-
-## 6. **AI Contributor Matching**
-
-- **Feature**: Intelligent matching of contributors.
-- **Details**:
-  - AI analyzes profiles to suggest the best matches for available tasks.
-  
-![Contributor Matching Image](link-to-contributor-matching.png)  
-*(Image showcasing the matching process between contributors and tasks)*
-
----
-
-## 7. **Merit-Based Bounty Distribution**
-
-- **Feature**: Automatic distribution of total bounty.
-- **Details**:
-  - Bounty distributed based on the significance of contributions.
-
-![Merit-Based Distribution GIF](link-to-merit-distribution.gif)  
-*(GIF demonstrating the merit-based distribution system)*
-
----
-
-## 8. **Project Visibility and Developer Reputation Boost**
-
-- **Feature**: Enhancing developer profiles.
-- **Details**:
-  - Contributors build portfolios through logged contributions.
-
-![Reputation Boost Image](link-to-reputation-boost.png)  
-*(Image highlighting how contributions boost developer profiles)*
-
----
-
-## 9. **Blockchain-Based Transactions**
-
-- **Feature**: Secure financial transactions.
-- **Details**:
-  - All payments processed via blockchain, ensuring tamper-proof transactions.
-
-![Blockchain Transactions GIF](link-to-blockchain-transactions.gif)  
-*(GIF showcasing the transaction process on blockchain)*
-
----
-
-## 10. **Decentralized and Transparent System**
-
-- **Feature**: Complete transparency in project management.
-- **Details**:
-  - Every action recorded on the blockchain, creating a reliable audit trail.
-
-![Decentralization Image](link-to-decentralization.png)  
-*(Image explaining the decentralized nature of the platform)*
-
----
-
-## 11. **Contributor Profile Boosting**
-
-- **Feature**: Track record building for contributors.
-- **Details**:
-  - Successful completions lead to higher profile visibility.
-
-![Profile Boosting GIF](link-to-profile-boosting.gif)  
-*(GIF showing how contributions enhance profiles)*
-
----
-
-## 12. **Project Dashboard and Issue Tracking**
-
-- **Feature**: Comprehensive dashboards.
-- **Details**:
-  - Project owners and contributors can track progress and manage issues efficiently.
-
-![Dashboard Image](link-to-dashboard.png)  
-*(Image depicting the project dashboard with tracking features)*
-
----
-
-## 13. **Decentralized Data Storage**
-
-- **Feature**: Secure and resilient data storage.
-- **Details**:
-  - Data stored in a decentralized manner to prevent manipulation.
-
-![Data Storage GIF](link-to-data-storage.gif)  
-*(GIF illustrating decentralized data storage)*
-
----
-
-## 14. **Automated Transaction Management**
-
-- **Feature**: Smart contracts for bug bounties.
-- **Details**:
-  - Bounty funds stored in smart contracts and automatically distributed upon completion.
-
-![Automated Transactions Image](link-to-automated-transactions.png)  
-*(Image explaining automated transaction processes)*
-
----
-
-## Summary
-By integrating blockchain technology, AI assistance, and a decentralized project management system, our platform provides a comprehensive solution for both project owners and technical contributors. It ensures transparency, fairness, and efficiency, creating a thriving ecosystem for project collaboration.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <h2 id="technology-stack">Technology Stack</h2>
 
-- **Blockchain Technology**: Sphereon
+- **Blockchain Technology**: Aptos
 - **Smart Contracts Language**: Move
 - **Web Framework**: Next.js
 - **Database**: MongoDB
 - **Styling**: TailwindCSS
-- **AI Frameworks**: TensorFlow, Keras
+- **AI Frameworks**: TensorFlow, Keras, RASA
 - **Version Control**: Git
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h2 id="contract">Contract Addresses</h2>
 
-| Role         | Address                                                                                     
-|--------------|---------------------------------------------------------------------------------------------
-| Owner        | OxdbaOa8c309cfa037778d8955cd50730bc5056e9922d25a                                             
-| Contributor  | Ox30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a84                                       
-| Module       | Ox4ccce76a4bcf03d8b9892455e74a017bf1 d2a4faa48b83fba127                                      
-| Owner        | Oxe4d3303b1 Ofd33ac781000363d5627eb                                                          
-| Contributor  | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8                                       
-| Jyothika     | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                           
-| Module/Contract | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b 
+Module Address                                                                                     
+--------------------------------------------------------------------------------------------
+| Account Address| 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                                                                             
+| Module Address | 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b    
 
+<a href="https://testnet.tracemove.io/account/0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b"> Check-Out Module Address On Aptos Testnet Scan</a>
 
 <h2 id="license">License</h2>
 
@@ -607,7 +426,7 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 
   <td valign="top"><div width="20%">
       <img src="images/j.jpg" alt="Jyotika" width="165px" height="200px" />
-      <h3>Jyotika</h3>
+      <h3>Jyothika</h3>
       <p>Blockchain Aptos Developer</p>
     </div></td>
   </tr>

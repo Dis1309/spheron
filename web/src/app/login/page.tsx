@@ -32,15 +32,15 @@ const Login = () => {
       const result = await aptos.view({
         payload: {
           function: `${moduleAddress}::ProjectModule::project_mapping_exist`,
-          typeArguments: [], 
-          functionArguments: [account.address]
-        }
+          typeArguments: [],
+          functionArguments: [account.address],
+        },
       });
-      console.log(result[0])
+      console.log(result[0]);
       // Check the result
       if (result[0]) {
         console.log("Project mapping exists for the user.");
-        let name = (account.address).toString();
+        let name = account.address.toString();
         sessionStorage.setItem("accountAddress", account?.address);
         router.push("/dashboard");
         // Add any other actions here based on this check
@@ -48,38 +48,36 @@ const Login = () => {
         console.log("No project mapping exists for the user.");
         // Add any other actions here based on this check
 
-      const transaction1: InputTransactionData = {
-        data: {
-          function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
-          functionArguments: [],
-        },
-      };
-      // Replace ⁠ client ⁠ with your Aptos client instance and ⁠ account ⁠ with the signer object
-      const response1 = await signAndSubmitTransaction(transaction1);
+        const transaction1: InputTransactionData = {
+          data: {
+            function: `${moduleAddress}::ProjectModule::initialize_project_mapping`,
+            functionArguments: [],
+          },
+        };
+        // Replace ⁠ client ⁠ with your Aptos client instance and ⁠ account ⁠ with the signer object
+        const response1 = await signAndSubmitTransaction(transaction1);
 
-      // Optionally, wait for the transaction to be confirmed
-      console.log("Initializing project mapping...");
-      await aptos.waitForTransaction({ transactionHash: response1.hash });
-      console.log("ProjectMap initialized!");
-      console.log(response1);
-      var  name = account?.address.toString();
-    const transaction2: InputTransactionData = {
-      data: {
-        function: `${moduleAddress}::ProjectModule::create_user`,
-        functionArguments: [name],
-      },
-    };
-    console.log("Creating new user and their collection");
-    console.log(transaction2);
-    const response2 = await signAndSubmitTransaction(transaction2);
-    await aptos.waitForTransaction({ transactionHash: response2.hash });
-    console.log("Created new user and their collection");
-    console.log(response2);
-      sessionStorage.setItem("accountAddress", account?.address);
-    router.push("/dashboard");
-    }
-    
-
+        // Optionally, wait for the transaction to be confirmed
+        console.log("Initializing project mapping...");
+        await aptos.waitForTransaction({ transactionHash: response1.hash });
+        console.log("ProjectMap initialized!");
+        console.log(response1);
+        var name = account?.address.toString();
+        const transaction2: InputTransactionData = {
+          data: {
+            function: `${moduleAddress}::ProjectModule::create_user`,
+            functionArguments: [name],
+          },
+        };
+        console.log("Creating new user and their collection");
+        console.log(transaction2);
+        const response2 = await signAndSubmitTransaction(transaction2);
+        await aptos.waitForTransaction({ transactionHash: response2.hash });
+        console.log("Created new user and their collection");
+        console.log(response2);
+        sessionStorage.setItem("accountAddress", account?.address);
+        router.push("/dashboard");
+      }
     } catch (error: any) {
       console.log(error);
     }
@@ -159,7 +157,7 @@ const Login = () => {
           contributors: project.contributors, // Array of contributors
         });
       }
-    }catch(error:any){
+    } catch (error: any) {
       console.log(error);
     }
   }
@@ -235,7 +233,7 @@ const Login = () => {
       // createProject();
       // onApproval();
       // getallprojectinfo();
-     
+
       createUser();
     }
   }, [connected]);
