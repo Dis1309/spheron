@@ -603,7 +603,7 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 
   <td valign="top"><div width="20%">
       <img src="images/j.jpg" alt="Jyotika" width="165px" height="200px" />
-      <h3>Jyotika</h3>
+      <h3>Jyothika</h3>
       <p>Blockchain Aptos Developer</p>
     </div></td>
   </tr>
