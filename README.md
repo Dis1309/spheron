@@ -79,12 +79,19 @@ With our platform, project owners can transform their concepts into reality, whi
    <div align="center">
         <img src="images/priority_classify.gif" alt="issue categorize" width="800" height="400">
     </div>
+    
+3. **AI-Powered Chatbot (Built with RASA)**:  
+   Our platform includes an **AI-powered chatbot** built with **RASA**, designed to provide an interactive experience for users. The chatbot helps users by:
+   - Answering questions about specific projects
+   - Offering suggestions for projects that align with users’ skills and interests
+   - Categorizing and assisting with project selection, ensuring users find the most relevant bounties
 
-3. **Blockchain-Backed Payments**:  
-   Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
+   By integrating **RASA**, we deliver a sophisticated, conversational AI experience, ensuring users can navigate the platform efficiently and get real-time project-related information without any hassle.
 
-   <div align="center">
-        <img src="images/nft-demo.gif" alt="nft Demo" width="800" height="400">
+    <div align="center">
+      <a href="https://github.com/Dis1309/spheron">
+        <img src="images/chatbot_demo.gif" alt="Chatbot Demo" width="800" height="400">
+      </a>
     </div>
 
 4. **Decentralized Contribution Management**:
@@ -94,12 +101,11 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/contri.gif" alt="contribution Demo" width="800" height="400">
     </div>
 
+5. **Personalized AI Recommendations**:  
+    Our platform leverages **advanced AI** algorithms to provide personalized project and issue recommendations tailored to each contributor's skills and expertise. By analyzing user profiles and project data, the AI ensures that contributors are matched with the most relevant tasks, maximizing their impact and productivity while aligning with their strengths. This intelligent system enhances the quality of contributions and helps contributors tackle challenges best suited to their abilities.
 
-5. **Secure Contributor Rewards**:  
-   For contributors, the platform offers **end-to-end security** using Spheron’s decentralized storage, ensuring that all contributions and rewards remain transparent and secure. Once a contribution is approved by the project owner, the contributor is rewarded via a smart contract, eliminating the need for intermediaries. This blockchain-based solution guarantees that contributors receive their rewards without any risk of tampering or delay, as all transactions are verifiable on the public ledger.
-
-   <div align="center">
-        <img src="images/contri2.gif" alt="transparent rewards Demo" width="800" height="400">
+    <div align="center">
+        <img src="images/recommendation.gif" alt="Recommendation Demo" width="800" height="400">
     </div>
 
 6. **Dynamic Bounty Distribution**:  
@@ -115,26 +121,19 @@ With our platform, project owners can transform their concepts into reality, whi
    <div align="center">
         <img src="images/payment.gif" alt="payment confirmation demo" width="800" height="400">
     </div>
+    
+8. **Blockchain-Backed Payments**:  
+   Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
 
-
-8. **AI-Powered Chatbot (Built with RASA)**:  
-   Our platform includes an **AI-powered chatbot** built with **RASA**, designed to provide an interactive experience for users. The chatbot helps users by:
-   - Answering questions about specific projects
-   - Offering suggestions for projects that align with users’ skills and interests
-   - Categorizing and assisting with project selection, ensuring users find the most relevant bounties
-
-   By integrating **RASA**, we deliver a sophisticated, conversational AI experience, ensuring users can navigate the platform efficiently and get real-time project-related information without any hassle.
-
-    <div align="center">
-      <a href="https://github.com/Dis1309/spheron">
-        <img src="images/chatbot_demo.gif" alt="Chatbot Demo" width="800" height="400">
-      </a>
+   <div align="center">
+        <img src="images/nft-demo.gif" alt="nft Demo" width="800" height="400">
     </div>
-9. **Personalized AI Recommendations**:  
-    Our platform leverages **advanced AI** algorithms to provide personalized project and issue recommendations tailored to each contributor's skills and expertise. By analyzing user profiles and project data, the AI ensures that contributors are matched with the most relevant tasks, maximizing their impact and productivity while aligning with their strengths. This intelligent system enhances the quality of contributions and helps contributors tackle challenges best suited to their abilities.
 
-    <div align="center">
-        <img src="images/recommendation.gif" alt="Recommendation Demo" width="800" height="400">
+9. **Secure Contributor Rewards**:  
+   For contributors, the platform offers **end-to-end security** using Spheron’s decentralized storage, ensuring that all contributions and rewards remain transparent and secure. Once a contribution is approved by the project owner, the contributor is rewarded via a smart contract, eliminating the need for intermediaries. This blockchain-based solution guarantees that contributors receive their rewards without any risk of tampering or delay, as all transactions are verifiable on the public ledger.
+
+   <div align="center">
+        <img src="images/contri2.gif" alt="transparent rewards Demo" width="800" height="400">
     </div>
 
 10. **Write With AI**:  
@@ -145,6 +144,7 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/generate_with_ai.gif" alt="Write With AI Demo" width="800" height="400">
       </a>
     </div>
+    
 11. **NFT Marketplace**:  
     Our platforms also allows users to sell thier tokens to other people so that they can also earn money in exhange of the project they build. This ensures that the Project owners also do not incurr any losses in case they are not willing to ove forward with the project they once found interesting.
 
