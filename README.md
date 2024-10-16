@@ -156,54 +156,49 @@ Here’s the revised section that introduces the code snippet, focusing on the *
 
 ### Code Snippets to Highlight Features:
 
-For the **Dynamic Bounty Distribution** feature, here’s how smart contracts can dynamically allocate bounties based on issue severity using Move:
+For the **Dynamic Bounty Prize Distribution** feature, here’s how smart contracts can dynamically allocate bounties based on issue severity using Move:
 
 ```move
-// BountyDistribution.move
+public entry fun transaction_winners(
+        deployer: &signer,
+        project_id: u64,
+        high: u64,
+        critical: u64,
+        low: u64
+    ) acquires ProjectMapping, {
+       let project_mapping = borrow_global<ProjectMapping>(@account_address);
+       let all_projects = project_mapping.projects;
+       let projectMain =simple_map::borrow(&mut all_projects,&project_id);
+       let project = projectMain.contributors;
+       let len = vector::length(&project);
+        let mp:SimpleMap<address,u64> = simple_map::create(); 
+       for (i in 0..len) {
+         let contributor = vector::borrow(&project,i);
+         let amount:u64 = 0;
+         
+         if(contributor.level ==  string::utf8(b"High")) {
+           amount = projectMain.high_bounty/high;
+         } else if(contributor.level ==  string::utf8(b"Critical")) {
+           amount = projectMain.critical_bounty/critical;
+         } else amount = projectMain.low_bounty/low;
 
-module BountyDistribution {
-    use aptos_framework::coin;
-    use aptos_framework::account;
-
-    struct BountyDistribution {
-        owner: address,
-        rewards: map<address, u64>,
+         if(simple_map::contains_key(&mut mp,&contributor.issuer)==false) {
+             simple_map::add(&mut mp, contributor.issuer,amount); 
+         } else {
+            let tmp:u64 = *simple_map::borrow(&mut mp,&contributor.issuer);
+            amount = amount + tmp;
+            simple_map::upsert(&mut mp,contributor.issuer,amount );
+         };
+       };
+       for (i in 0..len) {
+         let contributor = vector::borrow(&project,i);
+         if(simple_map::contains_key(&mut mp,&contributor.issuer)==true) {
+            let value = *simple_map::borrow(&mut mp,&contributor.issuer);
+            let add:address = @account_address;
+            transfer(deployer, contributor.issuer, value);
+         };
+       };
     }
-
-    // Initialize the Bounty Distribution contract
-    public fun initialize(owner: address) {
-        let distribution = BountyDistribution {
-            owner,
-            rewards: map::empty<address, u64>(),
-        };
-        account::save_owner(owner, distribution);
-    }
-
-    // Allocate rewards based on severity
-    public fun allocate_bounty(distribution: &mut BountyDistribution, contributor: address, severity: u8) {
-        assert!(msg::sender() == distribution.owner, "Only owner can allocate bounties");
-        
-        let reward = match severity {
-            1 => 10_000_000, // Critical
-            2 => 5_000_000,  // High
-            3 => 2_000_000,  // Low
-            _ => 0,
-        };
-
-        if reward > 0 {
-            let current_reward = map::get(&distribution.rewards, contributor).unwrap_or(0);
-            map::insert(&mut distribution.rewards, contributor, current_reward + reward);
-        }
-    }
-
-    // Claim rewards by the contributor
-    public fun claim_reward(distribution: &mut BountyDistribution, contributor: address) {
-        let reward = map::remove(&mut distribution.rewards, contributor).unwrap_or(0);
-        assert!(reward > 0, "No rewards to claim");
-
-        coin::transfer(&distribution.owner, contributor, reward);
-    }
-}
 ```
 
 ### Key Functions:
@@ -304,7 +299,7 @@ Join us on this exciting journey to reshape the bug bounty landscape!
 ![Diffusers](https://img.shields.io/badge/Diffusers-00897B.svg?style=for-the-badge)
 
 
-- **Blockchain Platform**: Sphereon Blockchain
+- **Blockchain Platform**: Aptos Blockchain
 - **Smart Contracts**: Written in Move Language
 - **AI**: Automated Issue Categorization
 - **Payments**: Cryptocurrency Transactions via Blockchain
@@ -315,25 +310,32 @@ Join us on this exciting journey to reshape the bug bounty landscape!
 
 <h3 id="installation">Installation Instructions:</h3>
 
-To set up the bug bounty platform locally, you'll need to have the following prerequisites installed on your system:
+## Prerequisites
 
-1. **Move Language SDK**: Follow the [Move SDK installation guide](https://move-language.com) to get started.
+1. **Petro Wallet**: Make sure you have a Petro Wallet to connect. You can either:
+   - Download the Petro Wallet from the Chrome Extension Store.
+2. **Web2 Onboarding**:Without Petro wallet one can also onboard using gmail.
+   - Alternatively, sign in using Google for Web2 onboarding (No need of wallet).
 
-Once you have the prerequisites, follow these steps:
+Once you have the prerequisites, follow these steps to set up the bug bounty platform locally:
+
+## Setup Instructions
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Celebi07/bug-bounty-platform
+   git clone https://github.com/Dis1309/spheron
+   ```
 
 2. **Navigate to the project directory**:
    ```bash
-   cd spheron
+   cd web
    ```
 
 3. **Install dependencies**:
    ```bash
    npm install
    ```
+
 
 <h3 id="example">Example Usage:</h3>
 
@@ -536,16 +538,12 @@ By integrating blockchain technology, AI assistance, and a decentralized project
 
 <h2 id="contract">Contract Addresses</h2>
 
-| Role         | Address                                                                                     
-|--------------|---------------------------------------------------------------------------------------------
-| Owner        | OxdbaOa8c309cfa037778d8955cd50730bc5056e9922d25a                                             
-| Contributor  | Ox30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a84                                       
-| Module       | Ox4ccce76a4bcf03d8b9892455e74a017bf1 d2a4faa48b83fba127                                      
-| Owner        | Oxe4d3303b1 Ofd33ac781000363d5627eb                                                          
-| Contributor  | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8                                       
-| Jyothika     | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                           
-| Module/Contract | Ox7bf84486bf9bOeOb96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b 
+Module Address                                                                                     
+--------------------------------------------------------------------------------------------
+| Account Address| 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b                                                                             
+| Module Address | 0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b    
 
+<a href="https://testnet.tracemove.io/account/0x7bf84486bf9b0e0b96226927e6f3c1b5a35c96ef4d8300f699d8341ef50aa35b"> Check-Out Module Address On Aptos Testnet Scan</a>
 
 <h2 id="license">License</h2>
 
@@ -607,7 +605,7 @@ Join us in revolutionizing bug bounty platforms! Whether you're a security resea
 
   <td valign="top"><div width="20%">
       <img src="images/j.jpg" alt="Jyotika" width="165px" height="200px" />
-      <h3>Jyotika</h3>
+      <h3>Jyothika</h3>
       <p>Blockchain Aptos Developer</p>
     </div></td>
   </tr>
