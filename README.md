@@ -137,6 +137,14 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/generate_with_ai.gif" alt="Write With AI Demo" width="800" height="400">
       </a>
     </div>
+13. **NFT Marketplace**:  
+    Our platforms also allows users to sell thier tokens to other people so that they can also earn money in exhange of the project they build. This ensures that the Project owners also do not incurr any losses in case they are not willing to ove forward with the project they once found interesting.
+
+    <div align="center">
+      <a href="https://github.com/Dis1309/spheron">
+        <img src="images/generate_with_ai.gif" alt="Write With AI Demo" width="800" height="400">
+      </a>
+    </div>
 
 ---
 
