@@ -289,13 +289,18 @@ Explore creating virtual spaces in the metaverse where contributors can collabor
 ![Next.js](https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge)
 ![MongoDB](https://img.shields.io/badge/MongoDB-green.svg?style=for-the-badge)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC.svg?style=for-the-badge)
-![IPFS](https://img.shields.io/badge/IPFS-blue.svg?style=for-the-badge)
-![Solidity](https://img.shields.io/badge/Solidity-gray.svg?style=for-the-badge)
 ![Web3.js](https://img.shields.io/badge/Web3.js-4E9F7A.svg?style=for-the-badge)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00.svg?style=for-the-badge)
-![Keras](https://img.shields.io/badge/Keras-D00000.svg?style=for-the-badge)
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991.svg?style=for-the-badge)
-![Diffusers](https://img.shields.io/badge/Diffusers-00897B.svg?style=for-the-badge)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055ff.svg?style=for-the-badge)
+![Google Generative AI](https://img.shields.io/badge/Google%20Generative%20AI-4285F4.svg?style=for-the-badge)
+![Radix UI](https://img.shields.io/badge/Radix%20UI-6633cc.svg?style=for-the-badge)
+![Zod](https://img.shields.io/badge/Zod-E34A86.svg?style=for-the-badge)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02.svg?style=for-the-badge)
+![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-EC5990.svg?style=for-the-badge)
+![Recharts](https://img.shields.io/badge/Recharts-888888.svg?style=for-the-badge)
+![Lucide React](https://img.shields.io/badge/Lucide%20React-50B7F5.svg?style=for-the-badge)
+![Aptos SDK](https://img.shields.io/badge/Aptos%20SDK-28a745.svg?style=for-the-badge)
+
 
 
 - **Blockchain Platform**: Aptos Blockchain
