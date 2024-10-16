@@ -72,42 +72,52 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/add-project.gif" alt="add project Demo" width="800" height="400">
     </div>
 
-2. **Dynamic Bounty Distribution**:  
-   Our platform provides a flexible, tier-based bounty distribution system, enabling project owners to allocate rewards dynamically. Based on the severity of identified vulnerabilities, contributors are compensated under **Critical**, **High**, and **Low** tiers. This ensures fair and **meritocratic distribution** of rewards, motivating bug hunters to resolve more significant security issues for higher incentives.
 
-   <img src="images/dynamic-bounty.gif" alt="Dynamic Bounty Distribution" width="600"/>
-
-3. **AI-Assisted Issue Categorization**:  
+2. **AI-Assisted Issue Categorization**:  
    **AI integration** allows our platform to categorize issues based on their severity efficiently. By using cutting-edge machine learning models trained on vast security data, our AI system automatically assigns issues into the appropriate tiers: **Critical**, **High**, or **Low**. This saves project owners time and reduces manual evaluation efforts while improving accuracy in identifying priority vulnerabilities.
 
    <div align="center">
         <img src="images/priority_classify.gif" alt="issue categorize" width="800" height="400">
     </div>
 
-4. **Blockchain-Backed Payments**:  
+3. **Blockchain-Backed Payments**:  
    Payments on our platform are facilitated through blockchain-backed smart contracts. Contributors are paid directly and securely in cryptocurrency after completing their tasks. Our smart contracts ensure **instant**, *transparent*, and **trustless** transactions without intermediaries, giving contributors peace of mind and a secure payment gateway.
 
-   <img src="images/blockchain-payments.gif" alt="Blockchain Payments" width="600"/>
+   <div align="center">
+        <img src="images/nft-demo.gif" alt="nft Demo" width="800" height="400">
+    </div>
 
-5. **Decentralized Data Storage**:  
-   All project-related data, including reported issues and their corresponding bounties, are securely stored using **NFTs on the blockchain**. This decentralized storage model ensures a *tamper-proof*, **secure**, and *immutable* record of the entire bug-bounty process, reducing reliance on centralized servers and increasing data reliability.
+4. **Decentralized Contribution Management**:
+    Project owners can view all contributions related to their projects through a decentralized interface. Using **NFT-based** project tracking, each contribution is represented by a unique token, securely stored on the blockchain. Owners can approve or reject these contributions based on their quality. Upon approval, contributors are automatically rewarded through smart contracts, ensuring a transparent and tamper-proof process. This decentralized storage model, built on Spheron, guarantees that project data remains secure and immutable, with no reliance on centralized servers.
 
-   <img src="images/decentralized-storage.gif" alt="Decentralized Data Storage" width="600"/>
+  <div align="center">
+        <img src="images/contri.gif" alt="contribution Demo" width="800" height="400">
+    </div>
 
-6. **Secure and Transparent Transactions**:  
-   Every financial transaction made on the platform is executed through **smart contracts**, removing the need for third-party intermediaries. By using blockchain technology, we guarantee the security and transparency of transactions, making it impossible for malicious actors to tamper with the payment processes. Additionally, both contributors and project owners can verify the integrity of all payments on the public ledger.
 
-   <img src="images/secure-transactions.gif" alt="Secure Transactions" width="600"/>
+5. **Secure Contributor Rewards**:  
+   For contributors, the platform offers **end-to-end security** using Spheron’s decentralized storage, ensuring that all contributions and rewards remain transparent and secure. Once a contribution is approved by the project owner, the contributor is rewarded via a smart contract, eliminating the need for intermediaries. This blockchain-based solution guarantees that contributors receive their rewards without any risk of tampering or delay, as all transactions are verifiable on the public ledger.
+
+   <div align="center">
+        <img src="images/contri2.gif" alt="transparent rewards Demo" width="800" height="400">
+    </div>
+
+6. **Dynamic Bounty Distribution**:  
+   Our platform provides a flexible, tier-based bounty distribution system, enabling project owners to allocate rewards dynamically. Based on the severity of identified vulnerabilities, contributors are compensated under **Critical**, **High**, and **Low** tiers. This ensures fair and **meritocratic distribution** of rewards, motivating bug hunters to resolve more significant security issues for higher incentives.
+
+   <div align="center">
+        <img src="images/category.gif" alt="bounty categorize" width="800" height="400">
+    </div>
 
 7. **Automated Transaction Management**:  
    To ensure **trust** and **transparency** between contributors and project creators, the bounty payments are securely held in **smart contracts** while the bounty is live. Once the bounty ends, the funds are automatically distributed among contributors based on their contributions. This feature eliminates manual handling of payments, reducing human error and increasing fairness.
 
-   <img src="images/automated-transactions.gif" alt="Automated Transactions" width="600"/>
+   <div align="center">
+        <img src="images/payment.gif" alt="payment confirmation demo" width="800" height="400">
+    </div>
 
-8. **Real-Time Bounty Updates:** 
-   Contributors and project owners can track bounty progress in real-time. As issues are resolved and confirmed, bounties are automatically adjusted and reflected on the platform, providing full transparency and allowing for instant feedback loops between the two parties.
 
-9. **AI-Powered Chatbot (Built with RASA)**:  
+8. **AI-Powered Chatbot (Built with RASA)**:  
    Our platform includes an **AI-powered chatbot** built with **RASA**, designed to provide an interactive experience for users. The chatbot helps users by:
    - Answering questions about specific projects
    - Offering suggestions for projects that align with users’ skills and interests
@@ -120,14 +130,14 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/chatbot_demo.gif" alt="Chatbot Demo" width="800" height="400">
       </a>
     </div>
-10. **Personalized AI Recommendations**:  
+9. **Personalized AI Recommendations**:  
     Our platform leverages **advanced AI** algorithms to provide personalized project and issue recommendations tailored to each contributor's skills and expertise. By analyzing user profiles and project data, the AI ensures that contributors are matched with the most relevant tasks, maximizing their impact and productivity while aligning with their strengths. This intelligent system enhances the quality of contributions and helps contributors tackle challenges best suited to their abilities.
 
     <div align="center">
         <img src="images/recommendation.gif" alt="Recommendation Demo" width="800" height="400">
     </div>
 
-11. **Write With AI**:  
+10. **Write With AI**:  
     Our platform includes an innovative Write with AI feature that allows users to generate project descriptions automatically using AI-powered assistance. This feature leverages cutting-edge natural language processing models to create detailed and contextually accurate descriptions based on the project details provided by the user.
 
     <div align="center">
@@ -135,12 +145,12 @@ With our platform, project owners can transform their concepts into reality, whi
         <img src="images/generate_with_ai.gif" alt="Write With AI Demo" width="800" height="400">
       </a>
     </div>
-13. **NFT Marketplace**:  
+11. **NFT Marketplace**:  
     Our platforms also allows users to sell thier tokens to other people so that they can also earn money in exhange of the project they build. This ensures that the Project owners also do not incurr any losses in case they are not willing to ove forward with the project they once found interesting.
 
     <div align="center">
       <a href="https://github.com/Dis1309/spheron">
-        <img src="images/generate_with_ai.gif" alt="Write With AI Demo" width="800" height="400">
+        <img src="images/marketplace.gif" alt="NFT Marketplace" width="800" height="400">
       </a>
     </div>
 
