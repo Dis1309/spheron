@@ -202,6 +202,27 @@ const projectData = [
     "tags": [
       "ui/ux"
     ]
+  },
+  {
+    "project_id": 10,
+    "title": "hello",
+    "description": "This is a projet regarding creating a project that helps developer get a gist on how they can learn and use ai to improve their skills",
+    "technologies": [
+      "ai",
+      "blockchain"
+    ],
+    "url": "http://localhost:3000/dashboard",
+    "imageUrl": "https://picsum.photos/200/300",
+    "startdate": "2025-11-20",
+    "enddate": "2025-11-21",
+    "maxbounty": 100,
+    "critical": 50,
+    "high": 30,
+    "low": 20,
+    "tags": [
+      "ai",
+      "blockchain"
+    ]
   }
 ];
 

@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const { input } = await req.json();
     console.log("Received input:", input); // Log input for debugging
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
     const refinedPrompt = `Write a brief project description for the following project idea: "${input}".If I provided a github link in previous line then go to the github and write about description about this project. Focus on describing the project in 3-4 sentences. Never go over 300 characters in your response.`;
 
     const result = await model.generateContent(refinedPrompt);

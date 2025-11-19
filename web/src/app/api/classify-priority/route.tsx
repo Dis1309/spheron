@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY);
 export async function POST(req: Request) {
   try {
     const { description } = await req.json();
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     // Refined prompt to classify priority
     const refinedPrompt = `Based on this issue description: "${description}", classify it as 'low', 'high', or 'critical' priority. 'low' for very basic contribution. 'high' for some good contribution. 'critical' for those without which are utmost important and difficult. Respond only with one of these three words.`;

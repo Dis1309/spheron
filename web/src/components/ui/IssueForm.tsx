@@ -88,11 +88,11 @@ export default function IssueForm() {
     const dataToSend = {
       ...values,
       issueId: 123, // static issueId
-      projectId: 4, // static projectId
+      projectId: 10, // static projectId
       isApproved: false, // static isApproved (default: false)
       contributerId: sessionStorage.getItem("accountAddress"),
       ownerId:
-        "0x30c99cc17174dbf24efeb6775cf97b75641c9a9b1f8c48244a841f7752d96f73",
+        "0x1aac933f4c589a554818a141dcfe83dddc206dfb2e983226164397219a78b23a",
       priority: calculatedPriority, // Include the classified priority
     };
 

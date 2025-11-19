@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: CoreMessage[] } = await req.json();
   console.log("chatbot");
   const result = await streamText({
-    model: google("models/gemini-1.5-flash-latest"),
+    model: google("models/gemini-2.5-pro-latest"),
     system: systemPrompt,
     messages,
   });
